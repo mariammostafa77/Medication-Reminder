@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    tools:ignore="InvalidNavigation">
+
+    <fragment android:id="@+id/start_fragment"
+        android:name="com.example.medicationreminder.StartFragment"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/start_skip_dect"
+            app:destination="@+id/fragment_skip_add_med"/>
+        <action
+            android:id="@+id/start_register_dect"
+            app:destination="@+id/fragment_register"/>
+        <action
+            android:id="@+id/start_login_dect"
+            app:destination="@+id/fragment_login"/>
+
+    </fragment>
+    <fragment android:id="@+id/fragment_skip_add_med"
+        android:name="com.example.medicationreminder.SkipAddMidFragment"
+        tools:layout="@layout/fragment_skip_add_mid"></fragment>
+
+    <fragment android:id="@+id/fragment_register"
+        android:name="com.example.medicationreminder.RgisterationFragment"
+        tools:layout="@layout/fragment_rgisteration"></fragment>
+
+    <fragment android:id="@+id/fragment_login"
+        android:name="com.example.medicationreminder.LoginFragment"
+        tools:layout="@layout/fragment_login"></fragment>
+
+</navigation>
