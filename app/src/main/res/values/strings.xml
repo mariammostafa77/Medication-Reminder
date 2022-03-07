@@ -19,4 +19,7 @@
     <string name="donontHaveAccount">Create new account?</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="registerform">Registeration Form</string>
+    <string name="loginform">Login Form</string>
+
 </resources>

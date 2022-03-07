@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,8 +62,9 @@ public class SkipAddMidFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View v=inflater.inflate(R.layout.fragment_skip_add_mid, container, false);
-        Button btn=v.findViewById(R.id.skip);
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        TextView txtSkip=v.findViewById(R.id.txtSkip);
+        txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),HomeActivity.class);
