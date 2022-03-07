@@ -1,12 +1,22 @@
 <resources>
     <string name="app_name">MedicationReminder</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="AddMed">Add Medication</string>
+    <string name="MedName">What is med name?</string>
+    <string name="medicationName">Med Name</string>
+    <string name="treatmentDuration">What is treatment duration ?</string>
+    <string name="medUnit">What is med unit ?</string>
+    <string name="HowOftenDoYouTakeThisMed">How often do you take this med ?</string>
+    <string name="next">next</string>
+    <string name="RefillReminder">Refill Reminder</string>
+    <string name="totalNumOfpills" >How many pills do you have left?</string>
+    <string name="reminderNum">Remind me when i have :</string>
+    <string name="time">What time do you want to be reminded?</string>
+    <string name="Save">Save</string>
     <string name="appName">App Name</string>
     <string name="getStart">Get Start</string>
     <string name="haveAccount">Already have an aacout?</string>
     <string name="donontHaveAccount">Create new account?</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>
