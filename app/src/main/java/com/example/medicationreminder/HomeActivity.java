@@ -6,15 +6,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
+    boolean clicked=false;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    Button button;
+    FloatingActionButton floatingActionButton,floatingActionButton2,floatingActionButton3;
+    TextView txtAddMed,txtAddMidfriend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +49,59 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+        floatingActionButton=findViewById(R.id.floatingActionButton);
+        floatingActionButton2=findViewById(R.id.floatingActionButton2);
+        floatingActionButton3=findViewById(R.id.floatingActionButton3);
+        txtAddMed=findViewById(R.id.txtAddMed);
+        txtAddMidfriend=findViewById(R.id.txtAddMid);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAddButtonClick();
+            }
+        });
+
     }
+
+    private void onAddButtonClick() {
+        setVisibile(clicked);
+        setAnimtion(clicked);
+        clicked= !clicked;
+    }
+    private void setVisibile(boolean clicked) {
+        if(!clicked){
+            floatingActionButton2.setVisibility(View.VISIBLE);
+            floatingActionButton3.setVisibility(View.VISIBLE);
+        }
+        else{
+            floatingActionButton2.setVisibility(View.INVISIBLE);
+            floatingActionButton3.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void setAnimtion(boolean clicked) {
+        if(!clicked){
+            floatingActionButton2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
+            floatingActionButton3.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
+            txtAddMidfriend.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
+            txtAddMed.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
+            floatingActionButton.startAnimation(AnimationUtils.loadAnimation(this,R.anim.float_btn));
+
+
+
+
+        }
+        else{
+            floatingActionButton2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
+            floatingActionButton3.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
+            txtAddMidfriend.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
+            txtAddMed.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
+            floatingActionButton.startAnimation(AnimationUtils.loadAnimation(this,R.anim.close_float_btn));
+
+        }
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -49,5 +111,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+
     }
 }

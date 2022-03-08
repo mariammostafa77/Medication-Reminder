@@ -42,8 +42,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:id="@+id/btnRegister"
+        android:text="@string/login"
+        android:id="@+id/btnLogin"
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="20dp"
         />
