@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -12,18 +13,28 @@ import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -37,6 +48,10 @@ public class RgisterationFragment extends Fragment {
     NavDirections navDirections;
     private FirebaseAuth mAuth;
     EditText edtUsername,edtPhone,edtEmailR,edtPasswordR,edtConPassword;
+    ImageView imgGoogle;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final String TAG = "GoogleActivity";
+    private static final int RC_SIGN_IN = 9001;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +61,7 @@ public class RgisterationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public RgisterationFragment() {
         // Required empty public constructor
@@ -74,6 +90,7 @@ public class RgisterationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
 
+
     }
 
     @Override
@@ -89,6 +106,7 @@ public class RgisterationFragment extends Fragment {
         edtEmailR=v.findViewById(R.id.edtEmailR);
         edtPasswordR=v.findViewById(R.id.edtPasswordR);
         edtConPassword=v.findViewById(R.id.edtConfirmPassword);
+        imgGoogle=v.findViewById(R.id.imgGoogle);
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -117,9 +135,15 @@ public class RgisterationFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(getActivity(), "User had been registered successfully", Toast.LENGTH_SHORT).show();
-                                            Intent i = new Intent(getActivity(), HomeActivity.class);
-                                            startActivity(i);
+                                            FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+                                            if(firebaseUser.isEmailVerified()) {
+                                                Toast.makeText(getActivity(), "User had been registered successfully", Toast.LENGTH_SHORT).show();
+                                                Intent i = new Intent(getActivity(), HomeActivity.class);
+                                                startActivity(i);
+                                            }else{
+                                                firebaseUser.sendEmailVerification();
+                                                Toast.makeText(getActivity(), "Check your email for verify your account", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
                                             Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                                         }
@@ -183,6 +207,75 @@ public class RgisterationFragment extends Fragment {
 
             }
         });
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("286966019798-7nsfc3774p76k4on13sm1nip7ogr9dtc.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+    imgGoogle.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            signIn();
+        }
+    });
+
         return v;
     }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Toast.makeText(getActivity(), "Failur", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(),new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent i = new Intent(getActivity(), HomeActivity.class);
+                            startActivity(i);
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if(user!=null){
+            Intent i = new Intent(getActivity(), HomeActivity.class);
+            startActivity(i);
+        }
+        else {
+           // Toast.makeText(getActivity(), "SomeThing wrong", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

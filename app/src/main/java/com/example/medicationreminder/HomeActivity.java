@@ -6,16 +6,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
     boolean clicked=false;
@@ -30,12 +35,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new HomeFragment()).commit();
         setContentView(R.layout.activity_home);
+
+
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
         toolbar=findViewById(R.id.navToolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -44,11 +53,31 @@ public class HomeActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
 
 
+
                         drawerLayout.closeDrawers();
+                        switch (menuItem.getItemId()){
+                            case R.id.logout:
+                                //Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                                FirebaseAuth.getInstance().signOut();
+
+                                Intent intent=new Intent(HomeActivity.this,StartActivity.class);
+                                startActivity(intent);
+
+                               editor.remove("email");
+                                editor.remove("password");
+                                editor.clear();
+                                editor.commit();
+
+                                Toast.makeText(HomeActivity.this, sharedPreferences.getString("email",null), Toast.LENGTH_SHORT).show();
+
+
+                                break;
+                        }
 
                         return true;
                     }
                 });
+
         floatingActionButton=findViewById(R.id.floatingActionButton);
         floatingActionButton2=findViewById(R.id.floatingActionButton2);
         floatingActionButton3=findViewById(R.id.floatingActionButton3);
@@ -60,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                 onAddButtonClick();
             }
         });
+
 
     }
 
@@ -99,6 +129,8 @@ public class HomeActivity extends AppCompatActivity {
             floatingActionButton.startAnimation(AnimationUtils.loadAnimation(this,R.anim.close_float_btn));
 
         }
+
+
     }
 
 
@@ -109,6 +141,8 @@ public class HomeActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
+
         }
         return super.onOptionsItemSelected(item);
 

@@ -34,10 +34,23 @@
 
     <fragment android:id="@+id/fragment_login"
         android:name="com.example.medicationreminder.LoginFragment"
-        tools:layout="@layout/fragment_login"></fragment>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/login_reset_dect"
+            app:destination="@+id/fragment_reset_password"/>
+
+    </fragment>
 
     <fragment android:id="@+id/fragment_home"
         android:name="com.example.medicationreminder.HomeFragment"
         tools:layout="@layout/fragment_home"></fragment>
+
+    <fragment android:id="@+id/fragment_reset_password"
+        android:name="com.example.medicationreminder.ResetPasswordFragment"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/reset_password_login_dect"
+            app:destination="@+id/fragment_login"/>
+    </fragment>
 
 </navigation>
