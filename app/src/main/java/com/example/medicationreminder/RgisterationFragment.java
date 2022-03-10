@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,16 +33,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RgisterationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+
+
 public class RgisterationFragment extends Fragment {
     Button btnRegister;
     NavController navController;
@@ -51,39 +51,19 @@ public class RgisterationFragment extends Fragment {
     ImageView imgGoogle;
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
+    private static final int RC_SIGN_IN = 111;
+    GoogleSignInOptions gso;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+
 
 
     public RgisterationFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RgisterationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RgisterationFragment newInstance(String param1, String param2) {
-        RgisterationFragment fragment = new RgisterationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,34 +77,38 @@ public class RgisterationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v= inflater.inflate(R.layout.fragment_rgisteration, container, false);
-        btnRegister=v.findViewById(R.id.btnRegister);edtUsername=v.findViewById(R.id.edtUsername);
+        View v = inflater.inflate(R.layout.fragment_rgisteration, container, false);
+        btnRegister = v.findViewById(R.id.btnRegister);
+        edtUsername = v.findViewById(R.id.edtUsername);
 
 
-        edtUsername=v.findViewById(R.id.edtUsername);
-        edtPhone=v.findViewById(R.id.edtPhone);
-        edtEmailR=v.findViewById(R.id.edtEmailR);
-        edtPasswordR=v.findViewById(R.id.edtPasswordR);
-        edtConPassword=v.findViewById(R.id.edtConfirmPassword);
-        imgGoogle=v.findViewById(R.id.imgGoogle);
+        edtUsername = v.findViewById(R.id.edtUsername);
+        edtPhone = v.findViewById(R.id.edtPhone);
+        edtEmailR = v.findViewById(R.id.edtEmailR);
+        edtPasswordR = v.findViewById(R.id.edtPasswordR);
+        edtConPassword = v.findViewById(R.id.edtConfirmPassword);
+        imgGoogle = v.findViewById(R.id.imgGoogle);
+
+
+
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String username=edtUsername.getText().toString();
-                String phone=edtPhone.getText().toString();
-                String email=edtEmailR.getText().toString();
-                String password=edtPasswordR.getText().toString();
-                String confirmPassword=edtConPassword.getText().toString();
+                String username = edtUsername.getText().toString();
+                String phone = edtPhone.getText().toString();
+                String email = edtEmailR.getText().toString();
+                String password = edtPasswordR.getText().toString();
+                String confirmPassword = edtConPassword.getText().toString();
 
-                if(!username .isEmpty() &&!phone .isEmpty() &&!email .isEmpty() &&
-                        !password .isEmpty() &&!confirmPassword .isEmpty() &&
-                        confirmPassword.equals(password)&&password.length()>=6 &&
+                if (!username.isEmpty() && !phone.isEmpty() && !email.isEmpty() &&
+                        !password.isEmpty() && !confirmPassword.isEmpty() &&
+                        confirmPassword.equals(password) && password.length() >= 6 &&
                         Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -135,12 +119,12 @@ public class RgisterationFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-                                            if(firebaseUser.isEmailVerified()) {
+                                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                            if (firebaseUser.isEmailVerified()) {
                                                 Toast.makeText(getActivity(), "User had been registered successfully", Toast.LENGTH_SHORT).show();
                                                 Intent i = new Intent(getActivity(), HomeActivity.class);
                                                 startActivity(i);
-                                            }else{
+                                            } else {
                                                 firebaseUser.sendEmailVerification();
                                                 Toast.makeText(getActivity(), "Check your email for verify your account", Toast.LENGTH_SHORT).show();
                                             }
@@ -156,46 +140,45 @@ public class RgisterationFragment extends Fragment {
                         }
                     });
 
-                }
-                else{
-                    if(TextUtils.isEmpty(username)){
+                } else {
+                    if (TextUtils.isEmpty(username)) {
                         edtUsername.setError("Username is requried");
                         edtUsername.requestFocus();
 
                     }
-                    if(TextUtils.isEmpty(phone)){
+                    if (TextUtils.isEmpty(phone)) {
                         edtPhone.setError("please enter phone");
                         edtPhone.requestFocus();
 
                     }
-                    if(TextUtils.isEmpty(email)){
+                    if (TextUtils.isEmpty(email)) {
                         edtEmailR.setError("please enter email ");
                         edtEmailR.requestFocus();
 
                     }
 
-                    if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         edtEmailR.setError("please enter email in correct format");
                         edtEmailR.requestFocus();
 
                     }
-                    if(TextUtils.isEmpty(password)){
+                    if (TextUtils.isEmpty(password)) {
                         edtPasswordR.setError("please enter password");
                         edtPasswordR.requestFocus();
 
                     }
-                    if(password.length()<6){
+                    if (password.length() < 6) {
                         edtPasswordR.setError("required more than 6");
 
                         edtPasswordR.requestFocus();
 
                     }
-                    if(TextUtils.isEmpty(confirmPassword)){
+                    if (TextUtils.isEmpty(confirmPassword)) {
                         edtConPassword.setError("please enter password");
                         edtConPassword.requestFocus();
 
                     }
-                    if(!confirmPassword.equals(password)){
+                    if (!confirmPassword.equals(password)) {
                         edtConPassword.setError("must be matched");
                         edtConPassword.requestFocus();
 
@@ -204,25 +187,30 @@ public class RgisterationFragment extends Fragment {
                 }
 
 
-
             }
         });
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("286966019798-7nsfc3774p76k4on13sm1nip7ogr9dtc.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-    imgGoogle.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            signIn();
-        }
-    });
+        imgGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken("286966019798-7nsfc3774p76k4on13sm1nip7ogr9dtc.apps.googleusercontent.com")
+                        .requestEmail()
+                        .build();
+                mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+             signIn();
+            }
+        });
+
+
 
         return v;
     }
+
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -230,23 +218,25 @@ public class RgisterationFragment extends Fragment {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
+
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(getActivity(), "Failur", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "failur", Toast.LENGTH_SHORT).show();
             }
         }
     }
     private void firebaseAuthWithGoogle(String idToken) {
+
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(),new OnCompleteListener<AuthResult>() {
@@ -256,9 +246,9 @@ public class RgisterationFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(getActivity(), HomeActivity.class);
-                            startActivity(i);
-                            //updateUI(user);
+
+                            updateUI(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
@@ -273,9 +263,8 @@ public class RgisterationFragment extends Fragment {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
         }
-        else {
-           // Toast.makeText(getActivity(), "SomeThing wrong", Toast.LENGTH_SHORT).show();
-        }
+
+
     }
 
 }
