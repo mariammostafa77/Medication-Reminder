@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/btnTimeOfDay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/cloc"
+        app:layout_constraintBottom_toBottomOf="@+id/EdtTimeEveryDay"
+        app:layout_constraintEnd_toStartOf="@+id/EdtTimeEveryDay"
+        app:layout_constraintHorizontal_weight=".75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/EdtTimeEveryDay"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="Select Time"
+        android:textColor="#A5A5A5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/edtDosDay"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintStart_toEndOf="@+id/btnTimeOfDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtDosDay"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_border"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Dose"
+        android:inputType="number"
+        android:textColorHint="#A5A5A5"
+        app:layout_constraintEnd_toStartOf="@+id/tvUnitOfDay"
+        app:layout_constraintStart_toEndOf="@+id/EdtTimeEveryDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUnitOfDay"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColor="#070707"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtDosDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
