@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">MedicationReminder</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="AddMed">Add Medication</string>
     <string name="MedName">What is med name?</string>
+    <string name="AddMed">Add Medication</string>
     <string name="medicationName">Med Name</string>
+    <string name="StartDate">Start Date</string>
+    <string name="EndDate">End Date</string>
     <string name="treatmentDuration">What is treatment duration ?</string>
     <string name="medUnit">What is med unit ?</string>
     <string name="HowOftenDoYouTakeThisMed">How often do you take this med ?</string>

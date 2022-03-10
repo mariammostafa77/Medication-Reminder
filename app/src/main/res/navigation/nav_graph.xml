@@ -21,7 +21,11 @@
     </fragment>
     <fragment android:id="@+id/fragment_skip_add_med"
         android:name="com.example.medicationreminder.SkipAddMidFragment"
-        tools:layout="@layout/fragment_skip_add_mid"></fragment>
+        tools:layout="@layout/fragment_skip_add_mid">
+        <action
+            android:id="@+id/addMed"
+            app:destination="@+id/fragmentAddMed1"/>
+    </fragment>
 
     <fragment android:id="@+id/fragment_register"
         android:name="com.example.medicationreminder.RgisterationFragment"
@@ -53,4 +57,28 @@
             app:destination="@+id/fragment_login"/>
     </fragment>
 
+    <fragment android:id="@+id/fragmentAddMed1"
+        android:name="com.example.medicationreminder.AddMedFragment1"
+        tools:layout="@layout/fragment_add_med1">
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragmentAddMed2"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentAddMed2"
+        android:name="com.example.medicationreminder.AddMedFragment2"
+        tools:layout="@layout/fragment_add_med2">
+        <argument
+            android:name="numOfMed"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/fragmentAddMed3"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentAddMed3"
+        android:name="com.example.medicationreminder.AddMedFragment3"
+        tools:layout="@layout/fragment_add_med3">
+    </fragment>
 </navigation>
