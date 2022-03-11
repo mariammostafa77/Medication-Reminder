@@ -33,17 +33,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new HomeFragment()).commit();
         setContentView(R.layout.activity_home);
-
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new HomeFragment()).commit();
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
         toolbar=findViewById(R.id.navToolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
-         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {

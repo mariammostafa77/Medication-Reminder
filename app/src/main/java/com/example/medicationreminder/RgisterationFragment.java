@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.example.medicationreminder.registerModel.IView;
+import com.example.medicationreminder.registerpreseter.RegistrationPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,11 +40,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
-
-
-public class RgisterationFragment extends Fragment {
+public class RgisterationFragment extends Fragment implements IView {
     Button btnRegister;
     NavController navController;
     NavDirections navDirections;
@@ -51,8 +57,11 @@ public class RgisterationFragment extends Fragment {
     ImageView imgGoogle;
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 111;
+    private static final int RC_SIGN_IN = 100;
     GoogleSignInOptions gso;
+    FirebaseFirestore firebaseFirestore;
+    String userID;
+    RegistrationPresenter presenter;
 
 
 
@@ -69,6 +78,8 @@ public class RgisterationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        presenter=new RegistrationPresenter(this);
 
 
     }
@@ -107,38 +118,8 @@ public class RgisterationFragment extends Fragment {
                         !password.isEmpty() && !confirmPassword.isEmpty() &&
                         confirmPassword.equals(password) && password.length() >= 6 &&
                         Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        presenter.onRegistrationBtnClick(username,phone,email,password);
 
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                User user = new User(username, phone, email, password);
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                                            if (firebaseUser.isEmailVerified()) {
-                                                Toast.makeText(getActivity(), "User had been registered successfully", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getActivity(), HomeActivity.class);
-                                                startActivity(i);
-                                            } else {
-                                                firebaseUser.sendEmailVerification();
-                                                Toast.makeText(getActivity(), "Check your email for verify your account", Toast.LENGTH_SHORT).show();
-                                            }
-                                        } else {
-                                            Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(getActivity(), "Wrong", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-                    });
 
                 } else {
                     if (TextUtils.isEmpty(username)) {
@@ -228,42 +209,24 @@ public class RgisterationFragment extends Fragment {
 
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                firebaseAuthWithGoogle(account.getIdToken());
+                presenter.onRegistrationGoogleBtnClick(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(getActivity(), "failur", Toast.LENGTH_SHORT).show();
             }
         }
     }
-    private void firebaseAuthWithGoogle(String idToken) {
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(),new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
 
-                            updateUI(user);
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-    }
-
-    private void updateUI(FirebaseUser user) {
-        if(user!=null){
+    @Override
+    public void goToHome(boolean result) {
+        if(result==true) {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
         }
-
+        else{
+            Toast.makeText(getActivity(), "Error in registration", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
