@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
     String meddate;
     TextView allDate;
 

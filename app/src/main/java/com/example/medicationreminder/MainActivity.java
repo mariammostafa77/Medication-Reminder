@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.awt.font.TextAttribute;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

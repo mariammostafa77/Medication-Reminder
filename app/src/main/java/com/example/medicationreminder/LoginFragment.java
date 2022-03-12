@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medicationreminder.loginmodel.ILoginView;
+import com.example.medicationreminder.loginpresenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,7 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements ILoginView {
 
   EditText edtEmail,edtPassword;
   Button btnLogin;
@@ -52,6 +54,9 @@ public class LoginFragment extends Fragment {
   SharedPreferences sharedPreferences;
   private GoogleSignInClient mGoogleSignInClient;
   private final static int RC_SIGN_IN=111;
+  LoginPresenter presenter;
+    String email;
+    String password;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -63,6 +68,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth=FirebaseAuth.getInstance();
+        presenter=new LoginPresenter(this);
 
     }
 
@@ -81,47 +87,14 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            String email=edtEmail.getText().toString().trim();
-            String password=edtPassword.getText().toString().trim();
+             email=edtEmail.getText().toString().trim();
+             password=edtPassword.getText().toString().trim();
 
             if(!email.isEmpty() && !password.isEmpty() &&Patterns.EMAIL_ADDRESS.matcher(email).matches()&&password.length()>=6){
-              mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                  if(task.isSuccessful()){
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString(myEmail,email);
-                    editor.putString(myPassword,password);
-                    editor.commit();
-                    Intent i = new Intent(getActivity(), HomeActivity.class);
-
-                    startActivity(i);
-
-                  }
-                  else{
-                    Toast.makeText(getActivity(), "Email or Password is incorrect", Toast.LENGTH_SHORT).show();
-                  }
-                }
-              });
-
+             presenter.onLoginBtnClick(email,password);
             }
             else {
-              if (email.isEmpty()) {
-                edtEmail.setError("Email is required");
-                edtEmail.requestFocus();
-              }
-              if (password.isEmpty()) {
-                edtPassword.setError("Password is required");
-                edtPassword.requestFocus();
-              }
-              if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                edtEmail.setError("please enter a valid email");
-                edtEmail.requestFocus();
-              }
-              if(password.length()<6){
-                edtPassword.setError("min password length is 6");
-                edtPassword.requestFocus();
-              }
+                validatation();
             }
 
           }
@@ -136,14 +109,15 @@ public class LoginFragment extends Fragment {
         });
 
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("286966019798-7nsfc3774p76k4on13sm1nip7ogr9dtc.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
         imgGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken("286966019798-7nsfc3774p76k4on13sm1nip7ogr9dtc.apps.googleusercontent.com")
+                        .requestEmail()
+                        .build();
+                mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
                 signIn();
             }
@@ -167,43 +141,52 @@ public class LoginFragment extends Fragment {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                firebaseAuthWithGoogle(account.getIdToken());
+                presenter.onLoginGoogleBtnClick(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(getActivity(), "Failur", Toast.LENGTH_SHORT).show();
             }
         }
     }
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(),new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(getActivity(), HomeActivity.class);
-                            startActivity(i);
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+
+
+    private void validatation() {
+
+        if (email.isEmpty()) {
+            edtEmail.setError("Email is required");
+            edtEmail.requestFocus();
+        }
+        if (password.isEmpty()) {
+            edtPassword.setError("Password is required");
+            edtPassword.requestFocus();
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            edtEmail.setError("please enter a valid email");
+            edtEmail.requestFocus();
+        }
+        if(password.length()<6){
+            edtPassword.setError("min password length is 6");
+            edtPassword.requestFocus();
+        }
+
     }
 
-    private void updateUI(FirebaseUser user) {
-        if(user!=null){
+    @Override
+    public void goToHome(boolean result) {
+        if(result==true){
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putString(myEmail,email);
+            editor.putString(myPassword,password);
+            editor.commit();
             Intent i = new Intent(getActivity(), HomeActivity.class);
-            startActivity(i);
-        }
-        else {
-            // Toast.makeText(getActivity(), "SomeThing wrong", Toast.LENGTH_SHORT).show();
-        }
-    }
 
+            startActivity(i);
+            Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
+
+
+        }else{
+            Toast.makeText(getActivity(), "Username or password incorrect", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

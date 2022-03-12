@@ -62,7 +62,7 @@ public class RgisterationFragment extends Fragment implements IView {
     FirebaseFirestore firebaseFirestore;
     String userID;
     RegistrationPresenter presenter;
-
+    String username,phone,email,password,confirmPassword;
 
 
 
@@ -108,11 +108,11 @@ public class RgisterationFragment extends Fragment implements IView {
             @Override
             public void onClick(View v) {
 
-                String username = edtUsername.getText().toString();
-                String phone = edtPhone.getText().toString();
-                String email = edtEmailR.getText().toString();
-                String password = edtPasswordR.getText().toString();
-                String confirmPassword = edtConPassword.getText().toString();
+                 username = edtUsername.getText().toString();
+                 phone = edtPhone.getText().toString();
+                 email = edtEmailR.getText().toString();
+                 password = edtPasswordR.getText().toString();
+                 confirmPassword = edtConPassword.getText().toString();
 
                 if (!username.isEmpty() && !phone.isEmpty() && !email.isEmpty() &&
                         !password.isEmpty() && !confirmPassword.isEmpty() &&
@@ -122,49 +122,7 @@ public class RgisterationFragment extends Fragment implements IView {
 
 
                 } else {
-                    if (TextUtils.isEmpty(username)) {
-                        edtUsername.setError("Username is requried");
-                        edtUsername.requestFocus();
-
-                    }
-                    if (TextUtils.isEmpty(phone)) {
-                        edtPhone.setError("please enter phone");
-                        edtPhone.requestFocus();
-
-                    }
-                    if (TextUtils.isEmpty(email)) {
-                        edtEmailR.setError("please enter email ");
-                        edtEmailR.requestFocus();
-
-                    }
-
-                    if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        edtEmailR.setError("please enter email in correct format");
-                        edtEmailR.requestFocus();
-
-                    }
-                    if (TextUtils.isEmpty(password)) {
-                        edtPasswordR.setError("please enter password");
-                        edtPasswordR.requestFocus();
-
-                    }
-                    if (password.length() < 6) {
-                        edtPasswordR.setError("required more than 6");
-
-                        edtPasswordR.requestFocus();
-
-                    }
-                    if (TextUtils.isEmpty(confirmPassword)) {
-                        edtConPassword.setError("please enter password");
-                        edtConPassword.requestFocus();
-
-                    }
-                    if (!confirmPassword.equals(password)) {
-                        edtConPassword.setError("must be matched");
-                        edtConPassword.requestFocus();
-
-
-                    }
+                   validation();
                 }
 
 
@@ -190,7 +148,51 @@ public class RgisterationFragment extends Fragment implements IView {
         return v;
     }
 
+    private void validation() {
+        if (TextUtils.isEmpty(username)) {
+            edtUsername.setError("Username is requried");
+            edtUsername.requestFocus();
 
+        }
+        if (TextUtils.isEmpty(phone)) {
+            edtPhone.setError("please enter phone");
+            edtPhone.requestFocus();
+
+        }
+        if (TextUtils.isEmpty(email)) {
+            edtEmailR.setError("please enter email ");
+            edtEmailR.requestFocus();
+
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edtEmailR.setError("please enter email in correct format");
+            edtEmailR.requestFocus();
+
+        }
+        if (TextUtils.isEmpty(password)) {
+            edtPasswordR.setError("please enter password");
+            edtPasswordR.requestFocus();
+
+        }
+        if (password.length() < 6) {
+            edtPasswordR.setError("required more than 6");
+
+            edtPasswordR.requestFocus();
+
+        }
+        if (TextUtils.isEmpty(confirmPassword)) {
+            edtConPassword.setError("please enter password");
+            edtConPassword.requestFocus();
+
+        }
+        if (!confirmPassword.equals(password)) {
+            edtConPassword.setError("must be matched");
+            edtConPassword.requestFocus();
+
+
+        }
+    }
 
 
     private void signIn() {
@@ -223,6 +225,8 @@ public class RgisterationFragment extends Fragment implements IView {
         if(result==true) {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
+            Toast.makeText(getActivity(), "Registration Successfully", Toast.LENGTH_SHORT).show();
+
         }
         else{
             Toast.makeText(getActivity(), "Error in registration", Toast.LENGTH_SHORT).show();
