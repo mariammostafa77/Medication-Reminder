@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,8 +118,8 @@ public class AddMedFragment1 extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController= Navigation.findNavController(btnNext);
-                Bundle bundle=new Bundle();
+                NavController navController= Navigation.findNavController(getActivity(),R.id.viewLayout);
+                Bundle bundle = new Bundle();
                 medName=edtMedName.getText().toString();
                 medUnit=spinnerUnit.getSelectedItem().toString();
                 startDate=tvStartDate.getText().toString();
@@ -126,7 +128,19 @@ public class AddMedFragment1 extends Fragment {
                 numberTaken=numberTakenSpinner.getSelectedItem().toString();
                 bundle.putInt(MedNumTag,Integer.parseInt(edtMedNum.getText().toString()));
                 bundle.putString(numberTakenTag,numberTakenSpinner.getSelectedItem().toString());
-                navController.navigate(R.id.fragmentAddMed2,bundle);
+
+                if(numberTakenSpinner.getSelectedItem().toString()=="Day"){
+                    navController.navigate(R.id.next,bundle);
+                }
+                else if(numberTakenSpinner.getSelectedItem().toString()=="Week"){
+                    navController.navigate(R.id.next2,bundle);
+                }
+                else if(numberTakenSpinner.getSelectedItem().toString()=="Month"){
+                    navController.navigate(R.id.next3,bundle);
+                }
+
+
+
             }
         });
 

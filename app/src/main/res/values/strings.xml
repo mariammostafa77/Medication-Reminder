@@ -11,7 +11,7 @@
     <string name="HowOftenDoYouTakeThisMed">How often do you take this med ?</string>
     <string name="next">next</string>
     <string name="RefillReminder">Refill Reminder</string>
-    <string name="totalNumOfpills">How many pills do you have left?</string>
+    <string name="totalNumOfpills">How much / many do you have left?</string>
     <string name="reminderNum">Remind me when i have :</string>
     <string name="time">What time do you want to be reminded?</string>
     <string name="Save">Save</string>

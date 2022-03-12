@@ -7,16 +7,19 @@
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/drawable/rounded_border.xml" value="0.2169230769230769" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/drawable/text_line.xml" value="0.2203125" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/activity_home.xml" value="0.15715579710144928" />
+        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/activity_start.xml" value="0.11458333333333333" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med2.xml" value="0.16" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med3.xml" value="0.1838768115942029" />
+        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med_month.xml" value="0.22" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med_week.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_skip_add_mid.xml" value="0.15443840579710144" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_start.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_days.xml" value="0.22" />
-        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_week.xml" value="0.15443840579710144" />
+        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_month.xml" value="0.1716485507246377" />
+        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_week.xml" value="0.1" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/activity_home.xml" value="0.15648148148148147" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/activity_main.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/fragment_home.xml" value="0.17222222222222222" />

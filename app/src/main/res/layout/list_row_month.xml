@@ -24,13 +24,12 @@
             android:layout_margin="10dp">
 
             <Spinner
-                android:id="@+id/spinnerDays"
+                android:id="@+id/spinnerDaysInMonth"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:spinnerMode="dialog"
                 android:layout_marginTop="10dp"
                 android:background="@android:drawable/btn_dropdown"
-                app:layout_constraintBottom_toTopOf="@+id/tvTimeWeek"
+                app:layout_constraintBottom_toTopOf="@+id/tvTimeMonth"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,18 +37,18 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageView
-                android:id="@+id/imgTimeWeek"
+                android:id="@+id/imgTimeMonth"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/cloc"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTimeWeek"
-                app:layout_constraintEnd_toStartOf="@+id/tvTimeWeek"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTimeMonth"
+                app:layout_constraintEnd_toStartOf="@+id/tvTimeMonth"
                 app:layout_constraintHorizontal_weight=".75"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvTimeWeek" />
+                app:layout_constraintTop_toTopOf="@+id/tvTimeMonth" />
 
             <TextView
-                android:id="@+id/tvTimeWeek"
+                android:id="@+id/tvTimeMonth"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -60,13 +59,13 @@
                 android:textColor="#A5A5A5"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/edtDoseWeek"
+                app:layout_constraintEnd_toStartOf="@+id/edtDoseMonth"
                 app:layout_constraintHorizontal_weight="4"
-                app:layout_constraintStart_toEndOf="@+id/imgTimeWeek"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDays" />
+                app:layout_constraintStart_toEndOf="@+id/imgTimeMonth"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDaysInMonth" />
 
             <EditText
-                android:id="@+id/edtDoseWeek"
+                android:id="@+id/edtDoseMonth"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -78,12 +77,12 @@
                 android:inputType="numberDecimal"
                 android:textColorHint="#A5A5A5"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvUnitOfWeek"
-                app:layout_constraintStart_toEndOf="@+id/tvTimeWeek"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDays" />
+                app:layout_constraintEnd_toStartOf="@+id/tvUnitOfMonth"
+                app:layout_constraintStart_toEndOf="@+id/tvTimeMonth"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDaysInMonth" />
 
             <TextView
-                android:id="@+id/tvUnitOfWeek"
+                android:id="@+id/tvUnitOfMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -94,8 +93,8 @@
                 android:textColor="#070707"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/edtDoseWeek"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDays" />
+                app:layout_constraintStart_toEndOf="@+id/edtDoseMonth"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDaysInMonth" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

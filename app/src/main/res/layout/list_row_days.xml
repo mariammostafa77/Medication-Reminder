@@ -39,7 +39,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Dose"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textColorHint="#A5A5A5"
         app:layout_constraintEnd_toStartOf="@+id/tvUnitOfDay"
         app:layout_constraintStart_toEndOf="@+id/EdtTimeEveryDay"

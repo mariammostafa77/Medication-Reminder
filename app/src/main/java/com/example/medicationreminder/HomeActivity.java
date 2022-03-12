@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +37,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new HomeFragment()).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new HomeFragment()).commit();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.viewLayout);
+        NavController navController = navHostFragment.getNavController();
+            NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
+            navGraph.setStartDestination(R.id.fragment_home);
+            navController.setGraph(navGraph);
+
+
+
+
+
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
         toolbar=findViewById(R.id.navToolBar);
@@ -85,6 +98,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onAddButtonClick();
+            }
+        });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new AddMedFragment1()).commit();
             }
         });
 

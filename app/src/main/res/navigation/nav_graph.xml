@@ -47,7 +47,11 @@
 
     <fragment android:id="@+id/fragment_home"
         android:name="com.example.medicationreminder.HomeFragment"
-        tools:layout="@layout/fragment_home"></fragment>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/goToAddMed1"
+            app:destination="@+id/fragmentAddMed1"/>
+    </fragment>
 
     <fragment android:id="@+id/fragment_reset_password"
         android:name="com.example.medicationreminder.ResetPasswordFragment"
@@ -63,6 +67,12 @@
         <action
             android:id="@+id/next"
             app:destination="@+id/fragmentAddMed2"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/addMedFragmentMonth"/>
+        <action
+            android:id="@+id/next3"
+            app:destination="@+id/addMedFragmentWeek"/>
     </fragment>
     <fragment android:id="@+id/fragmentAddMed2"
         android:name="com.example.medicationreminder.AddMedFragment2"
@@ -80,5 +90,33 @@
     <fragment android:id="@+id/fragmentAddMed3"
         android:name="com.example.medicationreminder.AddMedFragment3"
         tools:layout="@layout/fragment_add_med3">
+    </fragment>
+
+    <fragment android:id="@+id/addMedFragmentWeek"
+        android:name="com.example.medicationreminder.AddMedWeekFragment"
+        tools:layout="@layout/fragment_add_med_week">
+        <argument
+            android:name="numOfMed"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next3"
+            app:destination="@+id/fragmentAddMed3"/>
+    </fragment>
+
+    <fragment android:id="@+id/addMedFragmentMonth"
+        android:name="com.example.medicationreminder.AddMedFragmentMonth"
+        tools:layout="@layout/fragment_add_med_week">
+        <argument
+            android:name="numOfMed"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragmentAddMed3"/>
     </fragment>
 </navigation>
