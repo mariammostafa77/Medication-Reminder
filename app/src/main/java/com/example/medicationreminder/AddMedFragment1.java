@@ -162,6 +162,7 @@ public class AddMedFragment1 extends Fragment {
                 textView.setText(date);
             }
         }, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
 }
