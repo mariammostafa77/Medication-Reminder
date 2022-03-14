@@ -57,8 +57,7 @@
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="70dp"
                 android:backgroundTint="#1F394A"
-                android:drawableRight="@drawable/next"
-                android:text="@string/next"
+                android:text="@string/Save"
                 android:textSize="16sp"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +66,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/recycleOfWeek" />
 
             <TextView
-                android:id="@+id/tvNum"
+                android:id="@+id/tvNumTaken"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -96,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.512"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNum" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNumTaken" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleOfWeek"

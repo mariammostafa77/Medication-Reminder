@@ -31,19 +31,45 @@
         app:layout_constraintStart_toEndOf="@+id/btnTimeOfDay"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+
+    <LinearLayout
         android:id="@+id/edtDosDay"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:background="@drawable/rounded_border"
         android:ems="10"
         android:gravity="center"
-        android:hint="Dose"
-        android:inputType="numberDecimal"
         android:textColorHint="#A5A5A5"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/line_text"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/tvUnitOfDay"
         app:layout_constraintStart_toEndOf="@+id/EdtTimeEveryDay"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/spinnerDose"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="9.9"
+            android:autofillHints="Med Unit"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/dropDownListDose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="2dp"
+            android:layout_weight=".1"
+            android:src="@drawable/drop_down" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tvUnitOfDay"

@@ -53,12 +53,11 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="70dp"
                 android:backgroundTint="#1F394A"
-                android:drawableRight="@drawable/next"
-                android:text="@string/next"
+                android:text="@string/Save"
                 android:textSize="16sp"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -112,6 +111,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

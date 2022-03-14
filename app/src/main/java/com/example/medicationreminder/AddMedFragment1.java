@@ -1,8 +1,10 @@
 package com.example.medicationreminder;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -55,6 +57,7 @@ public class AddMedFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_med1, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         spinnerUnit = view.findViewById(R.id.spinnerUnit);
         numberTakenSpinner = view.findViewById(R.id.numberTakenSpinner);
         dropDownMedUnit = view.findViewById(R.id.dropDownMedUnit);
@@ -118,7 +121,7 @@ public class AddMedFragment1 extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController= Navigation.findNavController(getActivity(),R.id.viewLayout);
+                NavController navController= Navigation.findNavController(v);
                 Bundle bundle = new Bundle();
                 medName=edtMedName.getText().toString();
                 medUnit=spinnerUnit.getSelectedItem().toString();
@@ -130,21 +133,19 @@ public class AddMedFragment1 extends Fragment {
                 bundle.putString(numberTakenTag,numberTakenSpinner.getSelectedItem().toString());
 
                 if(numberTakenSpinner.getSelectedItem().toString()=="Day"){
-                    navController.navigate(R.id.next,bundle);
+                    navController.navigate(R.id.fragmentAddMed2,bundle);
                 }
                 else if(numberTakenSpinner.getSelectedItem().toString()=="Week"){
-                    navController.navigate(R.id.next2,bundle);
+                    navController.navigate(R.id.addMedFragmentWeek,bundle);
                 }
                 else if(numberTakenSpinner.getSelectedItem().toString()=="Month"){
-                    navController.navigate(R.id.next3,bundle);
+                    navController.navigate(R.id.addMedFragmentMonth,bundle);
                 }
 
 
 
             }
         });
-
-
 
         return view;
     }

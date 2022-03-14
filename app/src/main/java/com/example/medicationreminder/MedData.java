@@ -1,18 +1,19 @@
 package com.example.medicationreminder;
 
 public class MedData {
-    String medName, medUnit, startDate, endDate,userId;
+    String medName, medUnit, startDate, endDate,userId,medId;
     int numOfTimes;
 
     public MedData() {
     }
 
-    public MedData(String medName, String medUnit, String startDate, String endDate,String userId,int numOfTimes) {
+    public MedData(String medName, String medUnit, String startDate, String endDate,String userId,String medId,int numOfTimes) {
         this.medName = medName;
         this.medUnit = medUnit;
         this.startDate = startDate;
         this.endDate = endDate;
         this.userId=userId;
+        this.medId=medId;
         this.numOfTimes = numOfTimes;
     }
 
@@ -62,5 +63,13 @@ public class MedData {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getMedId() {
+        return medId;
+    }
+
+    public void setMedId(String medId) {
+        this.medId = medId;
     }
 }

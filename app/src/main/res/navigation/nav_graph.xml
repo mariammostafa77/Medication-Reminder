@@ -86,10 +86,16 @@
         <action
             android:id="@+id/next2"
             app:destination="@+id/fragmentAddMed3"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
     </fragment>
     <fragment android:id="@+id/fragmentAddMed3"
         android:name="com.example.medicationreminder.AddMedFragment3"
         tools:layout="@layout/fragment_add_med3">
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
     </fragment>
 
     <fragment android:id="@+id/addMedFragmentWeek"
@@ -101,6 +107,9 @@
         <argument
             android:name="timeChoice"
             app:argType="string"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
         <action
             android:id="@+id/next3"
             app:destination="@+id/fragmentAddMed3"/>
@@ -115,6 +124,9 @@
         <argument
             android:name="timeChoice"
             app:argType="string"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/fragment_home"/>
         <action
             android:id="@+id/next"
             app:destination="@+id/fragmentAddMed3"/>

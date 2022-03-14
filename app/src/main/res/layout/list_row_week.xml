@@ -65,22 +65,48 @@
                 app:layout_constraintStart_toEndOf="@+id/imgTimeWeek"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerDays" />
 
-            <EditText
+
+
+            <LinearLayout
                 android:id="@+id/edtDoseWeek"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/line_text"
+                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_border"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="Dose"
-                android:inputType="numberDecimal"
-                android:textColorHint="#A5A5A5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvUnitOfWeek"
                 app:layout_constraintStart_toEndOf="@+id/tvTimeWeek"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDays" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDays">
+
+                <Spinner
+                    android:id="@+id/spinnerDoseOfWeek"
+                    android:layout_width="53dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="9.9"
+                    android:autofillHints="Med Unit"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dialog"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageView
+                    android:id="@+id/dropDownListDoseOfWeek"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight=".1"
+                    android:src="@drawable/drop_down" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvUnitOfWeek"
