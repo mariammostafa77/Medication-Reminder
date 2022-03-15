@@ -35,7 +35,6 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
     RecyclerView recycleOfWeek;
     TextView tvNumTaken;
     RecycleAdapterMedWeeks MyAdapter;
-    MedData medData;
     String userId;
     DatabaseReference mDatabase;
     FirebaseUser currentFirebaseUser;
@@ -79,27 +78,29 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
                 getArguments().getString(AddMedFragment1.numberTakenTag));
 
         Button btnNext3=view.findViewById(R.id.btnNext3);
+        if(AddMedFragment1.medUnit=="pill"){
+            btnNext3.setText("Next");
+        }
+        else{
+            btnNext3.setText("Save");
+        }
         btnNext3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(btnNext3);
                 String medId=userId+AddMedFragment1.medName+AddMedFragment1.startDate;
-                medData=new MedData(AddMedFragment1.medName.toString(),
+                AddMedFragment1.medData=new MedData(AddMedFragment1.medName.toString(),
                         AddMedFragment1.medUnit.toString(),
                         AddMedFragment1.startDate.toString(),
                         AddMedFragment1.endDate.toString(),userId,medId,
-                        AddMedFragment1.MedNum);
-                addMed(medData);
+                        AddMedFragment1.MedNum,AddMedFragment1.numberTaken,medDataWeekArray);
 
-                for (int i=0;i<medDataWeekArray.size();i++){
-                    medDataWeekArray.get(i).setId(medId);
-                    addMedTimesDates(medDataWeekArray.get(i));
-                }
                 if(AddMedFragment1.medUnit=="pill"){
                     NavDirections navDirections=AddMedWeekFragmentDirections.next3();
                     navController.navigate(navDirections);
                 }
                 else{
+                    addMed( AddMedFragment1.medData);
                     NavDirections navDirections=AddMedWeekFragmentDirections.next();
                     navController.navigate(navDirections);
 
@@ -126,14 +127,6 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
         });
     }
 
-    public void addMedTimesDates(MedDataWeek medDataWeek) {
-        mDatabase.child("MedicationDataTimeDates").child("perWeeks").push().setValue(medDataWeek).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     @Override
     public void getData(MedDataWeek medDataWeek) {
         medDataWeekArray.add(medDataWeek);

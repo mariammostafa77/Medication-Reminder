@@ -1,35 +1,19 @@
 package com.example.medicationreminder;
 
 public class RefillMed {
-    String userId,medId,remindTime;
-    int pillLeftMun,numOfRemind;
+    String remindTime;
+    int pillLeftNum,numOfRemind;
 
     public RefillMed() {
     }
 
-    public RefillMed(String userId, String medId, String remindTime, int pillLeftMun, int numOfRemind) {
-        this.userId = userId;
-        this.medId = medId;
+    public RefillMed(String remindTime, int pillLeftNum, int numOfRemind) {
         this.remindTime = remindTime;
-        this.pillLeftMun = pillLeftMun;
+        this.pillLeftNum = pillLeftNum;
         this.numOfRemind = numOfRemind;
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getMedId() {
-        return medId;
-    }
-
-    public void setMedId(String medId) {
-        this.medId = medId;
-    }
 
     public String getRemindTime() {
         return remindTime;
@@ -39,12 +23,12 @@ public class RefillMed {
         this.remindTime = remindTime;
     }
 
-    public int getPillLeftMun() {
-        return pillLeftMun;
+    public int getpillLeftNum() {
+        return pillLeftNum;
     }
 
-    public void setPillLeftMun(int pillLeftMun) {
-        this.pillLeftMun = pillLeftMun;
+    public void setpillLeftNum(int pillLeftNum) {
+        this.pillLeftNum = pillLeftNum;
     }
 
     public int getNumOfRemind() {

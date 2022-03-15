@@ -106,7 +106,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
         dropDownListDoseOfWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinnerDays.performClick();
+                spinnerDoseOfWeek.performClick();
             }
         });
         spinnerDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()

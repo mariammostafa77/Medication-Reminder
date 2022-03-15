@@ -42,7 +42,6 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
     TextView tvNum;
     RecyclerView recycleOfDay;
     RecycleAdapterMedDays MyAdapter;
-    MedData medData;
     public static String id;
     DatabaseReference mDatabase;
     FirebaseUser currentFirebaseUser ;
@@ -81,34 +80,34 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
         recycleOfDay.setAdapter(MyAdapter);
         id= currentFirebaseUser.getUid();
         Button btnNext2=view.findViewById(R.id.btnNext2);
+
+        if(AddMedFragment1.medUnit=="pill"){
+            btnNext2.setText("Next");
+        }
+        else{
+            btnNext2.setText("Save");
+        }
+
         btnNext2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(v);
 
                 String medId=id+AddMedFragment1.medName+AddMedFragment1.startDate;
-                medData=new MedData(AddMedFragment1.medName.toString(),
+                AddMedFragment1.medData=new MedData(AddMedFragment1.medName.toString(),
                         AddMedFragment1.medUnit.toString(),
                         AddMedFragment1.startDate.toString(),
                         AddMedFragment1.endDate.toString(),id,medId,
-                        AddMedFragment1.MedNum);
-                addMed(medData);
+                        AddMedFragment1.MedNum,AddMedFragment1.numberTaken,medDataDayArray);
 
-                medDataDay=new MedDataDay();
-                for (int i=0;i<medDataDayArray.size();i++){
-                    medDataDayArray.get(i).setId(medId);
-                    //Log.i("tag","list item "+medDataDay.getTime());
-                   addMedTimesDates(medDataDayArray.get(i));
-                }
                 if(AddMedFragment1.medUnit=="pill"){
                     NavDirections navDirections=AddMedFragment2Directions.next2();
                     navController.navigate(navDirections);
-
                 }
                 else{
+                    addMed( AddMedFragment1.medData);
                     NavDirections navDirections=AddMedFragment2Directions.next();
                     navController.navigate(navDirections);
-
                 }
 
 
@@ -129,14 +128,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
         });
     }
 
-    public void addMedTimesDates(MedDataDay medDataDay) {
-        mDatabase.child("MedicationDataTimeDates").child("perDays").push().setValue(medDataDay).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
 
 
     @Override

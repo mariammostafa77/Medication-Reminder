@@ -1,26 +1,16 @@
 package com.example.medicationreminder;
 
 public class MedDataMonth {
-    String medId;
     String dose;
     String time;
     String dayOfMonth;
     public MedDataMonth() {
     }
 
-    public MedDataMonth(String medId, String dose, String time, String dayOfMonth) {
-        this.medId = medId;
+    public MedDataMonth( String dose, String time, String dayOfMonth) {
         this.dose = dose;
         this.time = time;
         this.dayOfMonth = dayOfMonth;
-    }
-
-    public String getMedId() {
-        return medId;
-    }
-
-    public void setId(String medId) {
-        this.medId = medId;
     }
 
     public String getDose() {

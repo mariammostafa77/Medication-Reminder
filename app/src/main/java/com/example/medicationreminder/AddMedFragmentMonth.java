@@ -36,7 +36,6 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
     RecyclerView recycleOfMonth;
     TextView tvNum;
     RecycleAdapterMedMonth MyAdapter;
-    MedData medData;
     String userId;
     DatabaseReference mDatabase;
     FirebaseUser currentFirebaseUser ;
@@ -76,7 +75,12 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
         recycleOfMonth.setLayoutManager(linearLayoutManager);
         RecycleAdapterMedMonth MyAdapter =new RecycleAdapterMedMonth(getContext(),this);
         recycleOfMonth.setAdapter(MyAdapter);
-
+        if(AddMedFragment1.medUnit=="pill"){
+            btnNextMonth.setText("Next");
+        }
+        else{
+            btnNextMonth.setText("Save");
+        }
 
         btnNextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,18 +88,12 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
                 NavController navController= Navigation.findNavController(btnNextMonth);
 
                 String medId=userId+AddMedFragment1.medName+AddMedFragment1.startDate;
-                medData=new MedData(AddMedFragment1.medName.toString(),
+                AddMedFragment1.medData=new MedData(AddMedFragment1.medName.toString(),
                         AddMedFragment1.medUnit.toString(),
                         AddMedFragment1.startDate.toString(),
                         AddMedFragment1.endDate.toString(),userId,medId,
-                        AddMedFragment1.MedNum);
-                addMed(medData);
+                        AddMedFragment1.MedNum,AddMedFragment1.numberTaken,medDataMonthsArray);
 
-                for (int i=0;i<medDataMonthsArray.size();i++){
-                    medDataMonthsArray.get(i).setId(medId);
-                    //Log.i("tag","list item "+medDataDay.getTime());
-                    addMedTimesDates(medDataMonthsArray.get(i));
-                }
 
                 if(AddMedFragment1.medUnit=="pill"){
                     NavDirections navDirections=AddMedFragmentMonthDirections.next();
@@ -103,6 +101,7 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
 
                 }
                 else{
+                    addMed(AddMedFragment1.medData);
                     NavDirections navDirections=AddMedFragmentMonthDirections.next2();
                     navController.navigate(navDirections);
 
@@ -127,14 +126,6 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
         });
     }
 
-    public void addMedTimesDates(MedDataMonth medDataMonth) {
-        mDatabase.child("MedicationDataTimeDates").child("perMonth").push().setValue(medDataMonth).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 
     @Override

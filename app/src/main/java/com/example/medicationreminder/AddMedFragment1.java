@@ -1,16 +1,12 @@
 package com.example.medicationreminder;
 
-import android.app.ActionBar;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +27,7 @@ public class AddMedFragment1 extends Fragment {
     TextView tvStartDate,tvEndDate;
     Button btnNext;
     EditText edtMedNum,edtMedName;
-
+    public static MedData medData;
     public static String medName;
     public static String medUnit;
     public static String startDate;

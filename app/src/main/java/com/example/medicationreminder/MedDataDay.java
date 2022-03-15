@@ -11,21 +11,21 @@ public class MedDataDay {
    public MedDataDay() {
    }
 
-   public MedDataDay(String medId, String dose, String time) {
-      this.medId = medId;
+   public MedDataDay( String dose, String time) {
+      //this.medId = medId;
       this.dose = dose;
       this.time = time;
    }
 
 
 
-   public String getMedId() {
+   /*public String getMedId() {
       return medId;
    }
 
    public void setId(String medId) {
       this.medId = medId;
-   }
+   }*/
 
    public String getDose() {
       return dose;

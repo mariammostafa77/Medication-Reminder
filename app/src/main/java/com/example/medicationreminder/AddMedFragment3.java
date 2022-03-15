@@ -26,9 +26,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 public class AddMedFragment3 extends Fragment {
 
-    TextView tvUnitReminder,tvUnitReminder2;
+    TextView tvUnitReminder,tvUnitReminder2,tvSkip;
     EditText edtLeftNum,edtNumRefill;
     Button btnSave;
     String time;
@@ -56,6 +59,7 @@ public class AddMedFragment3 extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         refillMed=new RefillMed();
 
+        tvSkip=view.findViewById(R.id.tvSkip);
         edtLeftNum=view.findViewById(R.id.edtLeftNum);
         edtNumRefill=view.findViewById(R.id.edtNumRefill);
         timePicker1=view.findViewById(R.id.timePicker1);
@@ -65,32 +69,47 @@ public class AddMedFragment3 extends Fragment {
         tvUnitReminder.setText(AddMedFragment1.medUnit.toString());
         tvUnitReminder2.setText(AddMedFragment1.medUnit.toString());
 
+        timePicker1.setIs24HourView(true);
+        time = String.valueOf(timePicker1.getHour()).toString() + ":" + String.valueOf(timePicker1.getMinute()).toString();
         timePicker1.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 time = String.valueOf(hourOfDay).toString() + ":" + String.valueOf(minute).toString();
             }
         });
+
+
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addData(AddMedFragment1.medData);
+                NavController navController= Navigation.findNavController(v);
+                NavDirections navDirections=AddMedFragment3Directions.next();
+                navController.navigate(navDirections);
+            }
+        });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                refillMed.setMedId(AddMedFragment2.medId);
-                refillMed.setUserId(AddMedFragment2.id);
                 refillMed.setNumOfRemind(Integer.parseInt(edtNumRefill.getText().toString()));
-                refillMed.setPillLeftMun(Integer.parseInt(edtLeftNum.getText().toString()));
+                refillMed.setpillLeftNum(Integer.parseInt(edtLeftNum.getText().toString()));
                 refillMed.setRemindTime(time);
-                mDatabase.child("MedicationRefillData").push().setValue(refillMed).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
-                        NavController navController= Navigation.findNavController(v);
-                        NavDirections navDirections=AddMedFragment3Directions.next();
-                        navController.navigate(navDirections);
-                    }
-                });
+                AddMedFragment1.medData.setRefillMedData(refillMed);
+                addData(AddMedFragment1.medData);
+                NavController navController= Navigation.findNavController(v);
+                NavDirections navDirections=AddMedFragment3Directions.next();
+                navController.navigate(navDirections);
 
             }
         });
         return view;
+    }
+    public void addData(MedData medData){
+        mDatabase.child("MedicationData").push().setValue(medData).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
