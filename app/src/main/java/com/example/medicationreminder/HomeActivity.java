@@ -31,8 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     Button button;
-    FloatingActionButton floatingActionButton,floatingActionButton2,floatingActionButton3;
-    TextView txtAddMed,txtAddMidfriend;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.viewLayout);
         NavController navController = navHostFragment.getNavController();
             NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
-           // navGraph.setStartDestination(R.id.fragmentAddMed1);
+          // navGraph.setStartDestination(R.id.fragmentAddMed1);
            navGraph.setStartDestination(R.id.fragment_home);
             navController.setGraph(navGraph);
 
@@ -90,66 +89,14 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-        floatingActionButton=findViewById(R.id.floatingActionButton);
-        floatingActionButton2=findViewById(R.id.floatingActionButton2);
-        floatingActionButton3=findViewById(R.id.floatingActionButton3);
-        txtAddMed=findViewById(R.id.txtAddMed);
-        txtAddMidfriend=findViewById(R.id.txtAddMid);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAddButtonClick();
-            }
-        });
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new AddMedFragment1()).commit();
-            }
-        });
+
 
 
     }
 
-    private void onAddButtonClick() {
-        setVisibile(clicked);
-        setAnimtion(clicked);
-        clicked= !clicked;
-    }
-    private void setVisibile(boolean clicked) {
-        if(!clicked){
-            floatingActionButton2.setVisibility(View.VISIBLE);
-            floatingActionButton3.setVisibility(View.VISIBLE);
-        }
-        else{
-            floatingActionButton2.setVisibility(View.INVISIBLE);
-            floatingActionButton3.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void setAnimtion(boolean clicked) {
-        if(!clicked){
-            floatingActionButton2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
-            floatingActionButton3.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
-            txtAddMidfriend.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
-            txtAddMed.startAnimation(AnimationUtils.loadAnimation(this,R.anim.from_btn));
-            floatingActionButton.startAnimation(AnimationUtils.loadAnimation(this,R.anim.float_btn));
 
 
 
-
-        }
-        else{
-            floatingActionButton2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
-            floatingActionButton3.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
-            txtAddMidfriend.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
-            txtAddMed.startAnimation(AnimationUtils.loadAnimation(this,R.anim.to_btn));
-            floatingActionButton.startAnimation(AnimationUtils.loadAnimation(this,R.anim.close_float_btn));
-
-        }
-
-
-    }
 
 
 

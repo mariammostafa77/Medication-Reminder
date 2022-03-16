@@ -8,5 +8,9 @@
         android:icon="@drawable/add"
         android:id="@+id/bottom_add_midfriend"
         />
+        <item android:title="Medication"
+            android:icon="@drawable/medicine"
+            android:id="@+id/bottom_medication"
+            />
 </group>
 </menu>
