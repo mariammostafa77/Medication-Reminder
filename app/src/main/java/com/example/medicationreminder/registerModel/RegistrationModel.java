@@ -37,6 +37,7 @@ public class RegistrationModel implements IModel  {
                 if (task.isSuccessful()) {
                     //firstore
                    String userID=mAuth.getCurrentUser().getUid();
+                   String specialID=username+userID;
                     FirebaseFirestore firebaseFirestore= FirebaseFirestore.getInstance();
                     DocumentReference documentReference=firebaseFirestore.collection("users")
                             .document(userID);
@@ -45,15 +46,18 @@ public class RegistrationModel implements IModel  {
                     myUser.put("phone",phone);
                     myUser.put("email",email);
                     myUser.put("password",password);
+                    myUser.put("password",specialID);
+
                     documentReference.set(myUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
                         }
                     });
-                    User user = new User(username, phone, email, password);
+                    User user = new User(username, phone, email, password,specialID);
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
