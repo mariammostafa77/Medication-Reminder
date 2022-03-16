@@ -11,14 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
     Context context;
     ArrayList<MedInfo>medList;
+    int i=0;
+
 
     public MedAdapter(Context context, ArrayList<MedInfo> medList) {
         this.context = context;
         this.medList = medList;
+
     }
 
     @NonNull
@@ -32,13 +36,23 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MedAdapter.MyViewHolder holder, int position) {
+
+
         MedInfo medInfo=medList.get(position);
+        int counter=medInfo.getNumOfTimes();
+        List<TimeOfMed> times=new ArrayList<>();
+        times=medInfo.getTimeList();
+
         holder.txtMidName.setText(medInfo.getMedName());
-        holder.txtDose.setText(medInfo.getStartDate());
-        holder.txtTime.setText(medInfo.getTime());
+        holder.txtDose.setText(times.get(i).getDose()+medInfo.getMedUnit());
+        holder.txtTime.setText(times.get(i).getTime());
+        if(i<counter-1){
 
-      //  holder.myImage.setImageResource(medInfo.getImg());
-
+            i++;
+        }
+        else{
+            i=0;
+        }
 
 
     }

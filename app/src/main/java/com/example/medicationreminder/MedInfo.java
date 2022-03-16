@@ -1,9 +1,11 @@
 package com.example.medicationreminder;
 
+import java.util.List;
+
 public class MedInfo {
-   private String medName;
+    private String medName;
     private String time;
-    private String dose;
+    private String medUnit;
     private String userId;
     private String startDate;
     private String endDate;
@@ -12,6 +14,25 @@ public class MedInfo {
     private String notes;
     private String taken;
     private int numOfTimes;
+    private List<TimeOfMed> timeList;
+    private String medTakenUnit;
+
+
+    public String getMedTakenUnit() {
+        return medTakenUnit;
+    }
+
+    public void setMedTakenUnit(String medTakenUnit) {
+        this.medTakenUnit = medTakenUnit;
+    }
+
+    public List<TimeOfMed> getTimeList() {
+        return timeList;
+    }
+
+    public void setTimeList(List<TimeOfMed> timeList) {
+        this.timeList = timeList;
+    }
 
     public int getNumOfTimes() {
         return numOfTimes;
@@ -102,11 +123,11 @@ public class MedInfo {
         this.time = time;
     }
 
-    public String getDose() {
-        return dose;
+    public String getMedUnit() {
+        return medUnit;
     }
 
-    public void setDose(String dose) {
-        this.dose = dose;
+    public void setMedUnit(String medUnit) {
+        this.medUnit = medUnit;
     }
 }
