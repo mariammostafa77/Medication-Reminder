@@ -43,17 +43,18 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
         List<TimeOfMed> times=new ArrayList<>();
         times=medInfo.getTimeList();
 
+
+       if(i<counter-1){
+
+           i++;
+
+       }
+       else{
+           i=0;
+      }
         holder.txtMidName.setText(medInfo.getMedName());
         holder.txtDose.setText(times.get(i).getDose()+medInfo.getMedUnit());
         holder.txtTime.setText(times.get(i).getTime());
-        if(i<counter-1){
-
-            i++;
-        }
-        else{
-            i=0;
-        }
-
 
     }
 

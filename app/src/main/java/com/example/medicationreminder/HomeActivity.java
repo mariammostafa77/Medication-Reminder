@@ -40,8 +40,8 @@ public class HomeActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.viewLayout);
         NavController navController = navHostFragment.getNavController();
             NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
-           navGraph.setStartDestination(R.id.fragmentAddMed1);
-           //navGraph.setStartDestination(R.id.fragment_home);
+          // navGraph.setStartDestination(R.id.fragmentAddMed1);
+           navGraph.setStartDestination(R.id.fragment_home);
             navController.setGraph(navGraph);
 
 
