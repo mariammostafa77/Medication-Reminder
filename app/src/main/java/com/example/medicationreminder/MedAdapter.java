@@ -52,6 +52,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
        else{
            i=0;
       }
+
         holder.txtMidName.setText(medInfo.getMedName());
         holder.txtDose.setText(times.get(i).getDose()+medInfo.getMedUnit());
         holder.txtTime.setText(times.get(i).getTime());

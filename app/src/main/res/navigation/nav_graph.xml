@@ -33,6 +33,9 @@
         <action
             android:id="@+id/rgister_home_dect"
             app:destination="@+id/fragment_home"/>
+        <action
+            android:id="@+id/rgister_start_dect"
+            app:destination="@+id/start_fragment"/>
 
     </fragment>
 

@@ -3,6 +3,7 @@ package com.example.medicationreminder;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -144,7 +145,6 @@ public class RgisterationFragment extends Fragment implements IView {
         });
 
 
-
         return v;
     }
 
@@ -234,4 +234,5 @@ public class RgisterationFragment extends Fragment implements IView {
 
     }
 
+   
 }

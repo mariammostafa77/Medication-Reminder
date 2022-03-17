@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <com.google.android.material.appbar.CollapsingToolbarLayout
-        app:contentScrim="#3F51B5"
+        app:contentScrim="#03A9F4"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
