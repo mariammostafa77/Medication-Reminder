@@ -40,15 +40,18 @@ public class SkipAddMidFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),HomeActivity.class);
                 startActivity(intent);
+                StartFragment.isGuest=true;
             }
         });
         Button addYourMedBtn=v.findViewById(R.id.addYourMedBtn);
         addYourMedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StartFragment.isGuest=true;
                 NavController navController= Navigation.findNavController(addYourMedBtn);
                 NavDirections navDirections=SkipAddMidFragmentDirections.addMed();
                 navController.navigate(navDirections);
+
             }
         });
         return v;

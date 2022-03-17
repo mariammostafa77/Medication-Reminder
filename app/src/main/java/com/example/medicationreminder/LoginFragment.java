@@ -182,6 +182,7 @@ public class LoginFragment extends Fragment implements ILoginView {
 
             startActivity(i);
             Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
+            StartFragment.isGuest=false;
 
 
         }else{

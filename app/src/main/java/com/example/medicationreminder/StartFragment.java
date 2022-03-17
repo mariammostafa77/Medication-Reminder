@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 
 public class StartFragment extends Fragment {
+    public static boolean isGuest=false;
     NavController navController;
     NavDirections navDirections;
 

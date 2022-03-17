@@ -53,7 +53,7 @@ public class AddMedFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_med1, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+      //  ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         spinnerUnit = view.findViewById(R.id.spinnerUnit);
         numberTakenSpinner = view.findViewById(R.id.numberTakenSpinner);
         dropDownMedUnit = view.findViewById(R.id.dropDownMedUnit);

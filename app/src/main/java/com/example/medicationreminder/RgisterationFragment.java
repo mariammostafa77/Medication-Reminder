@@ -226,6 +226,7 @@ public class RgisterationFragment extends Fragment implements IView {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
             Toast.makeText(getActivity(), "Registration Successfully", Toast.LENGTH_SHORT).show();
+            StartFragment.isGuest=false;
 
         }
         else{
