@@ -60,6 +60,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 clickListener.onDeleteClick(medList.get(myPosition));
+                notifyDataSetChanged();
             }
         });
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,13 @@
 package com.example.medicationreminder.loginmodel;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginModel implements ILoginModel {
     boolean result=false;
@@ -11,7 +18,7 @@ public class LoginModel implements ILoginModel {
     }
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
-/*    @Override
+    @Override
     public boolean userLogin(DatabaseCallback databaseCallback, String email, String password) {
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -50,7 +57,7 @@ public class LoginModel implements ILoginModel {
                     }
                 });
         return result2;
-    }*/
+    }
 
     public interface DatabaseCallback{
         void onCallback(boolean result);
