@@ -6,7 +6,7 @@ import com.example.medicationreminder.loginmodel.ILoginModel;
 import com.example.medicationreminder.loginmodel.ILoginPresenter;
 import com.example.medicationreminder.loginmodel.ILoginView;
 import com.example.medicationreminder.loginmodel.LoginModel;
-import com.example.medicationreminder.registerModel.RegistrationModel;
+
 
 public class LoginPresenter implements ILoginPresenter {
     ILoginModel model;

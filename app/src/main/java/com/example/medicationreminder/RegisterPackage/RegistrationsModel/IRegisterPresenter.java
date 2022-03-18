@@ -1,6 +1,6 @@
-package com.example.medicationreminder.registerModel;
+package com.example.medicationreminder.RegisterPackage.RegistrationsModel;
 
-public interface IPresenter {
+public interface IRegisterPresenter {
     void onRegistrationBtnClick(String username,String phone,String email,String password);
     void onRegistrationGoogleBtnClick(String idToken);
 }

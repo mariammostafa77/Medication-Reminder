@@ -23,10 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
-import com.example.medicationreminder.registerModel.IView;
-import com.example.medicationreminder.registerpreseter.RegistrationPresenter;
+import com.example.medicationreminder.RegisterPackage.RegistrationsModel.IRegistersView;
+import com.example.medicationreminder.RegisterPackage.RegistrationsPresenter.RegisterPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -49,7 +47,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class RgisterationFragment extends Fragment implements IView {
+public class RgisterationFragment extends Fragment implements IRegistersView {
     Button btnRegister;
     NavController navController;
     NavDirections navDirections;
@@ -62,7 +60,7 @@ public class RgisterationFragment extends Fragment implements IView {
     GoogleSignInOptions gso;
     FirebaseFirestore firebaseFirestore;
     String userID;
-    RegistrationPresenter presenter;
+    RegisterPresenter presenter;
     String username,phone,email,password,confirmPassword;
 
 
@@ -80,7 +78,7 @@ public class RgisterationFragment extends Fragment implements IView {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        presenter=new RegistrationPresenter(this);
+        presenter=new RegisterPresenter(this);
 
 
     }
@@ -221,12 +219,13 @@ public class RgisterationFragment extends Fragment implements IView {
 
 
     @Override
-    public void goToHome(boolean result) {
+    public void goToLogin(boolean result) {
         if(result==true) {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
             Toast.makeText(getActivity(), "Registration Successfully", Toast.LENGTH_SHORT).show();
             StartFragment.isGuest=false;
+
 
         }
         else{
