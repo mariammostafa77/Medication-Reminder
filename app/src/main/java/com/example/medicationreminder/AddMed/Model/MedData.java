@@ -1,6 +1,4 @@
-package com.example.medicationreminder;
-
-import com.google.common.reflect.TypeToken;
+package com.example.medicationreminder.AddMed.Model;
 
 import java.util.List;
 

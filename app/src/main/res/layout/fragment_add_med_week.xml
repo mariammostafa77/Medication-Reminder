@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1F394A"
-    tools:context=".AddMedWeekFragment">
+    tools:context=".AddMed.View.AddMedWeekFragment">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

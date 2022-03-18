@@ -2,19 +2,7 @@ package com.example.medicationreminder;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-
-
 import android.text.TextUtils;
-
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+
 import com.example.medicationreminder.RegisterPackage.RegistrationsModel.IRegistersView;
 import com.example.medicationreminder.RegisterPackage.RegistrationsPresenter.RegisterPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,21 +23,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class RgisterationFragment extends Fragment implements IRegistersView {
@@ -218,6 +199,9 @@ public class RgisterationFragment extends Fragment implements IRegistersView {
     }
 
 
+
+
+
     @Override
     public void goToLogin(boolean result) {
         if(result==true) {
@@ -226,13 +210,9 @@ public class RgisterationFragment extends Fragment implements IRegistersView {
             Toast.makeText(getActivity(), "Registration Successfully", Toast.LENGTH_SHORT).show();
             StartFragment.isGuest=false;
 
-
         }
         else{
             Toast.makeText(getActivity(), "Error in registration", Toast.LENGTH_SHORT).show();
         }
-
     }
-
-   
 }

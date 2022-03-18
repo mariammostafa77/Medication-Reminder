@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.AddMed.Model;
 
 public class MedDataMonth {
     String dose;

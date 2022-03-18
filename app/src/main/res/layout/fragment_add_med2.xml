@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1F394A"
-    tools:context=".AddMedFragment2">
+    tools:context=".AddMed.View.AddMedFragment2">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

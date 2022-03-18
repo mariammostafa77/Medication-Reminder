@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.AddMed.View;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,16 +16,26 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medicationreminder.AddMed.Model.MedDataWeek;
+import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
+import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.R;
+
 import java.util.Calendar;
 
 public class RecycleAdapterMedWeeks extends RecyclerView.Adapter<RecycleAdapterMedWeeks.ViewHolder>  {
-        int count=AddMedFragment1.MedNum;
+        int count;
         Context context;
         MyInterfaceForWeek myInterfaceForWeek;
+        PresenterInterface presenter=new AddMedPresenter();
+        String medTime,dose;
+        String unit;
 
-public RecycleAdapterMedWeeks(Context context,MyInterfaceForWeek myInterfaceForWeek) {
+public RecycleAdapterMedWeeks(Context context,MyInterfaceForWeek myInterfaceForWeek,int count,String unit) {
         this.context = context;
         this.myInterfaceForWeek=myInterfaceForWeek;
+        this.count=count;
+        this.unit=unit;
         }
 
 class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,22 +66,28 @@ class ViewHolder extends RecyclerView.ViewHolder{
     public void bind(){
 
         for(int i=0;i<count;i++){
-            getTvUnitOfWeek().setText(AddMedFragment1.medUnit);
+            getTvUnitOfWeek().setText(unit);
         }
 
-        getImgTimeWeek().setOnClickListener(new View.OnClickListener() {
+
+
+        imgTimeWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getTime(tvTimeWeek);
-                medDataWeek.setTime(tvTimeWeek.getText().toString());
+                medTime=tvTimeWeek.getText().toString();
+                medDataWeek.setTime(medTime);
 
             }
         });
 
-        getTvTimeWeek().setOnClickListener(new View.OnClickListener() {
+        tvTimeWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getTime(tvTimeWeek);
+                medTime=tvTimeWeek.getText().toString();
+                medDataWeek.setTime(medTime);
+
             }
         });
         String[] arraySpinner = new String[]{"Dose","0.25", "0.5", "0.75", "1", "1.25", "1.5", "1.75","2","Others"};
@@ -90,8 +105,8 @@ class ViewHolder extends RecyclerView.ViewHolder{
         {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                medDataWeek.setDose(selectedItem);
+                dose = parent.getItemAtPosition(position).toString();
+                medDataWeek.setDose(dose);
             }
             public void onNothingSelected(AdapterView<?> parent)
             {
@@ -162,7 +177,8 @@ class ViewHolder extends RecyclerView.ViewHolder{
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 String time = hour + ":" + minute;
                 textView.setText(time);
-                medDataWeek.setTime(textView.getText().toString());
+                medTime=time;
+                medDataWeek.setTime(medTime);
             }
         }, hour, minute, false);
         timePickerDialog.show();

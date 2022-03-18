@@ -10,6 +10,7 @@
     <string name="medUnit">What is med unit ?</string>
     <string name="HowOftenDoYouTakeThisMed">How often do you take this med ?</string>
     <string name="next">next</string>
+    <string name="enterYourUnit">Enter Your Unit</string>
     <string name="RefillReminder">Refill Reminder</string>
     <string name="totalNumOfpills">How much / many do you have left?</string>
     <string name="reminderNum">Remind me when i have :</string>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1F394A"
-    tools:context=".AddMedFragment1">
+    tools:context=".AddMed.View.AddMedFragment1">
 
     <TextView
         android:id="@+id/textView"
@@ -43,276 +43,275 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/scroll">
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintCircleRadius="60dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:text="per"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/edtMedNum"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-                app:layout_constraintStart_toEndOf="@+id/edtMedNum"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="#1F394A"
-                android:drawableRight="@drawable/next"
-                android:text="@string/next"
-                android:textSize="16sp"
-                app:cornerRadius="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edtMedNum" />
-
-
-            <EditText
-                android:id="@+id/edtMedName"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/line_text"
-                android:ems="10"
-                android:gravity="center_vertical"
-                android:hint="@string/medicationName"
-                android:inputType="textPersonName"
-                android:padding="10dp"
-                android:textColorHint="#A5A5A5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TextContrastCheck" />
-
-            <LinearLayout
-                android:id="@id/linearLayout3"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/line_text"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15">
+                android:layout_height="match_parent"
+                app:layout_constraintCircleRadius="60dp">
 
-                <Spinner
-                    android:id="@+id/spinnerUnit"
+                <TextView
+                    android:id="@+id/tvPer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="per"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtMedNum"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                    app:layout_constraintStart_toEndOf="@+id/edtMedNum"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="40dp"
+                    android:backgroundTint="#1F394A"
+                    android:drawableRight="@drawable/next"
+                    android:text="@string/next"
+                    android:textSize="16sp"
+                    app:cornerRadius="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edtMedNum" />
+
+
+                <EditText
+                    android:id="@+id/edtMedName"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_weight="9.75"
-                    android:autofillHints="Med Unit"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dialog"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:background="@drawable/line_text"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="@string/medicationName"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:textColorHint="#A5A5A5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck" />
 
-                <ImageView
-                    android:id="@+id/dropDownMedUnit"
-                    android:layout_width="39dp"
-                    android:layout_height="34dp"
-                    android:layout_gravity="center"
+                <LinearLayout
+                    android:id="@id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/line_text"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                    <Spinner
+                        android:id="@+id/spinnerUnit"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="9.75"
+                        android:autofillHints="Med Unit"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <ImageView
+                        android:id="@+id/dropDownMedUnit"
+                        android:layout_width="39dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight=".25"
+                        android:src="@drawable/drop_down" />
+
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/line_text"
+                    android:paddingStart="10dp"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                    <ImageView
+                        android:id="@+id/btnTimeOfDay"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/cc"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvStartDate"
+                        app:layout_constraintHorizontal_weight=".75"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:text="@string/StartDate"
+                        android:textColor="#A5A5A5"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintStart_toEndOf="@+id/btnTimeOfDay"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/line_text"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                    <ImageView
+                        android:id="@+id/btnCalender2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/cc"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvEndDate"
+                        app:layout_constraintHorizontal_weight=".75"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:text="@string/EndDate"
+                        android:textColor="#A5A5A5"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintStart_toEndOf="@+id/btnCalender2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <EditText
+                    android:id="@+id/edtMedNum"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight=".25"
-                    android:src="@drawable/drop_down" />
-
-            </LinearLayout>
-
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/line_text"
-                android:paddingStart="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                <ImageView
-                    android:id="@+id/btnTimeOfDay"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:src="@drawable/cc"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/EdtTimeEveryDay"
-                    app:layout_constraintHorizontal_weight=".75"
+                    android:ems="10"
+                    android:hint="enter number"
+                    android:inputType="number"
+                    android:textColorHint="#A5A5A5"
+                    app:layout_constraintEnd_toStartOf="@+id/tvPer"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/EdtTimeEveryDay"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:gravity="center_vertical"
-                    android:paddingStart="5dp"
-                    android:text="@string/StartDate"
-                    android:textColor="#A5A5A5"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toEndOf="@+id/btnTimeOfDay"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/line_text"
-                android:orientation="horizontal"
-                android:paddingStart="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                <ImageView
-                    android:id="@+id/btnCalender2"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:src="@drawable/cc"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvEndDate"
-                    app:layout_constraintHorizontal_weight=".75"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvEndDate"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:gravity="center_vertical"
-                    android:paddingStart="5dp"
-                    android:text="@string/EndDate"
-                    android:textColor="#A5A5A5"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toEndOf="@+id/btnCalender2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-            <EditText
-                android:id="@+id/edtMedNum"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="5dp"
-                android:ems="10"
-                android:hint="enter number"
-                android:inputType="number"
-                android:textColorHint="#A5A5A5"
-                app:layout_constraintEnd_toStartOf="@+id/textView17"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-
-            <LinearLayout
-                android:id="@id/linearLayout4"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/line_text"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView16">
-
-                <Spinner
-                    android:id="@+id/numberTakenSpinner"
+                <LinearLayout
+                    android:id="@id/linearLayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/line_text"
-                    android:foregroundGravity="center"
-                    android:gravity="start|center_vertical"
-                    android:spinnerMode="dialog"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvPer"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16">
 
-                <ImageView
-                    android:id="@+id/dropDownChoice"
-                    android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/numberTakenSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/line_text"
+                        android:foregroundGravity="center"
+                        android:gravity="start|center_vertical"
+                        android:spinnerMode="dialog"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <ImageView
+                        android:id="@+id/dropDownChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight=".25"
+                        android:src="@drawable/drop_down" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight=".25"
-                    android:src="@drawable/drop_down" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="What is med unit ?"
+                    android:textColor="#A5A5A5"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtMedName" />
 
-            </LinearLayout>
-
-
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:text="What is med unit ?"
-                android:textColor="#A5A5A5"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtMedName" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/HowOftenDoYouTakeThisMed"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/HowOftenDoYouTakeThisMed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 
 

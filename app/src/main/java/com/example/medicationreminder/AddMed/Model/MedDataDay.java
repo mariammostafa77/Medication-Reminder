@@ -1,9 +1,6 @@
-package com.example.medicationreminder;
-
-import java.util.HashMap;
+package com.example.medicationreminder.AddMed.Model;
 
 public class MedDataDay {
-   String medId;
    String dose;
    String time;
 
@@ -12,20 +9,9 @@ public class MedDataDay {
    }
 
    public MedDataDay( String dose, String time) {
-      //this.medId = medId;
       this.dose = dose;
       this.time = time;
    }
-
-
-
-   /*public String getMedId() {
-      return medId;
-   }
-
-   public void setId(String medId) {
-      this.medId = medId;
-   }*/
 
    public String getDose() {
       return dose;

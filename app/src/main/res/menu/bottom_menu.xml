@@ -6,7 +6,7 @@
         android:id="@+id/bottom_home"/>
     <item android:title="Add Midfriend"
         android:icon="@drawable/add"
-        android:id="@+id/bottom_add_midfriend"
+        android:id="@+id/bottom_add_medication"
         />
         <item android:title="Medication"
             android:icon="@drawable/medicine"

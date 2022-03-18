@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.AddMed.View;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,20 +16,34 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medicationreminder.AddMed.Model.MedDataMonth;
+import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
+import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.R;
+
 import java.util.Calendar;
 
-public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.medicationreminder.RecycleAdapterMedMonth.ViewHolder>  {
+public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterMedMonth.ViewHolder>  {
 
-    int count=AddMedFragment1.MedNum;
+    int count;
     Context context;
     Calendar c;
     int monthMaxDays;
     MyInterfaceForMonth myInterfaceForMonth;
+    PresenterInterface presenter=new AddMedPresenter();
+    String medTime,dose;
+    String unit;
 
-    public RecycleAdapterMedMonth(Context context,MyInterfaceForMonth myInterfaceForMonth) {
+
+    public RecycleAdapterMedMonth(Context context,MyInterfaceForMonth myInterfaceForMonth,int count,String unit) {
         this.context = context;
         this.myInterfaceForMonth=myInterfaceForMonth;
+        this.count=count;
+        this.unit=unit;
+
     }
+
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         View row;
@@ -53,24 +66,29 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.med
 
         public void bind(){
 
-            for(int i=0;i<count;i++){
-                gettvUnitOfMonth().setText(AddMedFragment1.medUnit);
+           for(int i=0;i<count;i++){
+                gettvUnitOfMonth().setText(unit);
             }
 
-            getimgTimeMonth().setOnClickListener(new View.OnClickListener() {
+            imgTimeMonth.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getTime(tvTimeMonth);
+                    medTime=tvTimeMonth.getText().toString();
+                    medDataMonth.setTime(medTime);
 
                 }
             });
 
-            gettvTimeMonth().setOnClickListener(new View.OnClickListener() {
+            tvTimeMonth.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getTime(tvTimeMonth);
+                    medTime=tvTimeMonth.getText().toString();
+                    medDataMonth.setTime(medTime);
                 }
             });
+
             String[] arraySpinner = new String[]{"Dose","0.25", "0.5", "0.75", "1", "1.25", "1.5", "1.75","2","Others"};
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context.getApplicationContext(),
                     android.R.layout.simple_spinner_item, arraySpinner);
@@ -86,8 +104,8 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.med
             {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                 {
-                    String selectedItem = parent.getItemAtPosition(position).toString();
-                    medDataMonth.setDose(selectedItem);
+                    dose = parent.getItemAtPosition(position).toString();
+                    medDataMonth.setDose(dose);
                 }
                 public void onNothingSelected(AdapterView<?> parent)
                 {
@@ -109,7 +127,7 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.med
             numberTakenAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             getspinnerDaysInMonth().setAdapter(numberTakenAdapter2);
             for(int i=0;i<count;i++){
-                gettvUnitOfMonth().setText(AddMedFragment1.medUnit);
+                gettvUnitOfMonth().setText(unit);
             }
             spinnerDaysInMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
             {
@@ -152,7 +170,8 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.med
                 public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                     String time = hour + ":" + minute;
                     textView.setText(time);
-                    medDataMonth.setTime(tvTimeMonth.getText().toString());
+                    medTime=time;
+                    medDataMonth.setTime(medTime);
 
                 }
             }, hour, minute, false);
@@ -175,7 +194,6 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<com.example.med
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         holder.bind();
     }
 

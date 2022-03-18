@@ -2,26 +2,34 @@
 package com.example.medicationreminder;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationView;
 import com.example.medicationreminder.ShowMedication.presenter.ShowMedicationPresenter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
 
-public class HomeFragment extends Fragment implements IShowMedicationView {
+public class HomeFragment extends Fragment implements IShowMedicationView,ClickListenerInterface {
 
     RecyclerView medRecyclerView;
     MedAdapter medAdapter;
@@ -70,7 +78,7 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
         medRecyclerView.setHasFixedSize(true);
         medRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         medList = new ArrayList<>();
-        medAdapter = new MedAdapter(getContext(), medList);
+        medAdapter = new MedAdapter(getContext(), medList, (ClickListenerInterface) this);
 
         medList.clear();
 
@@ -97,5 +105,33 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
         medAdapter.notifyDataSetChanged();
         medRecyclerView.setAdapter(medAdapter);
 
+    }
+
+    @Override
+    public void onDeleteClick(MedInfo medInfo) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query applesQuery = ref.child("MedicationData").orderByChild("medId")
+                .equalTo(medInfo.getMedId());
+
+        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                    appleSnapshot.getRef().removeValue();
+                }
+                Toast.makeText(getContext(), "delete "+medInfo.getMedName(), Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "success");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("TAG", "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    @Override
+    public void onEditClick(MedInfo medInfo) {
+        Toast.makeText(getContext(), "Edit "+medInfo.getMedName(), Toast.LENGTH_SHORT).show();
     }
 }

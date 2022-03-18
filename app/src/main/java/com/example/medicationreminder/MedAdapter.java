@@ -17,11 +17,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
     Context context;
     ArrayList<MedInfo>medList;
     int i=0;
+    ClickListenerInterface clickListener;
 
 
-    public MedAdapter(Context context, ArrayList<MedInfo> medList) {
+    public MedAdapter(Context context, ArrayList<MedInfo> medList,ClickListenerInterface clickListener) {
         this.context = context;
         this.medList = medList;
+        this.clickListener=clickListener;
 
     }
 
@@ -42,8 +44,6 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
         int counter=medInfo.getNumOfTimes();
         List<TimeOfMed> times=new ArrayList<>();
         times=medInfo.getTimeList();
-
-
        if(i<counter-1){
 
            i++;
@@ -52,11 +52,22 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
        else{
            i=0;
       }
-
+        int myPosition=position;
         holder.txtMidName.setText(medInfo.getMedName());
         holder.txtDose.setText(times.get(i).getDose()+medInfo.getMedUnit());
         holder.txtTime.setText(times.get(i).getTime());
-
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onDeleteClick(medList.get(myPosition));
+            }
+        });
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onEditClick(medList.get(myPosition));
+            }
+        });
     }
 
     @Override
@@ -66,7 +77,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtMidName,txtDose,txtTime,txtNotes,txtTaken;
-        ImageView myImage;
+        ImageView myImage,imgEdit,imgDelete;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtMidName=itemView.findViewById(R.id.txtMidName);
@@ -75,6 +86,8 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
             txtTaken=itemView.findViewById(R.id.txtTaken);
             txtNotes=itemView.findViewById(R.id.txtNotes);
             myImage=itemView.findViewById(R.id.imageView3);
+            imgDelete=itemView.findViewById(R.id.imgDelete);
+            imgEdit=itemView.findViewById(R.id.imgEdit);
         }
     }
 

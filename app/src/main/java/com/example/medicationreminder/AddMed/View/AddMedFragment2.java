@@ -1,9 +1,8 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.AddMed.View;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -20,38 +19,46 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medicationreminder.AddMed.Model.MedData;
+import com.example.medicationreminder.AddMed.Model.MedDataDay;
+import com.example.medicationreminder.AddMed.Model.MedDataMonth;
+import com.example.medicationreminder.AddMed.Model.MedDataWeek;
+import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
+import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
+public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyInterfaceForMonth,MyInterfaceForWeek {
 
     TextView tvNum;
     RecyclerView recycleOfDay;
     RecycleAdapterMedDays MyAdapter;
-    public static String id;
+    String id;
     DatabaseReference mDatabase;
     FirebaseUser currentFirebaseUser ;
-    public static String medId;
-    MedDataDay medDataDay;
-    List<MedDataDay> medDataDayArray;
-
+    static List<MedDataDay> medDataDayArray;
+    static List<MedDataMonth>medDataMonthList;
+    static List<MedDataWeek>medDataWeekList;
+    String medId;
+    PresenterInterface presenter=new AddMedPresenter();
+    AddMedFragment3 addMedFragment3;
+    String medName;
+    String medUnit;
+    String startDate;
+    String endDate;
+    int numOfMed;
+    String timeUnitChoice;
 
     public AddMedFragment2() {
-        // Required empty public constructor
     }
 
     @Override
@@ -70,18 +77,26 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
-        tvNum.setText(getArguments().getInt(AddMedFragment1.MedNumTag)+" times per "+
-                getArguments().getString(AddMedFragment1.numberTakenTag));
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycleOfDay.setLayoutManager(linearLayoutManager);
         medDataDayArray=new ArrayList<>();
-        MyAdapter =new RecycleAdapterMedDays(getContext(), this);
+        MyAdapter =new RecycleAdapterMedDays(getContext(), this,AddMedFragment2Args.fromBundle(getArguments()).getNumOfMed(),AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit());
         recycleOfDay.setAdapter(MyAdapter);
         id= currentFirebaseUser.getUid();
         Button btnNext2=view.findViewById(R.id.btnNext2);
+        medName=AddMedFragment2Args.fromBundle(getArguments()).getMyMedName().toString();
+        medUnit=AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit().toString();
+        startDate=AddMedFragment2Args.fromBundle(getArguments()).getMyStartDate().toString();
+        endDate=AddMedFragment2Args.fromBundle(getArguments()).getMyEndDate().toString();
+        numOfMed=AddMedFragment2Args.fromBundle(getArguments()).getNumOfMed();
+        timeUnitChoice=AddMedFragment2Args.fromBundle(getArguments()).getTimeChoice().toString();
+        medId=id+medName +startDate;
+        tvNum.setText(numOfMed+" times per "+timeUnitChoice);
+        addMedFragment3=new AddMedFragment3(medName,medDataDayArray,
+                medUnit,startDate,endDate,numOfMed ,timeUnitChoice,medId);
 
-        if(AddMedFragment1.medUnit=="pill"){
+        if(medUnit=="pill"){
             btnNext2.setText("Next");
         }
         else{
@@ -92,20 +107,14 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(v);
-
-                String medId=id+AddMedFragment1.medName+AddMedFragment1.startDate;
-                AddMedFragment1.medData=new MedData(AddMedFragment1.medName.toString(),
-                        AddMedFragment1.medUnit.toString(),
-                        AddMedFragment1.startDate.toString(),
-                        AddMedFragment1.endDate.toString(),id,medId,
-                        AddMedFragment1.MedNum,AddMedFragment1.numberTaken,medDataDayArray);
-
-                if(AddMedFragment1.medUnit=="pill"){
+                if(medUnit=="pill"){
                     NavDirections navDirections=AddMedFragment2Directions.next2();
                     navController.navigate(navDirections);
                 }
                 else{
-                    addMed( AddMedFragment1.medData);
+                    String status=presenter.SetDadaIntoDatabase(presenter.setMedDataWithOutRefillReminder(medName,medUnit,startDate,endDate,id,medId,
+                            numOfMed,timeUnitChoice, medDataDayArray));
+                    Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
                     NavDirections navDirections=AddMedFragment2Directions.next();
                     navController.navigate(navDirections);
                 }
@@ -116,23 +125,18 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays {
 
         return view;
     }
-    public void addMed(MedData medData){
-        medId=null;
-        mDatabase.child("MedicationData").push().setValue(medData).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getContext(), "added successfully ", Toast.LENGTH_SHORT).show();
-                medId =medData.getMedId();
-
-            }
-        });
-    }
-
-
-
-
     @Override
     public void getData(MedDataDay medDataDay) {
         medDataDayArray.add(medDataDay);
+    }
+
+    @Override
+    public void getData(MedDataMonth medDataMonth) {
+        medDataMonthList.add(medDataMonth);
+    }
+
+    @Override
+    public void getData(MedDataWeek medDataWeek) {
+        medDataWeekList.add(medDataWeek);
     }
 }

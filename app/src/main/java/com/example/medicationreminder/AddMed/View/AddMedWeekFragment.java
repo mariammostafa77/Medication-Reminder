@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.AddMed.View;
 
 import android.os.Bundle;
 
@@ -18,8 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medicationreminder.AddMed.Model.MedData;
+import com.example.medicationreminder.AddMed.Model.MedDataWeek;
+import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
+import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
+public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
 
 
     RecyclerView recycleOfWeek;
@@ -41,7 +45,16 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
     public static String medId;
     MedDataWeek medDataWeek;
     List<MedDataWeek> medDataWeekArray;
+    Button btnNext3;
 
+    PresenterInterface presenter=new AddMedPresenter();
+    AddMedFragment3 addMedFragment3;
+    String medName;
+    String medUnit;
+    String startDate;
+    String endDate;
+    int numOfMed;
+    String timeUnitChoice;
 
     public AddMedWeekFragment() {
         // Required empty public constructor
@@ -59,12 +72,13 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
         View view=inflater.inflate(R.layout.fragment_add_med_week, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+        btnNext3=view.findViewById(R.id.btnNext3);
         tvNumTaken=view.findViewById(R.id.tvNumTaken);
         recycleOfWeek=view.findViewById(R.id.recycleOfWeek);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycleOfWeek.setLayoutManager(linearLayoutManager);
-        RecycleAdapterMedWeeks MyAdapter =new RecycleAdapterMedWeeks(getContext(),this);
+        RecycleAdapterMedWeeks MyAdapter =new RecycleAdapterMedWeeks(getContext(),this,AddMedWeekFragmentArgs.fromBundle(getArguments()).getNumOfMed(),AddMedWeekFragmentArgs.fromBundle(getArguments()).getMyMedUnit());
         recycleOfWeek.setAdapter(MyAdapter);
         medDataWeekArray=new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -74,37 +88,46 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek{
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-        tvNumTaken.setText(getArguments().getInt(AddMedFragment1.MedNumTag)+" times per "+
-                getArguments().getString(AddMedFragment1.numberTakenTag));
 
-        Button btnNext3=view.findViewById(R.id.btnNext3);
-        if(AddMedFragment1.medUnit=="pill"){
+        medName=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyMedName().toString();
+        medUnit=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyMedUnit().toString();
+        startDate=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyStartDate().toString();
+        endDate=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyEndDate().toString();
+        numOfMed=AddMedFragmentMonthArgs.fromBundle(getArguments()).getNumOfMed();
+        timeUnitChoice=AddMedFragmentMonthArgs.fromBundle(getArguments()).getTimeChoice().toString();
+        medId=userId+medName +startDate;
+        tvNumTaken.setText(numOfMed+" times per "+timeUnitChoice);
+
+
+        addMedFragment3=new AddMedFragment3(medName,
+                medUnit,startDate,endDate,numOfMed ,timeUnitChoice,medId,medDataWeekArray);
+
+        if(medUnit=="pill"){
             btnNext3.setText("Next");
         }
         else{
             btnNext3.setText("Save");
         }
+
         btnNext3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(btnNext3);
-                String medId=userId+AddMedFragment1.medName+AddMedFragment1.startDate;
-                AddMedFragment1.medData=new MedData(AddMedFragment1.medName.toString(),
-                        AddMedFragment1.medUnit.toString(),
-                        AddMedFragment1.startDate.toString(),
-                        AddMedFragment1.endDate.toString(),userId,medId,
-                        AddMedFragment1.MedNum,AddMedFragment1.numberTaken,medDataWeekArray);
 
-                if(AddMedFragment1.medUnit=="pill"){
+                if(medUnit=="pill"){
                     NavDirections navDirections=AddMedWeekFragmentDirections.next3();
                     navController.navigate(navDirections);
+
                 }
                 else{
-                    addMed( AddMedFragment1.medData);
+                    String status=presenter.SetDadaIntoDatabase(presenter.setMedDataWithOutRefillReminder(medName,medUnit,startDate,endDate,userId,medId,
+                            numOfMed,timeUnitChoice, medDataWeekArray));
+                    Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
                     NavDirections navDirections=AddMedWeekFragmentDirections.next();
                     navController.navigate(navDirections);
 
                 }
+
 
 
 
