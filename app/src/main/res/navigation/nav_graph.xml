@@ -30,7 +30,9 @@
     <fragment android:id="@+id/fragment_register"
         android:name="com.example.medicationreminder.RgisterationFragment"
         tools:layout="@layout/fragment_rgisteration">
-
+        <action
+            android:id="@+id/rgister_home_dect"
+            app:destination="@+id/fragment_home"/>
         <action
             android:id="@+id/rgister_start_dect"
             app:destination="@+id/start_fragment"/>
@@ -49,7 +51,13 @@
 
     </fragment>
 
-
+    <fragment android:id="@+id/fragment_home"
+        android:name="com.example.medicationreminder.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/goToAddMed1"
+            app:destination="@+id/fragmentAddMed1"/>
+    </fragment>
 
     <fragment android:id="@+id/fragment_reset_password"
         android:name="com.example.medicationreminder.ResetPasswordFragment"
@@ -59,5 +67,115 @@
             app:destination="@+id/fragment_login"/>
     </fragment>
 
+    <fragment android:id="@+id/fragmentAddMed1"
+        android:name="com.example.medicationreminder.AddMed.View.AddMedFragment1"
+        tools:layout="@layout/fragment_add_med1">
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragmentAddMed2"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/addMedFragmentMonth"/>
+        <action
+            android:id="@+id/next3"
+            app:destination="@+id/addMedFragmentWeek"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentAddMed2"
+        android:name="com.example.medicationreminder.AddMed.View.AddMedFragment2"
+        tools:layout="@layout/fragment_add_med2">
+        <argument
+            android:name="myMedName"
+            android:defaultValue="m"
+            app:argType="string"/>
+        <argument
+            android:name="MyMedUnit"
+            android:defaultValue="m"
+            app:argType="string"/>
+        <argument
+            android:name="MyStartDate"
+            android:defaultValue="m"
+            app:argType="string"/>
+        <argument
+            android:name="MyEndDate"
+            app:argType="string"/>
+        <argument
+            android:name="numOfMed"
+            android:defaultValue="1"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            android:defaultValue="m"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/fragmentAddMed3"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentAddMed3"
+        android:name="com.example.medicationreminder.AddMed.View.AddMedFragment3"
+        tools:layout="@layout/fragment_add_med3">
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
+    </fragment>
 
+    <fragment android:id="@+id/addMedFragmentWeek"
+        android:name="com.example.medicationreminder.AddMed.View.AddMedWeekFragment"
+        tools:layout="@layout/fragment_add_med_week">
+        <argument
+            android:name="myMedName"
+            app:argType="string"/>
+        <argument
+            android:name="MyMedUnit"
+            app:argType="string"/>
+        <argument
+            android:name="MyStartDate"
+            app:argType="string"/>
+        <argument
+            android:name="MyEndDate"
+            app:argType="string"/>
+        <argument
+            android:name="numOfMed"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragment_home"/>
+        <action
+            android:id="@+id/next3"
+            app:destination="@+id/fragmentAddMed3"/>
+    </fragment>
+
+    <fragment android:id="@+id/addMedFragmentMonth"
+        android:name="com.example.medicationreminder.AddMed.View.AddMedFragmentMonth"
+        tools:layout="@layout/fragment_add_med_week">
+        <argument
+            android:name="myMedName"
+            app:argType="string"/>
+        <argument
+            android:name="MyMedUnit"
+            app:argType="string"/>
+        <argument
+            android:name="MyStartDate"
+            app:argType="string"/>
+        <argument
+            android:name="MyEndDate"
+            app:argType="string"/>
+        <argument
+            android:name="numOfMed"
+            app:argType="integer"/>
+        <argument
+            android:name="timeChoice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/next2"
+            app:destination="@+id/fragment_home"/>
+        <action
+            android:id="@+id/next"
+            app:destination="@+id/fragmentAddMed3"/>
+    </fragment>
 </navigation>
