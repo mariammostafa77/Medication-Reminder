@@ -24,7 +24,10 @@ import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.WorkManagerHandler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMedDays.ViewHolder>  {
@@ -155,12 +158,12 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     Calendar calendarStartDate = Calendar.getInstance();
                     calendarStartDate.set(startDate[2],startDate[1],startDate[0],hour,minute);
                     long different=((calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000)%60;
-                    int differentDay=endDate[0]-startDate[0];
+                    long differentDay=differentBetweenDays(AddMedFragment2.startDate,AddMedFragment2.endDate);
                     Log.i("Date",""+different);
                     OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkManagerHandler.class)
                             .setInitialDelay(different, TimeUnit.MINUTES).build();
                     HomeActivity.requests.add(workRequest);
-                    for(int i=1;i<=differentDay;i++){
+                    for(long i=1;i<=differentDay;i++){
                         long duration=different+1440*i;
                         workRequest=new OneTimeWorkRequest.Builder(WorkManagerHandler.class)
                                 .setInitialDelay(duration, TimeUnit.MINUTES).build();
@@ -207,6 +210,19 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
         int[] allDate = {day, month, year};
         return allDate;
     }
+    public long differentBetweenDays(String sDate,String eDate){
+        long diff=0;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date d1 = sdf.parse(sDate);
+            Date d2 = sdf.parse(eDate);
+            long difference_In_Time = d2.getTime() - d1.getTime();
+            diff = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        return diff;
+    }
 
 }
