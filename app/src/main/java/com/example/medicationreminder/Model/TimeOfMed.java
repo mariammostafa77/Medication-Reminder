@@ -1,4 +1,4 @@
-package com.example.medicationreminder.ShowMedication.model;
+package com.example.medicationreminder.Model;
 
 public class TimeOfMed {
 

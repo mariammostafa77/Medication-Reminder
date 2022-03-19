@@ -11,11 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.medicationreminder.AddMed.View.AddMedFragment1;
-import com.example.medicationreminder.ShowEditMedFragment;
-import com.example.medicationreminder.ShowMedication.model.MedInfo;
+import com.example.medicationreminder.EditMed.View.ShowEditMedFragment;
+import com.example.medicationreminder.Model.MedInfo;
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.ShowMedication.model.TimeOfMed;
+import com.example.medicationreminder.Model.TimeOfMed;
 
 import java.util.ArrayList;
 import java.util.List;

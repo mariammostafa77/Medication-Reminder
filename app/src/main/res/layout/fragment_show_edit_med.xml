@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1F394A"
-    tools:context=".ShowEditMedFragment">
+    tools:context=".EditMed.View.ShowEditMedFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -52,7 +52,7 @@
             app:layout_constraintCircleRadius="60dp">
 
             <Button
-                android:id="@+id/btnNext2"
+                android:id="@+id/btnSaveEdit"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="50dp"
@@ -76,6 +76,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="Med Name"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/edtName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,18 +103,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="Times Info"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtName" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecycleTimes"
+                android:id="@+id/recycleTimes"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
@@ -130,10 +135,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:text="Refill Reminder Data"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RecycleTimes" />
+                app:layout_constraintTop_toBottomOf="@+id/recycleTimes" />
 
             <EditText
                 android:id="@+id/edtTimeNum"
@@ -142,8 +149,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/RecycleTimes"
+                app:layout_constraintBottom_toTopOf="@+id/recycleTimes"
                 app:layout_constraintEnd_toStartOf="@+id/textView6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -155,6 +163,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Number Left"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -165,21 +176,25 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 android:text="Remind Number"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/edtNumLeft"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="@+id/textView19"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
+                app:layout_constraintStart_toStartOf="@+id/edtNumRemind"
                 app:layout_constraintTop_toTopOf="@+id/textView19" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
+                android:id="@+id/edtNumRemind"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
@@ -198,6 +213,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:text="Remind Time"
+                android:textColor="#2B2A2A"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -209,7 +227,7 @@
                 android:weightSum="10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView22"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
+                app:layout_constraintStart_toStartOf="@+id/edtNumRemind"
                 app:layout_constraintTop_toTopOf="@+id/textView22">
 
                 <ImageView
@@ -248,6 +266,56 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/StartDate"
+                android:textColor="#2B2A2A"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtName" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/EndDate"
+                android:textColor="#2B2A2A"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tvEditEndDate"
+                app:layout_constraintStart_toEndOf="@+id/tvEditStartDate"
+                app:layout_constraintTop_toBottomOf="@+id/edtName" />
+
+            <TextView
+                android:id="@+id/tvEditStartDate"
+                android:layout_width="58dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toStartOf="@+id/textView18"
+                app:layout_constraintStart_toEndOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/edtName" />
+
+            <TextView
+                android:id="@+id/tvEditEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/textView18" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

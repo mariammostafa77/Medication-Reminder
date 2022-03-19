@@ -1,5 +1,7 @@
 package com.example.medicationreminder.AddMed.View;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -25,6 +27,7 @@ import com.example.medicationreminder.AddMed.Model.MedDataMonth;
 import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.AddMed.Model.RefillMed;
 import com.google.firebase.auth.FirebaseAuth;
@@ -148,9 +151,12 @@ public class AddMedFragment3 extends Fragment {
                 }
                 Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
 
-                NavController navController= Navigation.findNavController(v);
-                NavDirections navDirections=AddMedFragment3Directions.next();
-                navController.navigate(navDirections);
+                //NavController navController= Navigation.findNavController(v);
+                //NavDirections navDirections=AddMedFragment3Directions.next();
+                //navController.navigate(navDirections);
+                Intent i = new Intent(getActivity(), HomeActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -181,10 +187,12 @@ public class AddMedFragment3 extends Fragment {
                 }
                 Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
 
-                NavController navController= Navigation.findNavController(v);
-                NavDirections navDirections=AddMedFragment3Directions.next();
-                navController.navigate(navDirections);
-
+                //NavController navController= Navigation.findNavController(v);
+                //NavDirections navDirections=AddMedFragment3Directions.next();
+                //navController.navigate(navDirections);
+                Intent i = new Intent(getActivity(), HomeActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
         return view;

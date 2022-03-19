@@ -5,16 +5,14 @@ import android.util.Log;
 import com.example.medicationreminder.ShowMedication.View.ClickListenerInterface;
 import com.example.medicationreminder.ShowMedication.Database.DeleteEditRepo;
 import com.example.medicationreminder.ShowMedication.View.MedAdapter;
-import com.example.medicationreminder.ShowMedication.model.MedInfo;
+import com.example.medicationreminder.Model.MedInfo;
 import com.example.medicationreminder.ShowMedication.Database.RepositoryInterface;
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationPresenter;
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationView;
 import com.example.medicationreminder.ShowMedication.model.IshowMedicationModel;
 import com.example.medicationreminder.ShowMedication.model.ShowMedicationModel;
-import com.example.medicationreminder.ShowMedication.model.TimeOfMed;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ShowMedicationPresenter implements IShowMedicationPresenter , ClickListenerInterface {
     IshowMedicationModel model;

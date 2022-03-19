@@ -1,4 +1,7 @@
-package com.example.medicationreminder.ShowMedication.model;
+package com.example.medicationreminder.Model;
+
+import com.example.medicationreminder.AddMed.Model.RefillMed;
+import com.example.medicationreminder.Model.TimeOfMed;
 
 import java.util.List;
 
@@ -16,6 +19,7 @@ public class MedInfo {
     private int numOfTimes;
     private List<TimeOfMed> timeList;
     private String medTakenUnit;
+    private RefillMed refillMeds;
 
 
     public String getMedTakenUnit() {
@@ -129,5 +133,13 @@ public class MedInfo {
 
     public void setMedUnit(String medUnit) {
         this.medUnit = medUnit;
+    }
+
+    public RefillMed getRefillMeds() {
+        return refillMeds;
+    }
+
+    public void setRefillMeds(RefillMed refillMeds) {
+        this.refillMeds = refillMeds;
     }
 }

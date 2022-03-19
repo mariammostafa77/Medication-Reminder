@@ -1,8 +1,9 @@
 package com.example.medicationreminder.AddMed.View;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -11,7 +12,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +19,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.medicationreminder.AddMed.Model.MedData;
 import com.example.medicationreminder.AddMed.Model.MedDataDay;
 import com.example.medicationreminder.AddMed.Model.MedDataMonth;
 import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -85,7 +83,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
         MyAdapter =new RecycleAdapterMedDays(getContext(), this,AddMedFragment2Args.fromBundle(getArguments()).getNumOfMed(),AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit());
         recycleOfDay.setAdapter(MyAdapter);
         id= currentFirebaseUser.getUid();
-        Button btnNext2=view.findViewById(R.id.btnNext2);
+        Button btnNext2=view.findViewById(R.id.btnSaveEdit);
         medName=AddMedFragment2Args.fromBundle(getArguments()).getMyMedName().toString();
         medUnit=AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit().toString();
         startDate=AddMedFragment2Args.fromBundle(getArguments()).getMyStartDate().toString();
@@ -119,8 +117,11 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
                     String status=presenter.SetDadaIntoDatabase(presenter.setMedDataWithOutRefillReminder(medName,medUnit,startDate,endDate,id,medId,
                             numOfMed,timeUnitChoice, medDataDayArray));
                     Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
-                    NavDirections navDirections=AddMedFragment2Directions.next();
-                    navController.navigate(navDirections);
+                    //NavDirections navDirections=AddMedFragment2Directions.next();
+                    //navController.navigate(navDirections);
+                    Intent i = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(i);
+                    ((Activity) getActivity()).overridePendingTransition(0, 0);
                 }
 
 

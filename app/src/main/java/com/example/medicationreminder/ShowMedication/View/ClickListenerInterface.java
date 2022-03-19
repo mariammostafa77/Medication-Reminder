@@ -1,9 +1,6 @@
 package com.example.medicationreminder.ShowMedication.View;
 
-import com.example.medicationreminder.ShowMedication.model.MedInfo;
-import com.example.medicationreminder.ShowMedication.model.TimeOfMed;
-
-import java.util.List;
+import com.example.medicationreminder.Model.MedInfo;
 
 public interface ClickListenerInterface {
      void onDeleteAllClick(MedInfo medInfo);

@@ -1,5 +1,7 @@
 package com.example.medicationreminder.AddMed.View;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.example.medicationreminder.AddMed.Model.MedData;
 import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -125,8 +128,11 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
                     String status=presenter.SetDadaIntoDatabase(presenter.setMedDataWithOutRefillReminder(medName,medUnit,startDate,endDate,userId,medId,
                             numOfMed,timeUnitChoice, medDataWeekArray));
                     Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
-                    NavDirections navDirections=AddMedWeekFragmentDirections.next();
-                    navController.navigate(navDirections);
+                    //NavDirections navDirections=AddMedWeekFragmentDirections.next();
+                    //navController.navigate(navDirections);
+                    Intent i = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(i);
+                    ((Activity) getActivity()).overridePendingTransition(0, 0);
 
                 }
 
