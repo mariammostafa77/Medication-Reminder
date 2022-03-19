@@ -10,7 +10,12 @@ public class MedData <T>{
     public MedData() {
     }
 
-    public MedData(String medName, String medUnit, String startDate, String endDate,String userId,String medId,int numOfTimes,String medTakenUnit,List<T> timeList) {
+    public MedData(String medName, int numOfTimes) {
+        this.medName = medName;
+        this.numOfTimes = numOfTimes;
+    }
+
+    public MedData(String medName, String medUnit, String startDate, String endDate, String userId, String medId, int numOfTimes, String medTakenUnit, List<T> timeList) {
         this.medName = medName;
         this.medUnit = medUnit;
         this.startDate = startDate;

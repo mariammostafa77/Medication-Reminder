@@ -8,8 +8,7 @@
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/drawable/text_line.xml" value="0.2203125" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/activity_home.xml" value="0.15715579710144928" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/activity_start.xml" value="0.11458333333333333" />
-        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/custom_other_unit_dialog.xml" value="0.14322916666666666" />
-        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.22" />
+        <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med2.xml" value="0.16" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med3.xml" value="0.1838768115942029" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/fragment_add_med_month.xml" value="0.2" />
@@ -22,25 +21,27 @@
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_month.xml" value="0.1716485507246377" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_week.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/med_row.xml" value="0.1" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/activity_home.xml" value="0.16032608695652173" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/custom_other_unit_dialog.xml" value="0.11822916666666666" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/delete_custom_dialog.xml" value="0.12771739130434784" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/edit_row.xml" value="0.1484375" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.11822916666666666" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med2.xml" value="0.1" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med3.xml" value="0.16530797101449277" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med_month.xml" value="0.1" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med_week.xml" value="0.1" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_home.xml" value="0.13134057971014493" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_show_edit_med.xml" value="0.2" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/list_row_days.xml" value="0.11822916666666666" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/active_or_inactive_med_row.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/activity_findfriendd.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/findfrienditem.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/fragment_active_medications.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/fragment_adddependent.xml" value="0.21686746987951808" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/fragment_findfriendfra.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/fragment_inactive_medications.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/fragment_medications_list.xml" value="0.1" />
+        <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/activity_home.xml" value="0.15648148148148147" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/activity_main.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/AndtroidTasks/Medication-Reminder/app/src/main/res/layout/fragment_home.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/activity_start.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/fragment_add_med1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/fragment_home.xml" value="0.19343065693430658" />
+        <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/fragment_start.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/med_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/menu/edit_delete_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

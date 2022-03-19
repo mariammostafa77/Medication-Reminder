@@ -84,8 +84,15 @@ public class HomeActivity extends AppCompatActivity {
 
                                 Toast.makeText(HomeActivity.this, sharedPreferences.getString("email",null), Toast.LENGTH_SHORT).show();
 
-
                                 break;
+
+                            case R.id.add_dependent:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new Adddependent()).commit();
+                                break;
+                            case R.id.add_midfriend:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new findfriendfra()).commit();
+                                break;
+
                         }
 
                         return true;
@@ -101,11 +108,13 @@ public class HomeActivity extends AppCompatActivity {
                         bottomNav.setVisibility(View.INVISIBLE);
                         return true;
 
+                    case R.id.bottom_medication:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new MedicationsListFragment()).commit();
+                        return true;
                 }
                 return false;
             }
         });
-
 
     }
 

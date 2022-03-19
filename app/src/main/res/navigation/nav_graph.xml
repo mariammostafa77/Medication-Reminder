@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    tools:ignore="InvalidNavigation">
+    tools:ignore="InvalidNavigation"
+    app:startDestination="@id/medicationsListFragment">
 
     <fragment android:id="@+id/start_fragment"
         android:name="com.example.medicationreminder.StartFragment"
@@ -57,6 +58,9 @@
         <action
             android:id="@+id/goToAddMed1"
             app:destination="@+id/fragmentAddMed1"/>
+        <action
+            android:id="@+id/action_fragment_home_to_medicationsListFragment"
+            app:destination="@id/medicationsListFragment" />
     </fragment>
 
     <fragment android:id="@+id/fragment_reset_password"
@@ -178,4 +182,25 @@
             android:id="@+id/next"
             app:destination="@+id/fragmentAddMed3"/>
     </fragment>
+    <fragment
+        android:id="@+id/medicationsListFragment"
+        android:name="com.example.medicationreminder.MedicationsListFragment"
+        android:label="fragment_medications_list"
+        tools:layout="@layout/fragment_medications_list" >
+        <action
+            android:id="@+id/action_medicationsListFragment_to_inactiveMedicationsFragment"
+            app:destination="@id/inactiveMedicationsFragment" />
+        <action
+            android:id="@+id/action_medicationsListFragment_to_activeMedicationsFragment"
+            app:destination="@id/activeMedicationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inactiveMedicationsFragment"
+        android:name="com.example.medicationreminder.InactiveMedicationsFragment"
+        android:label="fragment_active_medications"
+        tools:layout="@layout/fragment_active_medications" />
+    <fragment
+        android:id="@+id/activeMedicationsFragment"
+        android:name="com.example.medicationreminder.ActiveMedicationsFragment"
+        android:label="ActiveMedicationsFragment" />
 </navigation>
