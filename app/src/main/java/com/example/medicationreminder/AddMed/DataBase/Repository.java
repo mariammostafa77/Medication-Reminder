@@ -1,12 +1,16 @@
 package com.example.medicationreminder.AddMed.DataBase;
 
 import androidx.annotation.NonNull;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.medicationreminder.AddMed.Model.MedData;
 import com.example.medicationreminder.AddMed.Model.MedDataDay;
 import com.example.medicationreminder.AddMed.Model.MedDataMonth;
 import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Model.RefillMed;
+import com.example.medicationreminder.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -14,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class Repository implements RepoInterface {
     DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference();
@@ -34,6 +40,10 @@ public class Repository implements RepoInterface {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 result ="Added Successfully";
+                //noti
+                String name= medData.getMedId();
+                List<OneTimeWorkRequest> myrequests= HomeActivity.requests;
+                WorkManager.getInstance().enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE,myrequests);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -17,11 +17,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.View.AddMedFragment1;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     boolean clicked=false;
@@ -31,10 +35,16 @@ public class HomeActivity extends AppCompatActivity {
     Button button;
     BottomNavigationView bottomNav;
 
+    //notification
+    public static List<OneTimeWorkRequest>requests;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //notification
+        requests=new ArrayList<>();
 
         bottomNav=findViewById(R.id.bottomNav);
 
@@ -42,8 +52,8 @@ public class HomeActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.viewLayout);
         NavController navController = navHostFragment.getNavController();
             NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
-           //navGraph.setStartDestination(R.id.fragmentAddMed1);
-           navGraph.setStartDestination(R.id.fragment_home);
+           navGraph.setStartDestination(R.id.fragmentAddMed1);
+          // navGraph.setStartDestination(R.id.fragment_home);
             navController.setGraph(navGraph);
 
         drawerLayout=findViewById(R.id.drawerLayout);

@@ -15,15 +15,19 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.Model.MedDataDay;
 import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
+import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
+import com.example.medicationreminder.WorkHandler;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMedDays.ViewHolder>  {
     int count;
@@ -32,6 +36,8 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
     MyInterfaceForDays myInterfaceForDays;
     PresenterInterface presenter=new AddMedPresenter();
     String medTime,dose;
+
+
 
 
 
@@ -142,6 +148,29 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     medTime=time;
                     medDataDay.setTime(medTime);
                     Log.i("TAG","time from EdtTimeEveryDay click "+medTime);
+                    //Notification
+
+                    int[]startDate=splitMedDate(AddMedFragment2.startDate);
+
+                    int[]endDate=splitMedDate(AddMedFragment2.endDate);
+                    Calendar today = Calendar.getInstance();
+                    Calendar calendarStartDate = Calendar.getInstance();
+                    calendarStartDate.set(startDate[2],startDate[1],startDate[0],hour,minute);
+                    long different=((calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000)%60;
+                    int differentDay=endDate[0]-startDate[0];
+                    Log.i("Date",""+different);
+                    OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkHandler.class)
+                            .setInitialDelay(different, TimeUnit.MINUTES).build();
+                    HomeActivity.requests.add(workRequest);
+                    for(int i=1;i<=differentDay;i++){
+                        long duration=different+1440*i;
+                        workRequest=new OneTimeWorkRequest.Builder(WorkHandler.class)
+                                .setInitialDelay(duration, TimeUnit.MINUTES).build();
+                        HomeActivity.requests.add(workRequest);
+                    }
+
+
+
                 }
             }, hour, minute, false);
             timePickerDialog.show();
@@ -171,7 +200,15 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
     }
 
 
+    public int[] splitMedDate(String data) {
+        String[] splitDate = data.split("/");
+        int day = Integer.parseInt(splitDate[0]);
 
+        int month = Integer.parseInt(splitDate[1]);
+        int year = Integer.parseInt(splitDate[2]);
+        int[] allDate = {day, month, year};
+        return allDate;
+    }
 
 
 }
