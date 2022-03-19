@@ -22,11 +22,9 @@ import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
 import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.WorkHandler;
+import com.example.medicationreminder.WorkManagerHandler;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMedDays.ViewHolder>  {
@@ -159,12 +157,12 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     long different=((calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000)%60;
                     int differentDay=endDate[0]-startDate[0];
                     Log.i("Date",""+different);
-                    OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkHandler.class)
+                    OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkManagerHandler.class)
                             .setInitialDelay(different, TimeUnit.MINUTES).build();
                     HomeActivity.requests.add(workRequest);
                     for(int i=1;i<=differentDay;i++){
                         long duration=different+1440*i;
-                        workRequest=new OneTimeWorkRequest.Builder(WorkHandler.class)
+                        workRequest=new OneTimeWorkRequest.Builder(WorkManagerHandler.class)
                                 .setInitialDelay(duration, TimeUnit.MINUTES).build();
                         HomeActivity.requests.add(workRequest);
                     }
