@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.ShowMedication.model;
 
 import java.util.List;
 

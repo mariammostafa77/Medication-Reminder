@@ -3,14 +3,24 @@ package com.example.medicationreminder.AddMed.Model;
 public class MedDataDay {
    String dose;
    String time;
+   String doseId;
 
 
    public MedDataDay() {
    }
 
-   public MedDataDay( String dose, String time) {
+   public MedDataDay( String dose, String time,String doseId) {
       this.dose = dose;
       this.time = time;
+      this.doseId=doseId;
+   }
+
+   public String getDoseId() {
+      return doseId;
+   }
+
+   public void setDoseId(String doseId) {
+      this.doseId = doseId;
    }
 
    public String getDose() {

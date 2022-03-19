@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.ShowMedication.model;
 
 public class TimeOfMed {
 
@@ -7,6 +7,7 @@ public class TimeOfMed {
         String time;
         String dayOfMonth;
         String dayOfWeek;
+        String doseId;
 
         public TimeOfMed() {
         }
@@ -55,5 +56,13 @@ public class TimeOfMed {
         public void setDayOfWeek(String dayOfWeek) {
             this.dayOfWeek = dayOfWeek;
         }
+
+    public String getDoseId() {
+        return doseId;
     }
+
+    public void setDoseId(String doseId) {
+        this.doseId = doseId;
+    }
+}
 

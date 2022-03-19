@@ -57,6 +57,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
     String endDate;
     int numOfMed;
     String timeUnitChoice;
+    String doseId;
 
     public AddMedFragment2() {
     }
@@ -107,6 +108,9 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(v);
+                for (int i=0;i<medDataDayArray.size();i++){
+                    medDataDayArray.get(i).setDoseId(medId+medDataDayArray.get(i).getTime()+medDataDayArray.get(i).getDose());
+                }
                 if(medUnit=="pill"){
                     NavDirections navDirections=AddMedFragment2Directions.next2();
                     navController.navigate(navDirections);

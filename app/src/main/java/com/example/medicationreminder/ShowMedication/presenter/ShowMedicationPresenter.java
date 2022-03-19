@@ -2,30 +2,31 @@ package com.example.medicationreminder.ShowMedication.presenter;
 
 import android.util.Log;
 
-import com.example.medicationreminder.ClickListenerInterface;
-import com.example.medicationreminder.MedAdapter;
-import com.example.medicationreminder.MedInfo;
+import com.example.medicationreminder.ShowMedication.View.ClickListenerInterface;
+import com.example.medicationreminder.ShowMedication.Database.DeleteEditRepo;
+import com.example.medicationreminder.ShowMedication.View.MedAdapter;
+import com.example.medicationreminder.ShowMedication.model.MedInfo;
+import com.example.medicationreminder.ShowMedication.Database.RepositoryInterface;
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationPresenter;
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationView;
 import com.example.medicationreminder.ShowMedication.model.IshowMedicationModel;
 import com.example.medicationreminder.ShowMedication.model.ShowMedicationModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.example.medicationreminder.ShowMedication.model.TimeOfMed;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShowMedicationPresenter implements IShowMedicationPresenter , ClickListenerInterface {
     IshowMedicationModel model;
     IShowMedicationView view;
+    RepositoryInterface repo=new DeleteEditRepo();
 
     public ShowMedicationPresenter(IShowMedicationView view) {
 
         this.view = view;
         model=new ShowMedicationModel();
+    }
+    public ShowMedicationPresenter() {
     }
 
     @Override
@@ -35,29 +36,19 @@ public class ShowMedicationPresenter implements IShowMedicationPresenter , Click
     }
 
     @Override
-    public void onDeleteClick(MedInfo medInfo) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query applesQuery = ref.child("MedicationData").orderByChild("medId")
-                .equalTo(medInfo.getMedId());
+    public void onDeleteAllClick(MedInfo medInfo) {
+        repo.deleteAllDoses(medInfo);
+    }
 
-        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                    appleSnapshot.getRef().removeValue();
-                }
-                Log.e("TAG", "onDataChange");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("TAG", "onCancelled", databaseError.toException());
-            }
-        });
+    @Override
+    public void onDeleteDoseClick(String doseId) {
+        repo.deleteDose(doseId);
     }
 
     @Override
     public void onEditClick(MedInfo medInfo) {
         Log.e("TAG", "onEditClick");
     }
+
+
 }

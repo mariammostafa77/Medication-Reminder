@@ -1,7 +1,6 @@
 package com.example.medicationreminder.ShowMedication.model;
 
-import com.example.medicationreminder.MedAdapter;
-import com.example.medicationreminder.MedInfo;
+import com.example.medicationreminder.ShowMedication.View.MedAdapter;
 
 import java.util.ArrayList;
 

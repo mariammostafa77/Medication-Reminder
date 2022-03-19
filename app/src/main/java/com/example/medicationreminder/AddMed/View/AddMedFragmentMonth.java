@@ -113,7 +113,9 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
                 NavController navController= Navigation.findNavController(btnNextMonth);
 
 
-
+                for (int i=0;i<medDataMonthsArray.size();i++){
+                    medDataMonthsArray.get(i).setDoseId(medId+medDataMonthsArray.get(i).getDayOfMonth()+medDataMonthsArray.get(i).getTime()+medDataMonthsArray.get(i).getDose());
+                }
                 if(medUnit=="pill"){
                     NavDirections navDirections=AddMedFragmentMonthDirections.next();
                     navController.navigate(navDirections);

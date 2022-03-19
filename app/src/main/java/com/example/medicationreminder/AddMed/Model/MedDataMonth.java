@@ -4,13 +4,23 @@ public class MedDataMonth {
     String dose;
     String time;
     String dayOfMonth;
+    String doseId;
     public MedDataMonth() {
     }
 
-    public MedDataMonth( String dose, String time, String dayOfMonth) {
+    public MedDataMonth( String dose, String time, String dayOfMonth,String doseId) {
         this.dose = dose;
         this.time = time;
         this.dayOfMonth = dayOfMonth;
+        this.doseId=doseId;
+    }
+
+    public String getDoseId() {
+        return doseId;
+    }
+
+    public void setDoseId(String doseId) {
+        this.doseId = doseId;
     }
 
     public String getDose() {

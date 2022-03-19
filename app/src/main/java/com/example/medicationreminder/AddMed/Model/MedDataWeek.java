@@ -1,7 +1,7 @@
 package com.example.medicationreminder.AddMed.Model;
 
 public class MedDataWeek {
-    String medId;
+    String doseId;
     String dose;
     String time;
     String dayOfWeek;
@@ -9,19 +9,19 @@ public class MedDataWeek {
     public MedDataWeek() {
     }
 
-    public MedDataWeek(String medId, String dose, String time, String dayOfWeek) {
-        this.medId = medId;
+    public MedDataWeek(String doseId, String dose, String time, String dayOfWeek) {
+        this.doseId = doseId;
         this.dose = dose;
         this.time = time;
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getMedId() {
-        return medId;
+    public String getDoseId() {
+        return doseId;
     }
 
-    public void setId(String medId) {
-        this.medId = medId;
+    public void setDoseId(String DoseId) {
+        this.doseId = DoseId;
     }
 
     public String getDose() {

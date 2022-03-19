@@ -15,7 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medicationreminder.ShowMedication.View.ClickListenerInterface;
+import com.example.medicationreminder.ShowMedication.View.MedAdapter;
 import com.example.medicationreminder.ShowMedication.model.IShowMedicationView;
+import com.example.medicationreminder.ShowMedication.model.MedInfo;
 import com.example.medicationreminder.ShowMedication.presenter.ShowMedicationPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +32,7 @@ import java.util.Calendar;
 
 
 
-public class HomeFragment extends Fragment implements IShowMedicationView,ClickListenerInterface {
+public class HomeFragment extends Fragment implements IShowMedicationView {
 
     RecyclerView medRecyclerView;
     MedAdapter medAdapter;
@@ -78,7 +81,7 @@ public class HomeFragment extends Fragment implements IShowMedicationView,ClickL
         medRecyclerView.setHasFixedSize(true);
         medRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         medList = new ArrayList<>();
-        medAdapter = new MedAdapter(getContext(), medList, (ClickListenerInterface) this);
+        medAdapter = new MedAdapter(getContext(), medList);
 
         medList.clear();
 
@@ -107,31 +110,5 @@ public class HomeFragment extends Fragment implements IShowMedicationView,ClickL
 
     }
 
-    @Override
-    public void onDeleteClick(MedInfo medInfo) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query applesQuery = ref.child("MedicationData").orderByChild("medId")
-                .equalTo(medInfo.getMedId());
 
-        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                    appleSnapshot.getRef().removeValue();
-                }
-                Toast.makeText(getContext(), "delete "+medInfo.getMedName(), Toast.LENGTH_SHORT).show();
-                Log.e("TAG", "success");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("TAG", "onCancelled", databaseError.toException());
-            }
-        });
-    }
-
-    @Override
-    public void onEditClick(MedInfo medInfo) {
-        Toast.makeText(getContext(), "Edit "+medInfo.getMedName(), Toast.LENGTH_SHORT).show();
-    }
 }

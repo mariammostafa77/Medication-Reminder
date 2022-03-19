@@ -7,7 +7,7 @@ import com.example.medicationreminder.AddMed.Model.RefillMed;
 import java.util.List;
 
 public interface PresenterInterface<T> {
-    MedDataDay setDataOfEachTime(String time,String dose);
+    MedDataDay setDataOfEachTime(String time,String dose,String doseId);
     MedData setMedDataWithOutRefillReminder(String medName, String medUnit, String startDate, String endDate
             , String userId, String medId, int numOfMed, String timeUnitChoice, List<T> timeList );
     String SetDadaIntoDatabase(MedData medData);

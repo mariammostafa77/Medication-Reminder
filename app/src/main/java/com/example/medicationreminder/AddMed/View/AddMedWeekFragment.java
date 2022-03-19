@@ -113,7 +113,9 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
             @Override
             public void onClick(View v) {
                 NavController navController= Navigation.findNavController(btnNext3);
-
+                for (int i=0;i<medDataWeekArray.size();i++){
+                    medDataWeekArray.get(i).setDoseId(medId+medDataWeekArray.get(i).getDayOfWeek()+medDataWeekArray.get(i).getTime()+medDataWeekArray.get(i).getDose());
+                }
                 if(medUnit=="pill"){
                     NavDirections navDirections=AddMedWeekFragmentDirections.next3();
                     navController.navigate(navDirections);

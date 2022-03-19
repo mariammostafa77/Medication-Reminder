@@ -5,8 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.medicationreminder.MedAdapter;
-import com.example.medicationreminder.MedInfo;
+import com.example.medicationreminder.ShowMedication.View.MedAdapter;
 import com.example.medicationreminder.StartFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;

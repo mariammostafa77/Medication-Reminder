@@ -15,11 +15,12 @@ public class AddMedPresenter<T> implements PresenterInterface {
     private MedData medData=new MedData();
     private RepoInterface myRepo=new Repository();
     @Override
-    public MedDataDay setDataOfEachTime(String time, String dose) {
-        MedDataDay medDataDay=new MedDataDay(time,dose);
+    public MedDataDay setDataOfEachTime(String time, String dose,String doseId) {
+        MedDataDay medDataDay=new MedDataDay(time,dose,doseId);
         Log.i("TAG","time from presenter= "+time+" dose= ");
         return medDataDay;
     }
+
 
     @Override
     public MedData setMedDataWithOutRefillReminder(String medName, String medUnit, String startDate, String endDate, String userId, String medId, int numOfMed, String timeUnitChoice, List timeList) {

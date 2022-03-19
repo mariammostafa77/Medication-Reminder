@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.ShowMedication.View;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,19 +8,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.medicationreminder.AddMed.View.AddMedFragment1;
+import com.example.medicationreminder.ShowEditMedFragment;
+import com.example.medicationreminder.ShowMedication.model.MedInfo;
+import com.example.medicationreminder.R;
+import com.example.medicationreminder.ShowMedication.model.TimeOfMed;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
+public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> implements DeleteInterface {
     Context context;
     ArrayList<MedInfo>medList;
     int i=0;
     ClickListenerInterface clickListener;
+    static MedInfo myMedInfo=new MedInfo();
+    String choice;
+    static List<TimeOfMed> times;
+    static String doseId;
 
-
-    public MedAdapter(Context context, ArrayList<MedInfo> medList,ClickListenerInterface clickListener) {
+    public MedAdapter() {
+    }
+    public MedAdapter(Context context, ArrayList<MedInfo> medList) {
         this.context = context;
         this.medList = medList;
         this.clickListener=clickListener;
@@ -42,7 +54,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
 
         MedInfo medInfo=medList.get(position);
         int counter=medInfo.getNumOfTimes();
-        List<TimeOfMed> times=new ArrayList<>();
+        times=new ArrayList<>();
         times=medInfo.getTimeList();
        if(i<counter-1){
 
@@ -59,14 +71,19 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener.onDeleteClick(medList.get(myPosition));
-                notifyDataSetChanged();
+                CustomDeleteDialog deleteDialog=new CustomDeleteDialog(v.getContext());
+                deleteDialog.show();
+                myMedInfo=medList.get(myPosition);
+                doseId=myMedInfo.getTimeList().get(i).getDoseId();
+
             }
         });
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener.onEditClick(medList.get(myPosition));
+                myMedInfo=medList.get(myPosition);
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new ShowEditMedFragment()).commit();
+
             }
         });
     }
@@ -74,6 +91,16 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return medList.size();
+    }
+
+    @Override
+    public MedInfo getMedInfo() {
+        return myMedInfo;
+    }
+
+    @Override
+    public String getTimeOfDose() {
+        return doseId;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
