@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/viewLayout"
             android:layout_width="match_parent"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -35,7 +35,7 @@
             app:layout_constraintVertical_bias="0.038">
 
 
-        </androidx.fragment.app.FragmentContainerView>
+        </fragment>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
