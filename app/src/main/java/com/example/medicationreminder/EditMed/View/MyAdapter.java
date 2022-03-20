@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -57,8 +58,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if(medInfoList.get(position)==null){
+            position++;
+        }
         holder.getTvTime().setText(medInfoList.get(position).getTime());
-        holder.getTvDose().setText("Dose: "+medInfoList.get(position).getDose());
+        holder.getTvDose().setText(medInfoList.get(position).getDose());
         holder.getTvDay().setText("Day of Month:"+medInfoList.get(position).getDayOfMonth());
         holder.getTvDay().setText(medInfoList.get(position).getDayOfWeek());
         holder.getImgGetTime().setOnClickListener(new View.OnClickListener() {
@@ -96,14 +100,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         View row;
-        TextView tvTime, tvDose, tvDay;
+        TextView tvTime, tvDay;
+        EditText edtDose;
         ImageView imgGetTime;
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
             row = convertView;
             tvTime = row.findViewById(R.id.tvTime);
-            tvDose = row.findViewById(R.id.tvDose);
+            edtDose = row.findViewById(R.id.edtDose);
             tvDay = row.findViewById(R.id.tvDay);
             imgGetTime = row.findViewById(R.id.imgGetTime);
         }
@@ -117,7 +122,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         public TextView getTvDose() {
-            return tvDose;
+            return edtDose;
         }
 
         public TextView getTvDay() {

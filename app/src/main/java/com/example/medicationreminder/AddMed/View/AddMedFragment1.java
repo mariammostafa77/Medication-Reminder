@@ -1,9 +1,11 @@
 package com.example.medicationreminder.AddMed.View;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -27,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
 
 import java.util.Calendar;
@@ -34,7 +37,7 @@ import java.util.Calendar;
 public class AddMedFragment1 extends Fragment {
 
     Spinner spinnerUnit,numberTakenSpinner;
-    ImageView dropDownMedUnit,dropDownChoice,btnCalender1,btnCalender2;
+    ImageView dropDownMedUnit,dropDownChoice,btnCalender1,btnCalender2,imgClose;
     TextView tvStartDate,tvEndDate;
     Button btnNext;
     EditText edtMedNum,edtMedName;
@@ -57,7 +60,7 @@ public class AddMedFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_med1, container, false);
-      //  ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         spinnerUnit = view.findViewById(R.id.spinnerUnit);
         numberTakenSpinner = view.findViewById(R.id.numberTakenSpinner);
         dropDownMedUnit = view.findViewById(R.id.dropDownMedUnit);
@@ -69,14 +72,18 @@ public class AddMedFragment1 extends Fragment {
         btnNext=view.findViewById(R.id.btnSave);
         edtMedNum=view.findViewById(R.id.edtMedNum);
         edtMedName=view.findViewById(R.id.edtMedName);
-        TextView tvPer=view.findViewById(R.id.tvPer);
+        imgClose=view.findViewById(R.id.imgClose);
 
-        tvPer.setOnClickListener(new View.OnClickListener() {
+        imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCustomDialog();
+                Intent i = new Intent(getActivity(), HomeActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+                getActivity().finish();
             }
         });
+
 
         String[] unitSpinnerArray = new String[]{"pill", "IU", "mcg", "mg", "ml", "mg/ml", "others"};
         ArrayAdapter<String> unitSpinnerAdapter = new ArrayAdapter<String>(getContext(),

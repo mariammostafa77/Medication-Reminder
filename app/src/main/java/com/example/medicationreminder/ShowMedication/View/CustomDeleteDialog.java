@@ -54,7 +54,7 @@ public class CustomDeleteDialog extends Dialog implements
 
                 break;
             case R.id.tvDeleteDose:
-                presenter.onDeleteDoseClick(anInterface.getTimeOfDose());
+                presenter.onDeleteDoseClick(anInterface.getMedInfo(),anInterface.getTimeOfDose());
                 break;
             case R.id.btnCancel:
                 dismiss();

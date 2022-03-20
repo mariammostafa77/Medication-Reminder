@@ -1,6 +1,7 @@
 package com.example.medicationreminder.ShowMedication.View;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> im
     String choice;
     static List<TimeOfMed> times;
     static String doseId;
-
+    int counter;
     public MedAdapter() {
     }
     public MedAdapter(Context context, ArrayList<MedInfo> medList) {
@@ -52,7 +53,7 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> im
 
 
         MedInfo medInfo=medList.get(position);
-        int counter=medInfo.getNumOfTimes();
+         counter=medInfo.getTimeList().size();
         times=new ArrayList<>();
         times=medInfo.getTimeList();
        if(i<counter-1){
@@ -65,8 +66,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> im
       }
         int myPosition=position;
         holder.txtMidName.setText(medInfo.getMedName());
+        if(times.get(i)==null){
+            i++;
+            counter--;
+        }
         holder.txtDose.setText(times.get(i).getDose()+medInfo.getMedUnit());
         holder.txtTime.setText(times.get(i).getTime());
+
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

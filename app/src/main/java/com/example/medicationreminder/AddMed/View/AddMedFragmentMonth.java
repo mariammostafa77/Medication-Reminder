@@ -36,6 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -97,7 +99,8 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
         endDate=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyEndDate().toString();
         numOfMed=AddMedFragmentMonthArgs.fromBundle(getArguments()).getNumOfMed();
         timeUnitChoice=AddMedFragmentMonthArgs.fromBundle(getArguments()).getTimeChoice().toString();
-        medId=userId+medName +startDate;
+        Date currentTime = Calendar.getInstance().getTime();
+        medId=userId+medName +currentTime;
         tvNum.setText(numOfMed+" times per "+timeUnitChoice);
 
         addMedFragment3=new AddMedFragment3(medDataMonthsArray,medName,

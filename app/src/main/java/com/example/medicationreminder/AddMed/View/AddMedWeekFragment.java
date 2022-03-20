@@ -34,6 +34,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
@@ -98,7 +100,8 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
         endDate=AddMedFragmentMonthArgs.fromBundle(getArguments()).getMyEndDate().toString();
         numOfMed=AddMedFragmentMonthArgs.fromBundle(getArguments()).getNumOfMed();
         timeUnitChoice=AddMedFragmentMonthArgs.fromBundle(getArguments()).getTimeChoice().toString();
-        medId=userId+medName +startDate;
+        Date currentTime = Calendar.getInstance().getTime();
+        medId=userId+medName +currentTime;
         tvNumTaken.setText(numOfMed+" times per "+timeUnitChoice);
 
 

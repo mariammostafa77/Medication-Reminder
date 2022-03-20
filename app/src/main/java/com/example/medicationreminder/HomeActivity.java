@@ -106,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.bottom_add_medication:
                         getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new AddMedFragment1()).commit();
                         bottomNav.setVisibility(View.INVISIBLE);
+                        getSupportActionBar().hide();
                         return true;
 
                     case R.id.bottom_medication:

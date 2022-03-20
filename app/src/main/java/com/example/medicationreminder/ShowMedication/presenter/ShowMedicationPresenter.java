@@ -39,8 +39,8 @@ public class ShowMedicationPresenter implements IShowMedicationPresenter , Click
     }
 
     @Override
-    public void onDeleteDoseClick(String doseId) {
-        repo.deleteDose(doseId);
+    public void onDeleteDoseClick(MedInfo medInfo,String doseId) {
+        repo.deleteDose(medInfo,doseId);
     }
 
     @Override

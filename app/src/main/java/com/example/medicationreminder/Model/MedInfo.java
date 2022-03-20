@@ -19,7 +19,7 @@ public class MedInfo {
     private int numOfTimes;
     private List<TimeOfMed> timeList;
     private String medTakenUnit;
-    private RefillMed refillMeds;
+    private RefillMed refillMedData;
 
 
     public String getMedTakenUnit() {
@@ -135,11 +135,11 @@ public class MedInfo {
         this.medUnit = medUnit;
     }
 
-    public RefillMed getRefillMeds() {
-        return refillMeds;
+    public RefillMed getRefillMedData() {
+        return refillMedData;
     }
 
-    public void setRefillMeds(RefillMed refillMeds) {
-        this.refillMeds = refillMeds;
+    public void setRefillMedData(RefillMed refillMedData) {
+        this.refillMedData = refillMedData;
     }
 }

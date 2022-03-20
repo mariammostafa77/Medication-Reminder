@@ -36,7 +36,7 @@ public class Repository implements RepoInterface {
 
 
     public String addMed(MedData medData){
-        mDatabase.child("MedicationData").push().setValue(medData).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.child("MedicationData").child(medData.getMedId()).setValue(medData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 result ="Added Successfully";

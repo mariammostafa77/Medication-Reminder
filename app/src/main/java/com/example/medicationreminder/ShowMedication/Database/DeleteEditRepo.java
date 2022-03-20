@@ -3,6 +3,7 @@ package com.example.medicationreminder.ShowMedication.Database;
 import android.util.Log;
 
 import com.example.medicationreminder.Model.MedInfo;
+import com.example.medicationreminder.ShowMedication.View.MedAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,9 +35,9 @@ public class DeleteEditRepo implements RepositoryInterface {
     }
 
     @Override
-    public void deleteDose(String doseId) {
+    public void deleteDose(MedInfo medInfo,String doseId) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query applesQuery = ref.child("MedicationData").child("timeList").orderByChild("doseId")
+        Query applesQuery = ref.child("MedicationData").child(medInfo.getMedId()).child("timeList").orderByChild("doseId")
                 .equalTo(doseId);
 
         Log.i("TAG","doseId= "+doseId);

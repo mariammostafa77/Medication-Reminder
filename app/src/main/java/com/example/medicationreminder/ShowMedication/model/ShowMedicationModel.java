@@ -57,14 +57,16 @@ public class ShowMedicationModel implements IshowMedicationModel{
 
 
                     if (medInfo.getMedTakenUnit().equals("Day") && between == true) {
-                        for (i = 0; i < medInfo.getNumOfTimes(); i++) {
+                        for (i = 0; i < medInfo.getTimeList().size(); i++) {
+                            if(medInfo.getTimeList().get(i)!=null){
+                                medList.add(medInfo);
+                            }
 
-                            medList.add(medInfo);
                         }
                     }
                     if (medInfo.getMedTakenUnit().equals("Month")) {
 
-                        for (int c = 0; c < medInfo.getNumOfTimes(); c++) {
+                        for (int c = 0; c < medInfo.getTimeList().size(); c++) {
 
                             if (
                                     ((day == Integer.parseInt(medInfo.getTimeList().get(c).getDayOfMonth())
@@ -74,7 +76,8 @@ public class ShowMedicationModel implements IshowMedicationModel{
                                             (month <= allEndDates[1] && year <= allEndDates[2]) && equal == true
 
                             ) {
-                                medList.add(medInfo);
+                                    medList.add(medInfo);
+
                             }
 
 
@@ -82,14 +85,15 @@ public class ShowMedicationModel implements IshowMedicationModel{
                     }
 
                     if (medInfo.getMedTakenUnit().equals("Week")) {
-                        for (int w = 0; w < medInfo.getNumOfTimes(); w++) {
+                        for (int w = 0; w < medInfo.getTimeList().size(); w++) {
                             if (
                                     (thisDayName.equals(medInfo.getTimeList().get(w).getDayOfWeek()))
                                             && (month >= allStartDates[1] && year >= allStartDates[2])
                                             && (month <= allEndDates[1] && year <= allEndDates[2])
                                             && equal == true
                             ) {
-                                medList.add(medInfo);
+                                    medList.add(medInfo);
+
                             }
                         }
                     }
