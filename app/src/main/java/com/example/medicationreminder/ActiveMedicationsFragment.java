@@ -11,10 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.medicationreminder.AddMed.Model.MedData;
 import com.example.medicationreminder.Model.MedInfo;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+//import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +37,7 @@ public class ActiveMedicationsFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    FirebaseRecyclerAdapter<MedInfo, productviewholder> adapter;
+    //FirebaseRecyclerAdapter<MedInfo, productviewholder> adapter;
     //FirestoreRecyclerAdapter adapter;
     DatabaseReference myRef;
     @Override
@@ -78,7 +77,7 @@ public class ActiveMedicationsFragment extends Fragment {
                     arrayList.add(Medinfot);
                     String.valueOf(Medinfot.getNumOfTimes());
                 }
-                recyclerView.setAdapter(adapter);
+                //recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -96,7 +95,7 @@ public class ActiveMedicationsFragment extends Fragment {
         super.onStart();
         // myadapter1.startListening();
 
-        FirebaseRecyclerOptions<MedInfo> options=new FirebaseRecyclerOptions.Builder<MedInfo>()
+        /*FirebaseRecyclerOptions<MedInfo> options=new FirebaseRecyclerOptions.Builder<MedInfo>()
                 .setQuery(myRef,MedInfo.class).build();
         adapter= new FirebaseRecyclerAdapter<MedInfo, productviewholder>(options) {
             private productviewholder holder;
@@ -123,7 +122,7 @@ public class ActiveMedicationsFragment extends Fragment {
         };
 
         recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        adapter.startListening();*/
     }
 
 
@@ -131,7 +130,7 @@ public class ActiveMedicationsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 //                        adapter.stopListening();
-        adapter.stopListening();
+        //adapter.stopListening();
         // myadapter1.stopListening();
     }
     //********

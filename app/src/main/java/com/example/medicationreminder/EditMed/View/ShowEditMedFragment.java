@@ -76,7 +76,7 @@ public class ShowEditMedFragment extends Fragment {
 
     RepoInterface repo=new Repository();
     EditInterface presenter=new EditPresenter();
-    String name="";
+    String remindTime;
     MedInfo medInfo=new MedInfo();
     RefillMed refillMed=new RefillMed();
 
@@ -149,17 +149,13 @@ public class ShowEditMedFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Log.i("TAG","edt "+edtName.getText().toString());
-
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("MedicationData");
                                 medInfo.setMedName(edtName.getText().toString());
                                 medInfo.setStartDate(tvStartDate.getText().toString());
                                 medInfo.setEndDate(tvEndDate.getText().toString());
                                 medInfo.setTimeList(times);
                                 medInfo.setNumOfTimes(anInterface.getMedInfo().getNumOfTimes());
                                 medInfo.setMedUnit(anInterface.getMedInfo().getMedUnit());
-                                //refillMed.setNumOfRemind(Integer.parseInt(edtNumRemind.getText().toString()));
-                                //refillMed.setpillLeftNum(Integer.parseInt(edtNumLeft.getText().toString()));
-                                //refillMed.setRemindTime(tvRemindTime.getText().toString());
-                                //medInfo.setRefillMedData(refillMed);
                                 medInfo.setUserId(anInterface.getMedInfo().getUserId());
 
                                 HashMap hashMap=new HashMap();
@@ -172,17 +168,22 @@ public class ShowEditMedFragment extends Fragment {
                                 hashMap.put("userId",medInfo.getUserId());
                                 Log.i("TAG",medInfo.getUserId());
                                 hashMap.put("timeList",times);
-                                //hashMap.put("refillMedData",refillMed);
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("MedicationData");
-                                myRef.child(anInterface.getMedInfo().getMedId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Log.i("TAG","success");
-                                    }
-                                });
-                                adapter.notifyDataSetChanged();
 
                                 if(anInterface.getMedInfo().getRefillMedData() != null) {
+                                    refillMed.setNumOfRemind(Integer.parseInt(edtNumRemind.getText().toString()));
+                                    refillMed.setpillLeftNum(Integer.parseInt(edtNumLeft.getText().toString()));
+                                    refillMed.setRemindTime(tvRemindTime.getText().toString());
+                                    medInfo.setRefillMedData(refillMed);
+                                    hashMap.put("refillMedData",refillMed);
+                                    myRef.child(anInterface.getMedInfo().getMedId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.i("TAG","success");
+                                        }
+                                    });
+                                    adapter.notifyDataSetChanged();
+
+
                                     /*repo.editData(presenter.getAllUpdatedDateWithRemind(edtName.getText().toString(),
                                             tvStartDate.getText().toString(), tvEndDate.getText().toString(),
                                             times, Integer.parseInt(edtNumRemind.getText().toString()),
@@ -193,6 +194,14 @@ public class ShowEditMedFragment extends Fragment {
                                     /*repo.editData(presenter.getAllUpdatedDate(edtName.getText().toString(),
                                             tvStartDate.getText().toString(), tvEndDate.getText().toString(),
                                             times));*/
+                                    hashMap.put("refillMedData",refillMed);
+                                    myRef.child(anInterface.getMedInfo().getMedId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.i("TAG","success");
+                                        }
+                                    });
+                                    adapter.notifyDataSetChanged();
                                 }
                                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                                 startActivity(intent);
@@ -201,7 +210,6 @@ public class ShowEditMedFragment extends Fragment {
                         .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                             }
                         }).show();
             }

@@ -26,8 +26,10 @@ import com.example.medicationreminder.WorkerHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMedDays.ViewHolder>  {
@@ -37,7 +39,8 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
     MyInterfaceForDays myInterfaceForDays;
     PresenterInterface presenter=new AddMedPresenter();
     String medTime,dose;
-
+    //notification
+    public static List<OneTimeWorkRequest> requests=new ArrayList<>();
 
 
 
@@ -162,12 +165,12 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     Log.i("Date",""+different);
                     OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkerHandler.class)
                             .setInitialDelay(different, TimeUnit.MINUTES).build();
-                    HomeActivity.requests.add(workRequest);
+                    requests.add(workRequest);
                     for(long i=1;i<=differentDay;i++){
                         long duration=different+1440*i;
                         workRequest=new OneTimeWorkRequest.Builder(WorkerHandler.class)
                                 .setInitialDelay(duration, TimeUnit.MINUTES).build();
-                        HomeActivity.requests.add(workRequest);
+                        requests.add(workRequest);
                     }
 
 

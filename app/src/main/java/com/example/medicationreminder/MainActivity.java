@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPreferences=getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesGuest=getSharedPreferences("guest", Context.MODE_PRIVATE);
         Thread splashScreenStarter = new Thread() {
             public void run() {
                 try {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity  {
                         sleep(150);
                         delay = delay + 100;
                     }
-                    if(sharedPreferences.getString("email",null) ==null ) {
+                    if(sharedPreferences.getString("email",null) ==null) {
                        startActivity(new Intent(MainActivity.this, StartActivity.class));
 
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.medicationreminder.AddMed.View.AddMedFragment1;
 import com.example.medicationreminder.Model.MedInfo;
 import com.example.medicationreminder.ShowMedication.View.MedAdapter;
 import com.example.medicationreminder.StartFragment;
@@ -33,6 +34,9 @@ public class ShowMedicationModel implements IshowMedicationModel{
         database = FirebaseDatabase.getInstance().getReference().child("MedicationData");
         if(StartFragment.isGuest==false) {
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+        else{
+            id= AddMedFragment1.getMacAddress();
         }
 
         database.addChildEventListener(new ChildEventListener() {

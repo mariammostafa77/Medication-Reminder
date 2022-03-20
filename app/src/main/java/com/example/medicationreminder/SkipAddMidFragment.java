@@ -1,6 +1,8 @@
 package com.example.medicationreminder;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.medicationreminder.AddMed.View.AddMedFragment1;
 
 
 public class SkipAddMidFragment extends Fragment {
+
 
 
     public SkipAddMidFragment() {
@@ -34,6 +40,7 @@ public class SkipAddMidFragment extends Fragment {
                              Bundle savedInstanceState) {
        View v=inflater.inflate(R.layout.fragment_skip_add_mid, container, false);
 
+
         TextView txtSkip=v.findViewById(R.id.txtSkip);
         txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +58,6 @@ public class SkipAddMidFragment extends Fragment {
                 NavController navController= Navigation.findNavController(addYourMedBtn);
                 NavDirections navDirections=SkipAddMidFragmentDirections.addMed();
                 navController.navigate(navDirections);
-
             }
         });
         return v;

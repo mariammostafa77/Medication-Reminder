@@ -105,7 +105,7 @@ public class AddMedFragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_add_med3, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentFirebaseUser= FirebaseAuth.getInstance().getCurrentUser() ;
 
@@ -128,8 +128,7 @@ public class AddMedFragment3 extends Fragment {
                 time = String.valueOf(hourOfDay).toString() + ":" + String.valueOf(minute).toString();
             }
         });
-        id= currentFirebaseUser.getUid();
-
+        id= AddMedFragment3Args.fromBundle(getArguments()).getUserId().toString();
 
         tvSkip.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -76,7 +76,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
         recycleOfDay=view.findViewById(R.id.recycleOfDay);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -84,7 +84,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
         medDataDayArray=new ArrayList<>();
         MyAdapter =new RecycleAdapterMedDays(getContext(), this,AddMedFragment2Args.fromBundle(getArguments()).getNumOfMed(),AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit());
         recycleOfDay.setAdapter(MyAdapter);
-        id= currentFirebaseUser.getUid();
+        id= AddMedFragment2Args.fromBundle(getArguments()).getUserId().toString();
         Button btnNext2=view.findViewById(R.id.btnSaveEdit);
         medName=AddMedFragment2Args.fromBundle(getArguments()).getMyMedName().toString();
         medUnit=AddMedFragment2Args.fromBundle(getArguments()).getMyMedUnit().toString();
@@ -113,8 +113,9 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
                     medDataDayArray.get(i).setDoseId(medId+medDataDayArray.get(i).getTime()+medDataDayArray.get(i).getDose());
                 }
                 if(medUnit=="pill"){
-                    NavDirections navDirections=AddMedFragment2Directions.next2();
-                    navController.navigate(navDirections);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userId",id);
+                    navController.navigate(R.id.next2,bundle);
                 }
                 else{
                     String status=presenter.SetDadaIntoDatabase(presenter.setMedDataWithOutRefillReminder(medName,medUnit,startDate,endDate,id,medId,

@@ -31,8 +31,16 @@ import android.widget.Toast;
 
 import com.example.medicationreminder.HomeActivity;
 import com.example.medicationreminder.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 public class AddMedFragment1 extends Fragment {
 
@@ -42,6 +50,9 @@ public class AddMedFragment1 extends Fragment {
     Button btnNext;
     EditText edtMedNum,edtMedName;
     String newUnit;
+    DatabaseReference mDatabase;
+    FirebaseUser currentFirebaseUser ;
+    public static String id;
 
     public AddMedFragment1() {
         // Required empty public constructor
@@ -73,6 +84,20 @@ public class AddMedFragment1 extends Fragment {
         edtMedNum=view.findViewById(R.id.edtMedNum);
         edtMedName=view.findViewById(R.id.edtMedName);
         imgClose=view.findViewById(R.id.imgClose);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        Log.i("TAG","id before if= "+getMacAddress());
+
+        if(currentFirebaseUser==null){
+                id=getMacAddress();
+                Log.i("TAG","id= "+getMacAddress());
+                Log.i("TAG","MAC= "+getMacAddress());
+        }else {
+            id = currentFirebaseUser.getUid();
+        }
+        Log.i("TAG","id after if= "+getMacAddress());
+
 
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +184,7 @@ public class AddMedFragment1 extends Fragment {
                     bundle.putString("MyEndDate",tvEndDate.getText().toString());
                     bundle.putInt("numOfMed",Integer.parseInt(edtMedNum.getText().toString()));
                     bundle.putString("timeChoice",numberTakenSpinner.getSelectedItem().toString());
-
+                    bundle.putString("userId",id);
 
                     if(numberTakenSpinner.getSelectedItem().toString()=="Day"){
                         navController.navigate(R.id.fragmentAddMed2,bundle);
@@ -237,4 +262,34 @@ public class AddMedFragment1 extends Fragment {
     }
 
 
+
+
+
+    public static String getMacAddress() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return "";
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    res1.append(Integer.toHexString(b & 0xFF) + ":");
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            //handle exception
+        }
+        return "";
+
+    }
 }

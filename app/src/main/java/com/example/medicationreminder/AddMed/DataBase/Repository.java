@@ -10,6 +10,8 @@ import com.example.medicationreminder.AddMed.Model.MedDataDay;
 import com.example.medicationreminder.AddMed.Model.MedDataMonth;
 import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Model.RefillMed;
+import com.example.medicationreminder.AddMed.View.AddMedFragment1;
+import com.example.medicationreminder.AddMed.View.RecycleAdapterMedDays;
 import com.example.medicationreminder.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +26,7 @@ import java.util.List;
 public class Repository implements RepoInterface {
     DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference();
     FirebaseUser currentFirebaseUser=FirebaseAuth.getInstance().getCurrentUser() ;
-    String id= currentFirebaseUser.getUid();
+    String id= AddMedFragment1.id;
     MedData medData=new MedData();
     MedDataDay medDataDay=new MedDataDay();
     MedDataWeek medDataWeek=new MedDataWeek();
@@ -42,7 +44,7 @@ public class Repository implements RepoInterface {
                 result ="Added Successfully";
                 //noti
                 String name= medData.getMedId();
-                List<OneTimeWorkRequest> myrequests= HomeActivity.requests;
+                List<OneTimeWorkRequest> myrequests= RecycleAdapterMedDays.requests;
                 WorkManager.getInstance().enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE,myrequests);
             }
         }).addOnFailureListener(new OnFailureListener() {

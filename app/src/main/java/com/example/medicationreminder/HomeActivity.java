@@ -35,16 +35,13 @@ public class HomeActivity extends AppCompatActivity {
     Button button;
     BottomNavigationView bottomNav;
 
-    //notification
-    public static List<OneTimeWorkRequest>requests;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //notification
-        requests=new ArrayList<>();
 
         bottomNav=findViewById(R.id.bottomNav);
 
