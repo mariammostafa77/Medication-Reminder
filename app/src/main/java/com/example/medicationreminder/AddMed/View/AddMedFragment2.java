@@ -53,7 +53,7 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
     AddMedFragment3 addMedFragment3;
     String medName;
     String medUnit;
-   public static String startDate;
+    public static String startDate;
     public static String endDate;
     int numOfMed;
     String timeUnitChoice;

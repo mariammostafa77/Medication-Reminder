@@ -38,9 +38,10 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
     Context context;
     MyInterfaceForDays myInterfaceForDays;
     PresenterInterface presenter=new AddMedPresenter();
-    String medTime,dose;
+    public static String medTime,dose;
     //notification
     public static List<OneTimeWorkRequest> requests=new ArrayList<>();
+    public static String myMedName,myMedDoseUnit,myMedDose;
 
 
 
@@ -153,6 +154,7 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     medDataDay.setTime(medTime);
                     Log.i("TAG","time from EdtTimeEveryDay click "+medTime);
                     //Notification
+
 
                     int[]startDate=splitMedDate(AddMedFragment2.startDate);
 

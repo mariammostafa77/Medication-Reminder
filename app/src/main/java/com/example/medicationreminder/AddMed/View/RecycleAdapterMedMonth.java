@@ -1,5 +1,7 @@
 package com.example.medicationreminder.AddMed.View;
 
+import static com.example.medicationreminder.AddMed.View.RecycleAdapterMedDays.requests;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.util.Log;
@@ -15,13 +17,22 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.Model.MedDataMonth;
 import com.example.medicationreminder.AddMed.Presenter.AddMedPresenter;
 import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
 import com.example.medicationreminder.R;
+import com.example.medicationreminder.WorkerHandler;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterMedMonth.ViewHolder>  {
 
@@ -33,6 +44,7 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterM
     PresenterInterface presenter=new AddMedPresenter();
     String medTime,dose;
     String unit;
+    List<String> days=new ArrayList<>();
 
 
     public RecycleAdapterMedMonth(Context context,MyInterfaceForMonth myInterfaceForMonth,int count,String unit) {
@@ -121,6 +133,7 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterM
             for(int i=0;i<monthMaxDays;i++){
                 String value=String.valueOf(i+ 1);
                 daysOfMonth[i]=value;
+
             }
             ArrayAdapter<String> numberTakenAdapter2 = new ArrayAdapter<String>(context.getApplicationContext(),
                     android.R.layout.simple_spinner_item, daysOfMonth);
@@ -135,6 +148,8 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterM
                 {
                     String selectedItem = parent.getItemAtPosition(position).toString();
                     medDataMonth.setDayOfMonth(selectedItem);
+                    days.add(selectedItem);
+
                 }
                 public void onNothingSelected(AdapterView<?> parent)
                 {

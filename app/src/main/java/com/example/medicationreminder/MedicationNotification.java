@@ -40,7 +40,7 @@ public class MedicationNotification extends ContextWrapper {
         }
         return manager;
     }
-    public NotificationCompat.Builder getChannelNotification(String title, String message){
+    public NotificationCompat.Builder getChannelNotification(String title,String message){
         return new NotificationCompat.Builder(getApplicationContext(),channel_id)
                 .setContentTitle(title)
                 .setContentText(message)
