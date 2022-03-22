@@ -123,8 +123,9 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
                     medDataWeekArray.get(i).setDoseId(medId+medDataWeekArray.get(i).getDayOfWeek()+medDataWeekArray.get(i).getTime()+medDataWeekArray.get(i).getDose());
                 }
                 if(medUnit=="pill"){
-                    NavDirections navDirections=AddMedWeekFragmentDirections.next3();
-                    navController.navigate(navDirections);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userId",userId);
+                    navController.navigate(R.id.next3,bundle);
 
                 }
                 else{

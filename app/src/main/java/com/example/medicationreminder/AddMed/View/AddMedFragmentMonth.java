@@ -123,8 +123,9 @@ public class AddMedFragmentMonth extends Fragment implements MyInterfaceForMonth
                     medDataMonthsArray.get(i).setDoseId(medId+medDataMonthsArray.get(i).getDayOfMonth()+medDataMonthsArray.get(i).getTime()+medDataMonthsArray.get(i).getDose());
                 }
                 if(medUnit=="pill"){
-                    NavDirections navDirections=AddMedFragmentMonthDirections.next();
-                    navController.navigate(navDirections);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userId",userId);
+                    navController.navigate(R.id.next,bundle);
 
                 }
                 else{

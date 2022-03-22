@@ -1,12 +1,15 @@
 package com.example.medicationreminder.ShowMedication.View;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -23,7 +26,7 @@ import java.util.List;
 public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> implements DeleteInterface {
     Context context;
     ArrayList<MedInfo>medList;
-    int i=0;
+    static int i=0;
     ClickListenerInterface clickListener;
     static MedInfo myMedInfo=new MedInfo();
     String choice;
@@ -79,9 +82,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MyViewHolder> im
                 CustomDeleteDialog deleteDialog=new CustomDeleteDialog(v.getContext());
                 deleteDialog.show();
                 myMedInfo=medList.get(myPosition);
+                while (myMedInfo.getTimeList().get(i)==null){
+                    i++;
+                }
                 doseId=myMedInfo.getTimeList().get(i).getDoseId();
 
             }
+
         });
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override

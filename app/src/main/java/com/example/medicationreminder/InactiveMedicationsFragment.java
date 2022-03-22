@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.AddMed.Model.MedData;
 import com.example.medicationreminder.Model.MedInfo;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+//import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +34,7 @@ import java.util.Date;
 
 public class InactiveMedicationsFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    /*RecyclerView recyclerView;
     ArrayList<MedInfo> arrayList;
     DatabaseReference databaseReference;
     //InactiveMedicationsAdapter inactiveMedicationsAdapter;
@@ -54,7 +54,7 @@ public class InactiveMedicationsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +62,7 @@ public class InactiveMedicationsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_inactive_medications, container, false);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+       /* FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         myRef = database.getReference().child("MedicationData");
 
@@ -80,7 +80,7 @@ public class InactiveMedicationsFragment extends Fragment {
                 today= Calendar.getInstance().getTime();
         MedInfo medlist1=new MedInfo();
         String enddate=medlist1.getEndDate();
-        SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");*/
         /*try {
           //  Date sdate=sdf.parse(enddate);
             //if(today.after(sdate))
@@ -92,7 +92,7 @@ public class InactiveMedicationsFragment extends Fragment {
         }*/
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+     /*   databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -108,12 +108,12 @@ public class InactiveMedicationsFragment extends Fragment {
                  System.out.println("strtdate:"+startdate);
                     today = Calendar.getInstance().getTime();
                     MedInfo medlist1=new MedInfo();
-                    try {
+                   /* try {
                         Date date1 = sdf.parse(startdate);
-                        Date date2 = sdf.parse(enddate);
+                        Date date2 = sdf.parse(enddate);*/
 
                      // DateRangeValidator checker = new DateRangeValidator(startDate, endDate);
-                        if(date1.after(today)||date2.before(today))
+                       /* if(date1.after(today)||date2.before(today))
                         {
                             arrayList.add(medlistt);
                         }
@@ -123,7 +123,7 @@ public class InactiveMedicationsFragment extends Fragment {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                     //String enddate=medlist1.getEndDate();
                    // SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
@@ -132,16 +132,15 @@ public class InactiveMedicationsFragment extends Fragment {
            // Date sdate=sdf.parse(enddat);
 
 
-                }
-                recyclerView.setAdapter(adapter);
-            }
+               // }
+              //  recyclerView.setAdapter(adapter);
+            //}
 
-            @Override
+            /*@Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
+        });*/
 
         return view;
     }
@@ -151,7 +150,7 @@ public class InactiveMedicationsFragment extends Fragment {
         super.onStart();
         // myadapter1.startListening();
 
-        FirebaseRecyclerOptions<MedInfo> options=new FirebaseRecyclerOptions.Builder<MedInfo>()
+      /*  FirebaseRecyclerOptions<MedInfo> options=new FirebaseRecyclerOptions.Builder<MedInfo>()
                 .setQuery(myRef,MedInfo.class).build();
         adapter= new FirebaseRecyclerAdapter<MedInfo, productviewholder>(options) {
             @NonNull
@@ -194,6 +193,6 @@ public class InactiveMedicationsFragment extends Fragment {
             // full=itemView.findViewById(R.id.inactive_med_left);
             //jk=itemView.findViewById(R.id.txt_med_stringth_info);
 
-        }
+        }*/
     }
 }

@@ -25,6 +25,7 @@ import java.util.Date;
 public class ShowMedicationModel implements IshowMedicationModel{
     DatabaseReference database;
     String id=null;
+    MedInfo medInfo;
     int i;
     @Override
     public void getMed(ArrayList<MedInfo> medList, MedAdapter medAdapter, int day, int month, int year) {
@@ -42,7 +43,7 @@ public class ShowMedicationModel implements IshowMedicationModel{
         database.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                MedInfo medInfo = snapshot.getValue(MedInfo.class);
+                medInfo = snapshot.getValue(MedInfo.class);
                 medAdapter.notifyDataSetChanged();
 
                 String startDate = medInfo.getStartDate();
@@ -71,17 +72,18 @@ public class ShowMedicationModel implements IshowMedicationModel{
                     if (medInfo.getMedTakenUnit().equals("Month")) {
 
                         for (int c = 0; c < medInfo.getTimeList().size(); c++) {
+                            if (medInfo.getTimeList().get(c)!=null) {
+                                if (
+                                        ((day == Integer.parseInt(medInfo.getTimeList().get(c).getDayOfMonth())
+                                        )
+                                                && month >= allStartDates[1] && year >= allStartDates[2])
+                                                &&
+                                                (month <= allEndDates[1] && year <= allEndDates[2]) && equal == true
 
-                            if (
-                                    ((day == Integer.parseInt(medInfo.getTimeList().get(c).getDayOfMonth())
-                                    )
-                                            && month >= allStartDates[1] && year >= allStartDates[2])
-                                            &&
-                                            (month <= allEndDates[1] && year <= allEndDates[2]) && equal == true
-
-                            ) {
+                                ) {
                                     medList.add(medInfo);
 
+                                }
                             }
 
 
@@ -90,14 +92,16 @@ public class ShowMedicationModel implements IshowMedicationModel{
 
                     if (medInfo.getMedTakenUnit().equals("Week")) {
                         for (int w = 0; w < medInfo.getTimeList().size(); w++) {
-                            if (
-                                    (thisDayName.equals(medInfo.getTimeList().get(w).getDayOfWeek()))
-                                            && (month >= allStartDates[1] && year >= allStartDates[2])
-                                            && (month <= allEndDates[1] && year <= allEndDates[2])
-                                            && equal == true
-                            ) {
+                            if (medInfo.getTimeList().get(w) != null) {
+                                if (
+                                        (thisDayName.equals(medInfo.getTimeList().get(w).getDayOfWeek()))
+                                                && (month >= allStartDates[1] && year >= allStartDates[2])
+                                                && (month <= allEndDates[1] && year <= allEndDates[2])
+                                                && equal == true
+                                ) {
                                     medList.add(medInfo);
 
+                                }
                             }
                         }
                     }

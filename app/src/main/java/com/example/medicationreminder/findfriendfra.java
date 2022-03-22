@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+//import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +48,7 @@ public class findfriendfra extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_findfriendfra, container, false);
-        findfriendd=view.findViewById(R.id.recyclefindfriend);
+        /*findfriendd=view.findViewById(R.id.recyclefindfriend);
        // editText=view.findViewById(R.id.edit);
         //editphonee=view.findViewById(R.id.editphone);
         //editnamee=view.findViewById(R.id.editname);
@@ -99,8 +99,8 @@ public class findfriendfra extends Fragment {
         );*/
         return view;
     }
-/*
-    @Override
+
+    /*@Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getMenuInflater().inflate(R.menu.search,menu);
         MenuItem menuItem=menu.findItem(R.id.search);
@@ -123,9 +123,9 @@ public class findfriendfra extends Fragment {
         return new MenuInflater(getContext());
     }*/
 
-    public void processsearch(String s) {
+    //public void processsearch(String s) {
 
-        FirebaseRecyclerOptions<User>options=new FirebaseRecyclerOptions.Builder<User>()
+       /* FirebaseRecyclerOptions<User>options=new FirebaseRecyclerOptions.Builder<User>()
                 .setQuery(userref.orderByChild("email").startAt(s).endAt(s),User.class).build();
                  FirebaseRecyclerAdapter<User,findfriendviewholder>adapter=
                  new FirebaseRecyclerAdapter<User, findfriendviewholder>(options) {
@@ -182,12 +182,12 @@ public class findfriendfra extends Fragment {
         if(!currentuserid.equals(receiver_user_id))
         {
 
-            }
+            }*/
            /* else
             {
                bbbtn.setVisibility(View.INVISIBLE);
             }*/
-                chatref.child(currentuserid)
+                /*chatref.child(currentuserid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -208,7 +208,7 @@ public class findfriendfra extends Fragment {
 
                     }
                 });
-    }
+    }*/
    /* public void checkemail(View view)
     {
         mauth.fetchSignInMethodsForEmail(editText.getText().toString())
@@ -223,7 +223,7 @@ public class findfriendfra extends Fragment {
                     }
                 });
     }*/
-    private void cancelchatrequest()
+    /*private void cancelchatrequest()
     {
     chatref.child(currentuserid).child(receiver_user_id)
             .removeValue()
@@ -276,9 +276,9 @@ public class findfriendfra extends Fragment {
            }
        }
    });
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
         FirebaseRecyclerOptions<User>options=new FirebaseRecyclerOptions.Builder<User>()
@@ -346,7 +346,7 @@ public class findfriendfra extends Fragment {
             email=itemView.findViewById(R.id.emailfind);
 
         }
-    }
+    }*/
 
 
 }
