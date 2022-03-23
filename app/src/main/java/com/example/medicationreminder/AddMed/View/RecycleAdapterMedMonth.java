@@ -1,19 +1,21 @@
 package com.example.medicationreminder.AddMed.View;
 
-
-
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,11 +27,13 @@ import com.example.medicationreminder.AddMed.Presenter.PresenterInterface;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.WorkerHandler;
 
+import java.util.ArrayList;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -133,7 +137,6 @@ public class RecycleAdapterMedMonth extends RecyclerView.Adapter<RecycleAdapterM
             for(int i=0;i<monthMaxDays;i++){
                 String value=String.valueOf(i+ 1);
                 daysOfMonth[i]=value;
-
             }
             ArrayAdapter<String> numberTakenAdapter2 = new ArrayAdapter<String>(context.getApplicationContext(),
                     android.R.layout.simple_spinner_item, daysOfMonth);

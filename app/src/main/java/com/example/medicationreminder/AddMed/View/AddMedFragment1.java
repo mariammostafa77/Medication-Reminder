@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -49,10 +50,13 @@ public class AddMedFragment1 extends Fragment {
     TextView tvStartDate,tvEndDate;
     Button btnNext;
     EditText edtMedNum,edtMedName;
-    String newUnit;
+    static String newUnit;
     DatabaseReference mDatabase;
     FirebaseUser currentFirebaseUser ;
     public static String id;
+    static List<String> unitSpinnerArray;
+    ArrayAdapter<String> unitSpinnerAdapter;
+
 
     public AddMedFragment1() {
         // Required empty public constructor
@@ -110,8 +114,15 @@ public class AddMedFragment1 extends Fragment {
         });
 
 
-        String[] unitSpinnerArray = new String[]{"pill", "IU", "mcg", "mg", "ml", "mg/ml", "others"};
-        ArrayAdapter<String> unitSpinnerAdapter = new ArrayAdapter<String>(getContext(),
+        unitSpinnerArray = new ArrayList<String>();
+        unitSpinnerArray.add("pill");
+        unitSpinnerArray.add("IU");
+        unitSpinnerArray.add("mcg");
+        unitSpinnerArray.add("mg");
+        unitSpinnerArray.add("ml");
+        unitSpinnerArray.add("mg/ml");
+        unitSpinnerArray.add("others");
+        unitSpinnerAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_item, unitSpinnerArray);
         unitSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerUnit.setAdapter(unitSpinnerAdapter);
@@ -128,6 +139,7 @@ public class AddMedFragment1 extends Fragment {
 
             }
         });
+
 
         dropDownMedUnit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +242,7 @@ public class AddMedFragment1 extends Fragment {
             tvEndDate.setError("This field is required");
             return false;
         }
-        if (edtMedNum.equals("End Date")) {
+        if (edtMedNum==null) {
             edtMedNum.setError("This field is required");
             return false;
         } else if (Integer.parseInt(edtMedNum.getText().toString())<=0) {
@@ -249,6 +261,20 @@ public class AddMedFragment1 extends Fragment {
                     DialogInterface dialog, int which){
                 EditText editText = customLayout.findViewById(R.id.edtNewUnit);
                 sendDialogDataToActivity(editText.getText().toString());
+                if(newUnit.length()!=0 && newUnit!=null) {
+                    List<String> newUnitList = new ArrayList<>();
+                    newUnitList.add(newUnit);
+                    for (int i = 0; i < unitSpinnerArray.size(); i++) {
+                        newUnitList.add(unitSpinnerArray.get(i));
+                    }
+                    unitSpinnerAdapter = new ArrayAdapter<String>(getContext(),
+                            android.R.layout.simple_spinner_item, newUnitList);
+                    spinnerUnit.setAdapter(unitSpinnerAdapter);
+                    unitSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerUnit.setSelection(unitSpinnerAdapter.getPosition(newUnit));
+                }else{
+                    spinnerUnit.setSelection(unitSpinnerAdapter.getPosition("pill"));
+                }
                             }
                         });
         AlertDialog dialog
@@ -258,12 +284,10 @@ public class AddMedFragment1 extends Fragment {
 
     private void sendDialogDataToActivity(String data) {
         newUnit=data;
+        Log.i("TAG","Data= "+data);
+        Log.i("TAG","newUnit= "+newUnit);
         Toast.makeText(getContext(), data, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
 
     public static String getMacAddress() {
         try {

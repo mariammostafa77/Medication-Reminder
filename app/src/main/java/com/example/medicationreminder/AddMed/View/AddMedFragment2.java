@@ -134,6 +134,10 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
 
         return view;
     }
+
+
+
+
     @Override
     public void getData(MedDataDay medDataDay) {
         medDataDayArray.add(medDataDay);

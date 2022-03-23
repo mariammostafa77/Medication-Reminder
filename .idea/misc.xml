@@ -21,24 +21,43 @@
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_month.xml" value="0.1716485507246377" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/list_row_week.xml" value="0.1" />
         <entry key="..\:/ITI/Android/Finalproject/MedicationReminder/app/src/main/res/layout/med_row.xml" value="0.1" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/drawable-v24/btn_blue.xml" value="0.2169230769230769" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/drawable-v24/ic_baseline.xml" value="0.2169230769230769" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/drawable-v24/ic_wave.xml" value="0.2169230769230769" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/drawable/btn_white_border.xml" value="0.18177083333333333" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/drawable/line_text.xml" value="0.18177083333333333" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/active_or_inactive_med_row.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/activity_alarm_dialog.xml" value="0.14" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/activity_home.xml" value="0.16032608695652173" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/activity_main.xml" value="0.1598731884057971" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/activity_start.xml" value="0.1140625" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/custom_other_unit_dialog.xml" value="0.11822916666666666" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/custom_other_unit_dialog.xml" value="0.22" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/delete_custom_dialog.xml" value="0.12771739130434784" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/edit_row.xml" value="0.1484375" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.11822916666666666" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med2.xml" value="0.1" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/edit_row.xml" value="0.22" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/findfrienditem.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_active_medications.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.2" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med2.xml" value="0.18" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med3.xml" value="0.16530797101449277" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med_month.xml" value="0.1" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_add_med_week.xml" value="0.1" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_adddependent.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_findfriendfra.xml" value="0.1598731884057971" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_home.xml" value="0.13134057971014493" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_inactive_medications.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_medications_list.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_reset_password.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_rgisteration.xml" value="0.1598731884057971" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_show_edit_med.xml" value="0.2" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_skip_add_mid.xml" value="0.165625" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/fragment_start.xml" value="0.18" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/header_layout.xml" value="0.1598731884057971" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/list_row_days.xml" value="0.11822916666666666" />
-        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/med_row.xml" value="0.1703125" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/list_row_month.xml" value="0.1598731884057971" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/list_row_week.xml" value="0.1" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/med_row.xml" value="0.21" />
+        <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/reminder_dialog.xml" value="0.19753086419753085" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/menu/bottom_menu.xml" value="0.109375" />
         <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/active_or_inactive_med_row.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/activity_findfriendd.xml" value="0.17864583333333334" />

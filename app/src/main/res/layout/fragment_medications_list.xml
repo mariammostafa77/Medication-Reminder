@@ -43,11 +43,12 @@
         <Button
             android:id="@+id/btnAddMed"
 
-            android:textColor="#FF00BCD4"
             android:layout_width="300dp"
             android:layout_height="56dp"
             android:layout_marginTop="12dp"
+            android:backgroundTint="@color/colorAccent"
             android:text="Add Med"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:cornerRadius="@dimen/cardview_compat_inset_shadow"
             app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F394A"
+    android:background="@color/colorAccent"
     tools:context=".AddMed.View.AddMedFragment1">
 
     <TextView
@@ -76,7 +76,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="50dp"
                     android:layout_marginBottom="40dp"
-                    android:backgroundTint="#1F394A"
+                    android:backgroundTint="@color/colorAccent"
                     android:drawableRight="@drawable/next"
                     android:text="@string/next"
                     android:textSize="16sp"

@@ -25,6 +25,11 @@
     <string name="registerform">Registeration Form</string>
     <string name="loginform">Login Form</string>
     <string name="medInfo">Med Info</string>
+    <string name="TAKE">Take</string>
+    <string name="SNOOZE">SNOOZE</string>
+    <string name="Cancell">CANCEL</string>
+    <string name="signIn">Already have an account?</string>
+    <string name="RegistrationTxt">Create new account</string>
 
 
 </resources>
