@@ -179,7 +179,7 @@ public class LoginFragment extends Fragment implements ILoginView {
             editor.putString(myPassword,password);
             editor.commit();
             Intent i = new Intent(getActivity(), HomeActivity.class);
-
+            i.putExtra("userEmail",email);
             startActivity(i);
             Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
             StartFragment.isGuest=false;

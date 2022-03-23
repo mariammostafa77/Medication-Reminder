@@ -14,6 +14,7 @@ import com.example.medicationreminder.AddMed.Model.MedDataWeek;
 import com.example.medicationreminder.AddMed.Model.RefillMed;
 import com.example.medicationreminder.AddMed.View.AddMedFragment1;
 import com.example.medicationreminder.AddMed.View.RecycleAdapterMedDays;
+import com.example.medicationreminder.AddMed.View.RecycleAdapterMedWeeks;
 import com.example.medicationreminder.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

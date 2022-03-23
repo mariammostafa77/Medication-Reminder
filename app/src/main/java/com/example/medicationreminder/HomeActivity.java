@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Intent intent=getIntent();
+        String userEmail=intent.getStringExtra("userEmail");
 
 
         bottomNav=findViewById(R.id.bottomNav);
@@ -55,12 +58,15 @@ public class HomeActivity extends AppCompatActivity {
 
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
+        View headerView=navigationView.getHeaderView(0);
         toolbar=findViewById(R.id.navToolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        TextView txtUserEmail=headerView.findViewById(R.id.txtUserEmail);
+        txtUserEmail.setText(sharedPreferences.getString("email",null));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -108,6 +114,10 @@ public class HomeActivity extends AppCompatActivity {
 
                     case R.id.bottom_medication:
                         getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new MedicationsListFragment()).commit();
+                        return true;
+                    case R.id.bottom_home:
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(i);
                         return true;
                 }
                 return false;

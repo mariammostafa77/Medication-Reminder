@@ -1,6 +1,6 @@
 package com.example.medicationreminder.AddMed.View;
 
-import static com.example.medicationreminder.AddMed.View.RecycleAdapterMedDays.requests;
+
 
 import android.app.TimePickerDialog;
 import android.content.Context;

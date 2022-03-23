@@ -21,7 +21,8 @@ public class WorkerHandler extends Worker {
     @Override
     public Result doWork() {
         mNotificationHelper=new MedicationNotification(getApplicationContext());
-        NotificationCompat.Builder nb=mNotificationHelper.getChannelNotification("Med Time","You should take the Medication");
+        NotificationCompat.Builder nb=mNotificationHelper.getChannelNotification("Med Time","You should take the Medication: "+RecycleAdapterMedDays.myMedName+" "+
+                RecycleAdapterMedDays.myMedDose+RecycleAdapterMedDays.myMedDoseUnit);
         mNotificationHelper.getManager().notify(1,nb.build());
         Log.i("Date","inDoWork");
 

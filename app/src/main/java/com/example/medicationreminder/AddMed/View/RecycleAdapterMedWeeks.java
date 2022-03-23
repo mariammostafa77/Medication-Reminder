@@ -1,6 +1,6 @@
 package com.example.medicationreminder.AddMed.View;
 
-import static com.example.medicationreminder.AddMed.View.RecycleAdapterMedDays.requests;
+
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -41,9 +41,10 @@ public class RecycleAdapterMedWeeks extends RecyclerView.Adapter<RecycleAdapterM
         Context context;
         MyInterfaceForWeek myInterfaceForWeek;
         PresenterInterface presenter=new AddMedPresenter();
-        String medTime,dose;
+        public static String medTime,dose;
         String unit;
     List<String> days=new ArrayList();
+
 
 public RecycleAdapterMedWeeks(Context context,MyInterfaceForWeek myInterfaceForWeek,int count,String unit) {
         this.context = context;
@@ -196,7 +197,9 @@ class ViewHolder extends RecyclerView.ViewHolder{
                 medDataWeek.setTime(medTime);
 
                 //Notification
-
+                RecycleAdapterMedDays.myMedName=AddMedWeekFragment.medName;
+                RecycleAdapterMedDays.myMedDoseUnit=AddMedWeekFragment.medUnit;
+                RecycleAdapterMedDays. myMedDose=dose;
 
                 String endDate=AddMedWeekFragment.endDate;
                 Log.i("Date","endDate"+endDate);
@@ -231,7 +234,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
                                     .setInitialDelay(diffInMinutes, TimeUnit.MINUTES)
                                     .build();
                             if(diffInMinutes>0){
-                                requests.add(workRequest);
+                                RecycleAdapterMedDays.requests.add(workRequest);
 
                             }
 

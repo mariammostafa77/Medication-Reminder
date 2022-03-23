@@ -154,7 +154,9 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     medDataDay.setTime(medTime);
                     Log.i("TAG","time from EdtTimeEveryDay click "+medTime);
                     //Notification
-
+                    myMedName=AddMedFragment2.medName;
+                    myMedDoseUnit=AddMedFragment2.medUnit;
+                    myMedDose=dose;
 
                     int[]startDate=splitMedDate(AddMedFragment2.startDate);
 
@@ -162,12 +164,13 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     Calendar today = Calendar.getInstance();
                     Calendar calendarStartDate = Calendar.getInstance();
                     calendarStartDate.set(startDate[2],startDate[1],startDate[0],hour,minute);
-                    long different=((calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000)%60;
+                    long diffInMinutes=(calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000;
+                    long different=diffInMinutes-44640;
                     long differentDay=differentBetweenDays(AddMedFragment2.startDate,AddMedFragment2.endDate);
                     Log.i("Date",""+different);
                     OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkerHandler.class)
                             .setInitialDelay(different, TimeUnit.MINUTES).build();
-                    requests.add(workRequest);
+                   requests.add(workRequest);
                     for(long i=1;i<=differentDay;i++){
                         long duration=different+1440*i;
                         workRequest=new OneTimeWorkRequest.Builder(WorkerHandler.class)
