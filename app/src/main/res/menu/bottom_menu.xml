@@ -9,7 +9,7 @@
         android:id="@+id/bottom_add_medication"
         />
         <item android:title="Medication"
-            android:icon="@drawable/medicine"
+            android:icon="@drawable/medic"
             android:id="@+id/bottom_medication"
             />
         <item android:title="Friends"

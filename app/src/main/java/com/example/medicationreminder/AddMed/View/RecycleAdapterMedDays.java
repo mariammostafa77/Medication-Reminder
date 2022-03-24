@@ -1,17 +1,21 @@
 package com.example.medicationreminder.AddMed.View;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +43,7 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
     MyInterfaceForDays myInterfaceForDays;
     PresenterInterface presenter=new AddMedPresenter();
     public static String medTime,dose;
+    List<String> arraySpinner;
     //notification
     public static List<OneTimeWorkRequest> requests=new ArrayList<>();
     public static String myMedName,myMedDoseUnit,myMedDose;
@@ -99,7 +104,18 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     Log.i("TAG","time from EdtTimeEveryDay click "+medTime);
                 }
             });
-            String[] arraySpinner = new String[]{"Dose","0.25", "0.5", "0.75", "1", "1.25", "1.5", "1.75","2","Others"};
+
+            arraySpinner = new ArrayList<>();
+            arraySpinner.add("Dose");
+            arraySpinner.add("0.25");
+            arraySpinner.add("0.5");
+            arraySpinner.add("0.75");
+            arraySpinner.add("1");
+            arraySpinner.add("1.25");
+            arraySpinner.add("1.5");
+            arraySpinner.add("1.75");
+            arraySpinner.add("2");
+            arraySpinner.add("Others");
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context.getApplicationContext(),
                     android.R.layout.simple_spinner_item, arraySpinner);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -132,6 +148,19 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
         public View getRow() {
             return row;
         }
+
+        public ImageView getDropDownListDose() {
+            return dropDownListDose;
+        }
+
+        public Spinner getSpinnerDose() {
+            return spinnerDose;
+        }
+
+        public MedDataDay getMedDataDay() {
+            return medDataDay;
+        }
+
         public TextView getEdtTimeEveryDay() {
             return EdtTimeEveryDay;
         }
@@ -154,7 +183,9 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     medDataDay.setTime(medTime);
                     Log.i("TAG","time from EdtTimeEveryDay click "+medTime);
                     //Notification
-
+                    myMedName=AddMedFragment2.medName;
+                    myMedDoseUnit=AddMedFragment2.medUnit;
+                    myMedDose=dose;
 
                     int[]startDate=splitMedDate(AddMedFragment2.startDate);
 
@@ -162,8 +193,9 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
                     Calendar today = Calendar.getInstance();
                     Calendar calendarStartDate = Calendar.getInstance();
                     calendarStartDate.set(startDate[2],startDate[1],startDate[0],hour,minute);
-                    long different=((calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000)%60;
                     long differentDay=differentBetweenDays(AddMedFragment2.startDate,AddMedFragment2.endDate);
+                    long diffInMinutes=(calendarStartDate.getTimeInMillis()-today.getTimeInMillis())/60000;
+                    long different=diffInMinutes-44640;
                     Log.i("Date",""+different);
                     OneTimeWorkRequest workRequest=new OneTimeWorkRequest.Builder(WorkerHandler.class)
                             .setInitialDelay(different, TimeUnit.MINUTES).build();
@@ -181,6 +213,18 @@ public class RecycleAdapterMedDays extends RecyclerView.Adapter<RecycleAdapterMe
             }, hour, minute, false);
             timePickerDialog.show();
         }
+        private boolean CheckAllFields(ViewHolder holder) {
+            if (holder.getEdtTimeEveryDay().getText().equals("Select Time")) {
+                holder.getEdtTimeEveryDay().setError("This field is required");
+                return false;
+            }
+            if (holder.getSpinnerDose().getSelectedItem().toString().equals("Dose")) {
+                Toast.makeText(context, "This field is required", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            return true;
+        }
+
     }
 
 

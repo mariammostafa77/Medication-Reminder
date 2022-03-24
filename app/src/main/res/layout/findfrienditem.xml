@@ -60,13 +60,14 @@
                     android:textSize="20dp" />
 
 </LinearLayout>
+
                 <Button
+                    android:id="@+id/requestbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/requestbtn"
+                    android:backgroundTint="@color/colorAccent"
                     android:onClick="sendchatrequest"
-                    android:text="Send request"
-                    />
+                    android:text="Send request" />
             </LinearLayout>
 
         </LinearLayout>

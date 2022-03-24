@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F394A"
+    android:background="@color/colorAccent"
     tools:context=".AddMed.View.AddMedFragment2">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -23,8 +24,8 @@
 
     <ImageView
         android:id="@+id/imgClose2"
-        android:layout_width="20dp"
-        android:layout_height="10dp"
+        android:layout_width="36dp"
+        android:layout_height="27dp"
         android:layout_marginStart="10dp"
         android:src="@drawable/cancel"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -56,7 +57,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="70dp"
-                android:backgroundTint="#1F394A"
+                android:backgroundTint="@color/colorAccent"
                 android:text="@string/Save"
                 android:textSize="16sp"
                 app:cornerRadius="8dp"

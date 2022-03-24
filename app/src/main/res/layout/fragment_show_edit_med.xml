@@ -5,7 +5,7 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F394A"
+    android:background="@color/colorAccent"
     tools:context=".EditMed.View.ShowEditMedFragment">
 
     <TextView
@@ -61,7 +61,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="50dp"
                     android:layout_marginBottom="50dp"
-                    android:backgroundTint="#1F394A"
+                    android:backgroundTint="@color/colorAccent"
                     android:text="@string/Save"
                     android:textSize="16sp"
                     app:cornerRadius="8dp"

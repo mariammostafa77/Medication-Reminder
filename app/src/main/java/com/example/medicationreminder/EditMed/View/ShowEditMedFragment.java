@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
@@ -98,6 +99,7 @@ public class ShowEditMedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_edit_med, container, false);
         //presenteer.onEditClick(anInterface.getMedInfo());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         edtName = view.findViewById(R.id.edtName);
         edtNumLeft = view.findViewById(R.id.edtNumLeft);
         edtNumRemind = view.findViewById(R.id.edtNumRemind);

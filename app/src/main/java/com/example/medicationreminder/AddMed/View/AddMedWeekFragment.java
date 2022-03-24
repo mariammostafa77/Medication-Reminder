@@ -54,8 +54,8 @@ public class AddMedWeekFragment extends Fragment implements MyInterfaceForWeek {
 
     PresenterInterface presenter=new AddMedPresenter();
     AddMedFragment3 addMedFragment3;
-    String medName;
-    String medUnit;
+   public static String medName;
+    public static String medUnit;
    public static String startDate;
     public static String endDate;
     int numOfMed;

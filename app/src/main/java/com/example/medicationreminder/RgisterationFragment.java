@@ -206,6 +206,7 @@ public class RgisterationFragment extends Fragment implements IRegistersView {
     public void goToLogin(boolean result) {
         if(result==true) {
             Intent i = new Intent(getActivity(), HomeActivity.class);
+            i.putExtra("userEmail",email);
             startActivity(i);
             Toast.makeText(getActivity(), "Registration Successfully", Toast.LENGTH_SHORT).show();
             StartFragment.isGuest=false;

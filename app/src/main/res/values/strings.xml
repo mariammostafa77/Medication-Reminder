@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MedicationReminder</string>
+    <string name="app_name">TakeCare</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="MedName">What is med name?</string>
     <string name="AddMed">Add Medication</string>
@@ -25,6 +25,11 @@
     <string name="registerform">Registeration Form</string>
     <string name="loginform">Login Form</string>
     <string name="medInfo">Med Info</string>
+    <string name="TAKE">Take</string>
+    <string name="SNOOZE">SNOOZE</string>
+    <string name="Cancell">CANCEL</string>
+    <string name="signIn">Already have an account?</string>
+    <string name="RegistrationTxt">Create new account</string>
 
 
 </resources>

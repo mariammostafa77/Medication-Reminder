@@ -58,5 +58,8 @@ dependencies {
     implementation "androidx.work:work-runtime:2.7.1"
 
 
+    implementation "com.airbnb.android:lottie:3.4.0"
+
+
 
 }

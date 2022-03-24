@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.View.AddMedFragment1;
 import com.example.medicationreminder.view.MedicationsListFragment;
@@ -39,6 +40,8 @@ String username;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Intent intent=getIntent();
+        String userEmail=intent.getStringExtra("userEmail");
 
 
         bottomNav=findViewById(R.id.bottomNav);
@@ -55,6 +58,7 @@ String username;
 Context context;
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
+        View headerView=navigationView.getHeaderView(0);
         //navigationView.setNavigationItemSelectedListener();
         View headview=navigationView.getHeaderView(0);
         TextView textView=headview.findViewById(R.id.headername);
@@ -67,6 +71,8 @@ Context context;
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        TextView txtUserEmail=headerView.findViewById(R.id.txtUserEmail);
+        txtUserEmail.setText(sharedPreferences.getString("email",null));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -117,6 +123,10 @@ Context context;
 
                     case R.id.bottom_medication:
                         getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new MedicationsListFragment()).commit();
+                        return true;
+                    case R.id.bottom_home:
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(i);
                         return true;
 
                     case R.id.friends_add:

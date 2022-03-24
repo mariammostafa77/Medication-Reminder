@@ -51,8 +51,8 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
     String medId;
     PresenterInterface presenter=new AddMedPresenter();
     AddMedFragment3 addMedFragment3;
-    String medName;
-    String medUnit;
+   public static String medName;
+    public static String medUnit;
     public static String startDate;
     public static String endDate;
     int numOfMed;
@@ -134,6 +134,10 @@ public class AddMedFragment2 extends Fragment implements MyInterfaceForDays,MyIn
 
         return view;
     }
+
+
+
+
     @Override
     public void getData(MedDataDay medDataDay) {
         medDataDayArray.add(medDataDay);

@@ -4,8 +4,12 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
@@ -41,10 +45,16 @@ public class MedicationNotification extends ContextWrapper {
         return manager;
     }
     public NotificationCompat.Builder getChannelNotification(String title,String message){
+        Intent notificationIntent=new Intent(getApplicationContext(),HomeActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 200, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         return new NotificationCompat.Builder(getApplicationContext(),channel_id)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.drawable.ic_launcher_background);
+                .setContentIntent(contentIntent)
+                .setSound(uri)
+                .setSmallIcon(R.drawable.med);
 
 
     }

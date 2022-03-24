@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicationReminder">
         <activity
+            android:name=".AlarmDialogActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
