@@ -192,7 +192,7 @@
     </fragment>
     <fragment
         android:id="@+id/medicationsListFragment"
-        android:name="com.example.medicationreminder.MedicationsListFragment"
+        android:name="com.example.medicationreminder.view.MedicationsListFragment"
         android:label="fragment_medications_list"
         tools:layout="@layout/fragment_medications_list" >
         <action
@@ -204,11 +204,11 @@
     </fragment>
     <fragment
         android:id="@+id/inactiveMedicationsFragment"
-        android:name="com.example.medicationreminder.InactiveMedicationsFragment"
+        android:name="com.example.medicationreminder.view.InactiveMedicationsFragment"
         android:label="fragment_active_medications"
         tools:layout="@layout/fragment_active_medications" />
     <fragment
         android:id="@+id/activeMedicationsFragment"
-        android:name="com.example.medicationreminder.ActiveMedicationsFragment"
+        android:name="com.example.medicationreminder.view.ActiveMedicationsFragment"
         android:label="ActiveMedicationsFragment" />
 </navigation>

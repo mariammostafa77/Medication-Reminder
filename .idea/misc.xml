@@ -40,6 +40,24 @@
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/list_row_days.xml" value="0.11822916666666666" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/layout/med_row.xml" value="0.1703125" />
         <entry key="..\:/ITI/Android/MyFinalProject/Medication-Reminder/app/src/main/res/menu/bottom_menu.xml" value="0.109375" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/activity_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/activity_midfriend.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/custom_other_unit_dialog.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/delete_custom_dialog.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/edit_row.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/findfrienditem.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/findfrienditemfinal.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_active_medications.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_add_med1.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_custom_dialog.xml" value="0.22335495829471733" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_findfriendreceiver.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_friendslist.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_home.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_midfriendrequest.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/friendslistitem.xml" value="0.4679611650485437" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/layout/header_layout.xml" value="0.18125" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/menu/bottom_menu.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/EGC/Desktop/finalproject/Medication-Reminder/app/src/main/res/menu/menu_item.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/active_or_inactive_med_row.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/activity_findfriendd.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/EGC/Desktop/mariam/Medication-Reminder/app/src/main/res/layout/findfrienditem.xml" value="0.17864583333333334" />
@@ -59,6 +77,8 @@
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/fragment_home.xml" value="0.19343065693430658" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/layout/med_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/elshamey/OneDrive/Desktop/my Project/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/finalproject/Medication-Reminder/app/src/main/res/layout/activity_dialog.xml" value="0.1" />
+        <entry key="..\:/finalproject/Medication-Reminder/app/src/main/res/layout/fragment_midfriendrequest.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +18,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.View.AddMedFragment1;
+import com.example.medicationreminder.view.MedicationsListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     boolean clicked=false;
@@ -34,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button button;
     BottomNavigationView bottomNav;
-
+String username;
 
 
     @Override
@@ -53,8 +51,16 @@ public class HomeActivity extends AppCompatActivity {
            navGraph.setStartDestination(R.id.fragment_home);
             navController.setGraph(navGraph);
 
+
+Context context;
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
+        //navigationView.setNavigationItemSelectedListener();
+        View headview=navigationView.getHeaderView(0);
+        TextView textView=headview.findViewById(R.id.headername);
+        username=getIntent().getStringExtra("usernamee");
+        textView.setText(username);
+
         toolbar=findViewById(R.id.navToolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +93,10 @@ public class HomeActivity extends AppCompatActivity {
                                 getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new Adddependent()).commit();
                                 break;
                             case R.id.add_midfriend:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new findfriendfra()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new findfriendreceiver()).commit();
+                                break;
+                            case R.id.friendslist:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new friendslist()).commit();
                                 break;
 
                         }
@@ -109,6 +118,11 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.bottom_medication:
                         getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new MedicationsListFragment()).commit();
                         return true;
+
+                    case R.id.friends_add:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new midfriendrequest()).commit();
+                        return true;
+
                 }
                 return false;
             }

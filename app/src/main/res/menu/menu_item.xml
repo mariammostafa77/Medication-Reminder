@@ -14,6 +14,14 @@
                 android:id="@+id/add_midfriend"
                 android:icon="@drawable/add"
                 android:title="Add Midfriend" />
+            <item android:title="Friends"
+                android:icon="@drawable/ic_baseline_mobile_friendly_24"
+                android:id="@+id/friends_id"
+                />
+            <item
+                android:id="@+id/friendslist"
+                android:icon="@drawable/add"
+                android:title="friendslist" />
 
 
         </menu>

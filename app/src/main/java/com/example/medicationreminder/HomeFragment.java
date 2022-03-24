@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
         super.onCreate(savedInstanceState);
 
     }
-
+//**************************************************
     public int[] splitMedDate(String data) {
         String[] splitDate = data.split("/");
         int day = Integer.parseInt(splitDate[0]);
