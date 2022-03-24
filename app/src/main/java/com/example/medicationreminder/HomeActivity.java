@@ -71,8 +71,8 @@ Context context;
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        TextView txtUserEmail=headerView.findViewById(R.id.txtUserEmail);
-        txtUserEmail.setText(sharedPreferences.getString("email",null));
+
+        textView.setText(sharedPreferences.getString("email",null));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
