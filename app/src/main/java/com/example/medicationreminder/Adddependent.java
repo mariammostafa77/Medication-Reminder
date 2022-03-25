@@ -21,69 +21,69 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Adddependent extends Fragment {
-FirebaseDatabase root;
-DatabaseReference reference;
-FirebaseAuth firebaseAuth;
- EditText firstnameadd,lastfirstadd,emailadd,passwordadd;
-Button donedepend;
- @Override
- public void onCreate(Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
-
- }
-
- @Override
- public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                          Bundle savedInstanceState) {
-
-    View view= inflater.inflate(R.layout.fragment_adddependent, container, false);
-    //listView=view.findViewById(R.id.list);
-     firstnameadd=(EditText) view.findViewById(R.id.firstname);
-     lastfirstadd=(EditText)view.findViewById(R.id.lastname);
-     emailadd=(EditText)view.findViewById(R.id.email);
-     passwordadd=(EditText)view.findViewById(R.id.password);
-     donedepend=view.findViewById(R.id.done);
-     FirebaseAuth.getInstance().getCurrentUser().getUid();
-    donedepend.setOnClickListener(new View.OnClickListener() {
+    FirebaseDatabase root;
+    DatabaseReference reference;
+    FirebaseAuth firebaseAuth;
+    EditText firstnameadd,lastfirstadd,emailadd,passwordadd;
+    Button donedepend;
     @Override
-    public void onClick(View view) {
-   root=FirebaseDatabase.getInstance();
-  // reference=root.getReference("dependent");
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-   String namee=firstnameadd.getText().toString();
-   String lname=lastfirstadd.getText().toString();
-   String email=emailadd.getText().toString();
-   String pass=passwordadd.getText().toString();
-
-
-
-      //  ArrayList<String>listt=new ArrayList<>();
-       // ArrayAdapter adapter=new ArrayAdapter<String>(this,R.layout.listitem,listt);
-        //listView.setAdapter(adapter);
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-    DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser.getUid()).child("dependent");
-
-    reference.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-   for(DataSnapshot dataSnapshot:snapshot.getChildren())
-   {
-       dataSnapshot.getValue().toString();
-   }
     }
 
     @Override
-    public void onCancelled(@NonNull DatabaseError error) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view= inflater.inflate(R.layout.fragment_adddependent, container, false);
+        //listView=view.findViewById(R.id.list);
+        firstnameadd=(EditText) view.findViewById(R.id.firstname);
+        lastfirstadd=(EditText)view.findViewById(R.id.lastname);
+        emailadd=(EditText)view.findViewById(R.id.email);
+        passwordadd=(EditText)view.findViewById(R.id.password);
+        donedepend=view.findViewById(R.id.done);
+        FirebaseAuth.getInstance().getCurrentUser().getUid();
+        donedepend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                root=FirebaseDatabase.getInstance();
+                // reference=root.getReference("dependent");
+
+                String namee=firstnameadd.getText().toString();
+                String lname=lastfirstadd.getText().toString();
+                String email=emailadd.getText().toString();
+                String pass=passwordadd.getText().toString();
+
+
+
+                //  ArrayList<String>listt=new ArrayList<>();
+                // ArrayAdapter adapter=new ArrayAdapter<String>(this,R.layout.listitem,listt);
+                //listView.setAdapter(adapter);
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser.getUid()).child("dependent");
+
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot:snapshot.getChildren())
+                        {
+                            dataSnapshot.getValue().toString();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                User user=new User(namee,lname,email,pass);
+                reference.child(email).setValue(user);
+            }
+        });
+
+        return view;
 
     }
-});
-   User user=new User(namee,lname,email,pass);
-        reference.child(email).setValue(user);
-    }
-});
-
-     return view;
-
- }
 }
