@@ -12,5 +12,9 @@
             android:icon="@drawable/medic"
             android:id="@+id/bottom_medication"
             />
+        <item android:title="Friends"
+            android:icon="@drawable/ic_baseline_mobile_friendly_24"
+            android:id="@+id/friends_add"
+            />
 </group>
 </menu>

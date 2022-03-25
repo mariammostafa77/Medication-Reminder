@@ -26,7 +26,7 @@ public class WorkerHandler extends Worker {
         mNotificationHelper.getManager().notify(1,nb.build());
         Log.i("Date","inDoWork");
 
-
         return Result.success();
     }
+
 }

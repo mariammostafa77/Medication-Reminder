@@ -1,7 +1,12 @@
 
 package com.example.medicationreminder;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +33,11 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
 
     RecyclerView medRecyclerView;
     MedAdapter medAdapter;
-    ArrayList<MedInfo> medList;
+    public static ArrayList<MedInfo> medList;
     ShowMedicationPresenter presenter;
+    AlarmManager alarmManager;
 
+    PendingIntent pendingIntent;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +49,7 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
         super.onCreate(savedInstanceState);
 
     }
-
+//**************************************************
     public int[] splitMedDate(String data) {
         String[] splitDate = data.split("/");
         int day = Integer.parseInt(splitDate[0]);
@@ -79,6 +86,24 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
 
         presenter.onCalenderItemSlected(medList,medAdapter,thisday, thismonth, thisyear);
 
+        setupAlarm();
+        /*Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(medList!=null){
+                    for(int i=0;i<1;i++) {
+                        for (int j = 0; j < medList.get(i).getNumOfTimes(); j++){
+                            Log.i("TAG", medList.get(i).getTimeList().get(j).getTime());
+                            int[] splitArray2 = splitTime(medList.get(i).getTimeList().get(j).getTime());
+                            Log.i("TAG", "split = " + splitArray2[0] + " , " + splitArray2[1]);
+                            setupAlarm(splitArray2[0], splitArray2[1], i);
+                        }
+                    }
+                }
+            }
+        }, 5000);*/
+
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -102,5 +127,30 @@ public class HomeFragment extends Fragment implements IShowMedicationView {
 
     }
 
+    public void setupAlarm() {
 
+        alarmManager = (AlarmManager)   getContext().getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent =new  Intent(getContext(), AlarmRecievier.class);
+
+        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+
+        setAlarm();
+
+    }
+
+    public void setAlarm() {
+        AlarmManager am = (AlarmManager)   getContext().getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 5000, pendingIntent);
+
+
+    }
+    public int[] splitTime(String data) {
+        String[] splitDate = data.split(":");
+        int hour = Integer.parseInt(splitDate[0]);
+
+        int minuits = Integer.parseInt(splitDate[1]);
+        int[] allDate = {hour, minuits};
+        return allDate;
+    }
 }

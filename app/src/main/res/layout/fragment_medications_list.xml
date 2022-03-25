@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MedicationsListFragment">
+    tools:context=".view.MedicationsListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConstraintLayout"
@@ -15,30 +15,16 @@
 
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/activeFragment"
-            android:name="com.example.medicationreminder.ActiveMedicationsFragment"
+            android:id="@+id/inactiveFragment"
+            android:name="com.example.medicationreminder.view.InactiveMedicationsFragment"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="600dp"
             android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/inactiveFragment"
-          android:name="com.example.medicationreminder.InactiveMedicationsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/activeFragment"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toStartOf="@+id/activeFragment"
-            app:layout_constraintTop_toBottomOf="@+id/activeFragment" />
 
         <Button
             android:id="@+id/btnAddMed"

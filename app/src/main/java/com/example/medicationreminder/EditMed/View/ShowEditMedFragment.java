@@ -2,6 +2,7 @@ package com.example.medicationreminder.EditMed.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -80,7 +82,7 @@ public class ShowEditMedFragment extends Fragment {
     String remindTime;
     //MedInfo medInfo=new MedInfo();
     //RefillMed refillMed=new RefillMed();
-    String userId,medId;
+    static String userId,medId,startDate,endDate;
 
 
     public ShowEditMedFragment() {
@@ -130,8 +132,23 @@ public class ShowEditMedFragment extends Fragment {
         medId=anInterface.getMedInfo().getMedId();
         Log.i("TAG","userid= "+userId);
         Log.i("TAG","medid= "+medId);
-        String m=edtName.getText().toString();
-        System.out.println("m="+m);
+        startDate=tvStartDate.getText().toString();
+        endDate=tvEndDate.getText().toString();
+        tvStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDate(tvStartDate);
+                startDate=tvStartDate.getText().toString();
+            }
+        });
+        tvEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDate(tvEndDate);
+                endDate=tvEndDate.getText().toString();
+
+            }
+        });
 
         for (int i = 0; i < anInterface.getMedInfo().getTimeList().size(); i++) {
             times.add(anInterface.getMedInfo().getTimeList().get(i));
@@ -154,28 +171,6 @@ public class ShowEditMedFragment extends Fragment {
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                               /* Log.i("TAG","edt "+edtName.getText().toString());
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("MedicationData");
-                                medInfo.setMedName(edtName.getText().toString());
-                                medInfo.setStartDate(tvStartDate.getText().toString());
-                                medInfo.setEndDate(tvEndDate.getText().toString());
-                                medInfo.setTimeList(times);
-                                medInfo.setNumOfTimes(anInterface.getMedInfo().getNumOfTimes());
-                                medInfo.setMedUnit(anInterface.getMedInfo().getMedUnit());
-                                medInfo.setUserId(anInterface.getMedInfo().getUserId());
-
-                                HashMap hashMap=new HashMap();
-                                hashMap.put("medName",edtName.getText().toString());
-                                hashMap.put("startDate",tvStartDate.getText().toString());
-                                hashMap.put("endDate",tvEndDate.getText().toString());
-                                hashMap.put("medTakenUnit",anInterface.getMedInfo().getMedTakenUnit());
-                                hashMap.put("medUnit",medInfo.getMedUnit().toString());
-                                hashMap.put("numOfTimes",anInterface.getMedInfo().getNumOfTimes());
-                                hashMap.put("userId",medInfo.getUserId());
-                                Log.i("TAG",medInfo.getUserId());
-                                hashMap.put("timeList",times);*/
-
-                                Log.i("TAG",anInterface.getMedInfo().getUserId());
 
                                 if(anInterface.getMedInfo().getRefillMedData() != null) {
 
@@ -185,37 +180,9 @@ public class ShowEditMedFragment extends Fragment {
                                             String.valueOf(anInterface.getMedInfo().getNumOfTimes()),Integer.parseInt(edtNumLeft.getText().toString()),
                                             anInterface.getMedInfo().getRefillMedData().getNumOfRemind(),tvRemindTime.getText().toString(),medId);
                                     adapter.notifyDataSetChanged();
-                                    /*refillMed.setNumOfRemind(Integer.parseInt(edtNumRemind.getText().toString()));
-                                    refillMed.setpillLeftNum(Integer.parseInt(edtNumLeft.getText().toString()));
-                                    refillMed.setRemindTime(tvRemindTime.getText().toString());
-                                    medInfo.setRefillMedData(refillMed);
-                                    hashMap.put("refillMedData",refillMed);
-                                    myRef.child(anInterface.getMedInfo().getMedId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Log.i("TAG","success");
-                                        }
-                                    });*/
-
-
-
-                                    /*repo.editData(presenter.getAllUpdatedDateWithRemind(edtName.getText().toString(),
-                                            tvStartDate.getText().toString(), tvEndDate.getText().toString(),
-                                            times, Integer.parseInt(edtNumRemind.getText().toString()),
-                                            Integer.parseInt(edtNumLeft.getText().toString()),
-                                            tvRemindTime.getText().toString()));*/
 
                                 }else {
-                                    /*repo.editData(presenter.getAllUpdatedDate(edtName.getText().toString(),
-                                            tvStartDate.getText().toString(), tvEndDate.getText().toString(),
-                                            times));*/
-                                    //hashMap.put("refillMedData",refillMed);
-                                    /*myRef.child(anInterface.getMedInfo().getMedId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Log.i("TAG","success");
-                                        }
-                                    });*/
+
                                     presenter.getAllUpdatedDate(edtName.getText().toString(),tvStartDate.getText().toString(),
                                             tvEndDate.getText().toString(),times,anInterface.getMedInfo().getUserId(),
                                             anInterface.getMedInfo().getMedTakenUnit(), anInterface.getMedInfo().getMedUnit().toString(),
@@ -259,6 +226,21 @@ public class ShowEditMedFragment extends Fragment {
         edtNumRemind.setVisibility(View.INVISIBLE);
         linearView.setVisibility(View.INVISIBLE);
     }
-
+    public void getDate(TextView textView){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = day + "/" + month + "/" + year;
+                textView.setText(date);
+            }
+        }, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
 }
 

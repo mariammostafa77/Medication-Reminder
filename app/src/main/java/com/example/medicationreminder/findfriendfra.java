@@ -1,5 +1,7 @@
 package com.example.medicationreminder;
 
+import android.app.TimePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class findfriendfra extends Fragment {
     TextView textView;
@@ -347,6 +353,132 @@ public class findfriendfra extends Fragment {
 
         }
     }*/
+  /*  int hour,minute,days;
+    TimePickerDialog timePickerDialog = new TimePickerDialog(getRow().getContext(),
+            new TimePickerDialog.OnTimeSetListener() {
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+            hour = hourOfDay;
+            minute = minutes;
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(0,0,0,hour,minute);
+            if(days.size()!=0){
+                execute(hour,minute);
+            }else{
+                String startDate= AddDrugActivity.drugsModel.getStartDate();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String[] s=startDate.split("/");
+                Calendar today=Calendar.getInstance();
+                Calendar cStartDate= Calendar.getInstance();
+                String endDate = AddDrugActivity.drugsModel.getEndDate();
+                cStartDate.set(Integer.parseInt(s[2]),Integer.parseInt(s[1]),Integer.parseInt(s[0]),hour,minute);
+                long diffInMinutes=((cStartDate.getTimeInMillis()-today.getTimeInMillis())/60000);
+                diffInMinutes=diffInMinutes-44640;
+                Date d1 = null;
+                Date d2 = null;
+                try {
+                    d1 = simpleDateFormat.parse(startDate);
+                    d2 = simpleDateFormat.parse(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long differenceInTime = d2.getTime() - d1.getTime();
+                long diffInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+                // Log.i("TAG","Days: "+diffInDays);
+                Log.i("TAG","diff In Minutes: " + diffInMinutes);
+                Log.i("Tagg","num of dayes"+String.valueOf(diffInDays));
+                Log.i("Tagg",String.valueOf(diffInMinutes));
+                Data inputData  = new Data.Builder()
+                        .putString("medId",drugsModel.getId())
+                        .putString("medName",drugsModel.getName())
+                        .putString("medStrength",drugsModel.getStrength())
+                        .putInt("medPill",drugsModel.getNumOfPills())
+                        .build();
+                OneTimeWorkRequest workRequest= new  OneTimeWorkRequest.Builder(ReminderWorker.class)
+                        .setInitialDelay(diffInMinutes, TimeUnit.MINUTES)
+                        .setInputData(inputData).build();
+                if(diffInMinutes>0){
+                    requests.add(workRequest);
+                    Log.i("Tagg","done");
+                }
+                for(int i=1;i<=diffInDays;i++){
+                    Long duration=Math.abs(diffInMinutes+1440*i);
+                    workRequest=new OneTimeWorkRequest.Builder(ReminderWorker.class)
+                            .setInitialDelay(duration, TimeUnit.MINUTES)
+                            .setInputData(inputData).build();
+                    requests.add(workRequest);
+                }
+            }
+            String time = hour + ":" +minute;
+            timesSelected.add(time);
+            txtReminderTimes.setText(DateFormat.format("hh:mm aa", calendar));
+        }
+    },12,0,false);
+                    timePickerDialog.updateTime(hour,minute);
+                    timePickerDialog.show(););
+                    }
+    public View getRow() {
+         return View;
+               }
+public TextView getTxtReminderTimes() {
+        return txtReminderTimes;
+        }
+        }
+        void execute(int hour,int minute){
+        Format f = new SimpleDateFormat("EEEE");
+        Date dt = new Date();
+        Calendar today=Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
+        Calendar cs=Calendar.getInstance();
+        String endDate = AddDrugActivity.drugsModel.getEndDate();
+        Date endDatee = null;
+        try {
+        endDatee=new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+        } catch (ParseException e) {
+        e.printStackTrace();
+        }
+        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+        for(int i=1;i<=7;i++){
+        String compareDate=sdformat.format(dt);
+        //int compare=endDatee.compareTo(dt);
+        // Log.i("Tagg",String.valueOf(dt));
+        if(endDatee.after(dt)||endDate.equals(compareDate)){
+        Log.i("Tagg","done");
+        String str = f.format(dt);
+        if(days.contains(str)){
+        Log.i("Tagg",str);
+        Calendar n=Calendar.getInstance();
+        n.setTime(dt);
+        int year= n.get(Calendar.YEAR);
+        int month=n.get(Calendar.MONTH);
+        int day=n.get(Calendar.DAY_OF_MONTH);
+        cs.set(year,month+1,day,hour,minute);
+        Log.i("Tagg","year"+year+"month"+(month+1)+"day"+day);
+        long diffInMinutes=((cs.getTimeInMillis()-today.getTimeInMillis())/60000);
+        diffInMinutes=diffInMinutes-44640;
+        Log.i("Tagg",String.valueOf(diffInMinutes));
+        Data inputData  = new Data.Builder()
+        .putString("medId",drugsModel.getId())
+        .putString("medName",drugsModel.getName())
+        .putString("medStrength",drugsModel.getStrength())
+        .putInt("medPill",drugsModel.getNumOfPills())
+        .build();
+        OneTimeWorkRequest workRequest= new  OneTimeWorkRequest.Builder(ReminderWorker.class)
+        .setInitialDelay(diffInMinutes, TimeUnit.MINUTES)
+        .setInputData(inputData).build();
+        if(diffInMinutes>0){
+        requests.add(workRequest);
+        //Log.i("Tagg","done");
+        }
+
+        }
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+
+        }
+        }
+        }*/
 
 
 }

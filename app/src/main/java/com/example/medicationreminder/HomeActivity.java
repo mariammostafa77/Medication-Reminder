@@ -21,6 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.work.OneTimeWorkRequest;
 
 import com.example.medicationreminder.AddMed.View.AddMedFragment1;
+import com.example.medicationreminder.view.MedicationsListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button button;
     BottomNavigationView bottomNav;
-
+String username;
 
 
     @Override
@@ -56,8 +57,16 @@ public class HomeActivity extends AppCompatActivity {
            navGraph.setStartDestination(R.id.fragment_home);
             navController.setGraph(navGraph);
 
+
+Context context;
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
+        //navigationView.setNavigationItemSelectedListener();
+        View headview=navigationView.getHeaderView(0);
+        TextView textView=headview.findViewById(R.id.headername);
+        username=getIntent().getStringExtra("usernamee");
+        textView.setText(username);
+
         View headerView=navigationView.getHeaderView(0);
         toolbar=findViewById(R.id.navToolBar);
         setSupportActionBar(toolbar);
@@ -65,8 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
         SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        TextView txtUserEmail=headerView.findViewById(R.id.txtUserEmail);
-        txtUserEmail.setText(sharedPreferences.getString("email",null));
+        textView.setText(sharedPreferences.getString("email",null));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -93,7 +101,10 @@ public class HomeActivity extends AppCompatActivity {
                                 getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new Adddependent()).commit();
                                 break;
                             case R.id.add_midfriend:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new findfriendfra()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new findfriendreceiver()).commit();
+                                break;
+                            case R.id.friendslist:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new friendslist()).commit();
                                 break;
 
                         }
@@ -119,6 +130,11 @@ public class HomeActivity extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(i);
                         return true;
+
+                    case R.id.friends_add:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.viewLayout,new midfriendrequest()).commit();
+                        return true;
+
                 }
                 return false;
             }

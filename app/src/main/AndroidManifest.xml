@@ -23,6 +23,22 @@
         <activity
             android:name=".StartActivity"
             android:exported="false" />
+
+        <receiver
+            android:name=".Notification"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".ReminderBroadCast"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".AlarmRecievier" />
+        <activity
+            android:name=".Dialog"
+            android:label="alert_dialog"
+            android:launchMode="singleInstance"
+
+            android:theme="@android:style/Theme.Translucent"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
